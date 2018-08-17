@@ -1,23 +1,15 @@
-# React Starter
+# standup
 
-> This repo contains boilerplate code to aid in the creation of a new React app with Redux. Follow the below setup instructions to get started.
+standup comedy app that lets you broadcast a live set performance to listeners who then can give feedback
 
-### Setup Instructions
+https://docs.google.com/document/d/e/2PACX-1vRnGANrXQ1LnhI45krF8DCQ0bmNp7ywD0vsxUAUtRf9phE_5IoEWi9OlIIElmhvQb_yLht95y8d5p2U/pub
 
-> 1. Fork this repo
-> 1. Clone your forked copy of this repo
->    - `git clone https://github.com/[Your Username]/react_starter.git`
-> 1. Change directory into the newly cloned repo
->    - `cd react_starter`
-> 1. Install dependencies 
->    - `npm install`
-> 1. Start dev server
->    - `npm start`
-> 1. Open a browser and navigate to `localhost:3000` You should see a page that displays "Welcome to React!"
+## members
+- Kevin Young
+- Matthew Kirby
+- Paul Su
+- Mike Yim
 
-### Bundle For Deployment
-
-> 1. Run webpack to bundle files
->    - `npm run bundle`
-> 
-> **NOTE:** *After bundling you can not directly run your app locally. You must run your app from the root directory of a server.*
+### mentors
+- Cody
+- Tim
