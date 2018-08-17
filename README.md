@@ -1,29 +1,15 @@
-<img align="right" width="150" src="https://github.com/Learning-Fuze/react-with-server/blob/master/public/dist/php-react.png">
+# standup
 
-# PHP React Starter
+standup comedy app that lets you broadcast a live set performance to listeners who then can give feedback
 
-> This repo contains boilerplate code to aid in the creation of a new React app with Redux and PHP back end. Follow the below setup instructions to get started.
+https://docs.google.com/document/d/e/2PACX-1vRnGANrXQ1LnhI45krF8DCQ0bmNp7ywD0vsxUAUtRf9phE_5IoEWi9OlIIElmhvQb_yLht95y8d5p2U/pub
 
-### Setup Instructions
+## members
+- Kevin Young
+- Matthew Kirby
+- Paul Su
+- Mike Yim
 
-> 1. Fork this repo
-> 1. Clone your forked copy of this repo
->    - `git clone https://github.com/[Your Username]/lampr-demo.git`
-> 1. Change directory into the newly cloned repo
->    - `cd lampr-demo`
-> 1. Install dependencies 
->    - `npm install`
-> 1. Use MAMP or similar program to start Apache and MySQL servers
->    - Set root directory of server to the `public` folder of this project
->    - Set Apache port to `8000`
->    - Use phpMyAdmin (or similar) to create a database
-> 1. Start dev server
->    - `npm start`
-> 1. Open a browser and navigate to `localhost:3000` You should see "Welcome to React".
-
-### Bundle For Deployment
-
-> 1. Run webpack to bundle files
->    - `npm run bundle`
-> 
-> **NOTE:** *After bundling and placing on a web server. The `public` folder should be the web root*
+### mentors
+- Cody
+- Tim
