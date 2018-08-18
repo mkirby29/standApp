@@ -1,0 +1,12 @@
+.navBar {
+    margin-top: 3%;
+    height: 7vh;
+}
+
+.avatar_image {
+    border: 1px solid black;
+}
+
+.img-fluid {
+   height: 100%;
+}

@@ -1,0 +1,24 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 12vh;
+    line-height: 60px;
+    background-color: grey;
+    opacity: 0.5;
+}
+
+.footer_mic {
+    /* padding for old micro image */
+    /* padding-top: 3.7%; */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10vh;
+    line-height: 60px;
+    opacity: 1;
+}
+
+.styles_button__3Vugn {
+    background: red !important;
+}

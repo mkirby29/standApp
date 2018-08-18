@@ -1,0 +1,20 @@
+.audio_container {
+    margin: 4% auto;
+    height: 15vh;
+}
+
+.title_text {
+    width: 80%;
+}
+
+.audio_title {
+    font-size: 1em;
+}
+
+.audio_display {
+    margin-top: 7%;
+}
+
+.audio_image {
+    border: 1px solid black;
+}

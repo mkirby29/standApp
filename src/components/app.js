@@ -1,14 +1,29 @@
-import React from 'react';
-import '../assets/css/app.css';
-import logo from '../assets/images/logo.svg';
+import React, { Component } from 'react';
 
-const App = () => (
-    <div>
-        <div className="app">
-            <img src={logo} className="logo rotate"/>
-            <h1>Welcome to React</h1>
-        </div>
-    </div>
-);
+import {Route, Switch} from 'react-router-dom';
+
+import Home from './home';
+import AudioInfo from './audio_info';
+import Recording from './recording';
+import NotFound from './404';
+
+class App extends Component {
+    render () {
+        return (
+            <Switch>
+                <Route exact path='/' component={Home}/>
+                <Route 
+                        path='/audio-info' 
+                        render={ (props) => {
+                            // replace with audio_desp component
+                            return <AudioInfo/>
+                        }}
+                />
+                <Route path='/recording' component={Recording}/>
+                <Route component={NotFound}/>
+            </Switch>
+        )
+    }
+}
 
 export default App;

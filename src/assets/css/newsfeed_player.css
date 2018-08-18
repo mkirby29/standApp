@@ -1,0 +1,11 @@
+.audio-player {
+    background: url('../images/avatar.png');
+    height: 7rem;
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #play {
+    cursor: pointer;
+  }
