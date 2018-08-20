@@ -4,6 +4,7 @@ import avatar from '../assets/images/logo.jpg';
 export default [{
     0: {
         name: "Song Name",
+        src: {song},
         img:{avatar},
         comments:[
             {
@@ -26,6 +27,7 @@ export default [{
     },
     1: {
         name: "Song Name",
+        src: {song},
         img:{avatar},
         comments:[
             {
