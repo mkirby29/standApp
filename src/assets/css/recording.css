@@ -1,0 +1,10 @@
+#recording_page {
+    background-color: black;
+    height: 100vh;
+}
+
+.fa-chevron-left{
+    color: white;
+    position: absolute;
+    margin-top: 5%;
+}

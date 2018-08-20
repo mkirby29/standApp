@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ReactMic } from 'react-mic';
+import '../assets/css/microphone.css'
 
 class Microphone extends Component {
   constructor(props) {
@@ -31,13 +32,13 @@ class Microphone extends Component {
  
   render() {
     return (
-      <div>
+      <div className='microphone row justify-content-center align-items-center'>
         <ReactMic
           record={this.state.record}
           className="sound-wave"
           onStop={this.onStop}
-          strokeColor="#000000"
-          backgroundColor="#FF4081" />
+          strokeColor="#FFFFFF"
+          backgroundColor="black" />
         <button onClick={this.startRecording} type="button">Start</button>
         <button onClick={this.stopRecording} type="button">Stop</button>
       </div>
