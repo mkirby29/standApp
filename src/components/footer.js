@@ -14,7 +14,10 @@ function Footer (props) {
             {/* seperate layer, so microphone image doesn't fade with background opacity */}
             <div className="footer_mic text-center">
                 <Link to='/recording'>
-                    <ion-icon name="microphone" size="large"></ion-icon>
+                    <span className='fa-stack fa-2x'>
+                        <i className="far fa-circle fa-5x fa-stack-2x"></i>
+                        <i className="fas fa-microphone fa-lg fa-stack-1x fa-inverse"></i>
+                    </span>
                 </Link>
             </div>
         </div>

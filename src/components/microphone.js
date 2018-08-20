@@ -32,7 +32,7 @@ class Microphone extends Component {
  
   render() {
     return (
-      <div className='microphone'>
+      <div className='microphone row justify-content-center align-items-center'>
         <ReactMic
           record={this.state.record}
           className="sound-wave"

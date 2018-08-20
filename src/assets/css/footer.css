@@ -22,3 +22,7 @@
 .styles_button__3Vugn {
     background: red !important;
 }
+
+.fa-circle, .fa-microphone {
+    color: black;
+}

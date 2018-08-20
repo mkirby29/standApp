@@ -1,3 +1,11 @@
 button {
     color: white;
 }
+
+.microphone {
+    padding-top: 70%;
+}
+
+.sound-wave {
+    width: 100vw;
+}
