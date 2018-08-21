@@ -32,15 +32,25 @@ class Microphone extends Component {
  
   render() {
     return (
-      <div className='microphone row justify-content-center align-items-center'>
+      <div className='microphone'>
         <ReactMic
           record={this.state.record}
-          className="sound-wave"
+          className="sound-wave centered"
           onStop={this.onStop}
           strokeColor="#FFFFFF"
-          backgroundColor="black" />
-        <button onClick={this.startRecording} type="button">Start</button>
-        <button onClick={this.stopRecording} type="button">Stop</button>
+          backgroundColor="black"
+        />
+        <div className='record-controls text-center'>
+          <button onClick={this.startRecording} type="button">
+            <span className='fa-stack fa-2x'>
+              <i className="far fa-circle fa-stack-2x"></i>
+              <i className="fas fa-circle fa-stack-1x fa-inverse inner-record"></i>
+            </span>
+          </button>
+          <button onClick={this.stopRecording} type="button">
+            <i className="far fa-stop-circle fa-4x"></i>
+          </button>
+        </div>
       </div>
     )
   }

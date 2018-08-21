@@ -3,7 +3,7 @@
     height: 100vh;
 }
 
-.fa-chevron-left{
+#recording_page .fa-chevron-left{
     color: white;
     position: absolute;
     margin-top: 5%;

@@ -10,3 +10,12 @@
 .img-fluid {
    height: 100%;
 }
+
+.back_button .fa-chevron-left {
+    color: black;
+}
+
+.back_button {
+    padding-top: 2%;
+    text-align: center;
+}

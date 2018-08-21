@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../assets/css/newsfeed.css';
 import avatar from '../assets/images/avatar.png';
 import AudioContainer from './audio_container';
+import Header from './header';
 
 let responseDummy = {
     data: 
@@ -23,6 +24,7 @@ class NewsFeed extends Component {
         })
         return (
             <div>
+                <Header/>
                 {/* need to make method that runs AudioContainer for each audio object, to display for each entry */}
                 {/* <AudioContainer profile={avatar}/>
                 <AudioContainer profile={avatar}/>
