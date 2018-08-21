@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import '../assets/css/player.css';
-import Audio from 'react-audioplayer';
+// import Audio from 'react-audioplayer';
 // import songs from './playlist';
 import song from '../assets/audio/betterdays.mp3';
+import ReactAudioPlayer from 'react-audio-player';
 
 // need to fix here, not audio_info!
 
@@ -11,18 +12,11 @@ class CommentPlayer extends Component {
         super(props)
     }
     render() {
-        // console.log('PLAYLIST:', songs); 
         return (
-            <Audio
-                // width={600}
-                // height={400}
-                // autoPlay={true}
-                playlist={[
-                    {
-                        src: song,
-                        name: 'The song that is playing'
-                    }
-                ]}
+            <ReactAudioPlayer
+                src={song}
+                autoPlay
+                controls
             />
         )
     }

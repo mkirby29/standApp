@@ -11,7 +11,8 @@ import audioTest from '../assets/audio/betterdays.mp3';
 
 let playlist = [
     {
-        src: {audioTest},
+        src: audioTest,
+        // src: '../assets/audio/betterdays.mp3',
         title: 'Song Title',
         artist: 'Royalty Free'
     }
@@ -35,7 +36,7 @@ let rearrangedPlayer = [
     }
   ]
 
-export default props => {
+export default () => {
     return (
         <AudioPlayer
             audioFiles={playlist}
