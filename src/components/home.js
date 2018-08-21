@@ -26,7 +26,9 @@ class Home extends Component {
             }
         })
 
-        const { avatar, song, id, author_name, song_name, likes } = response.data;
+        const { avatar, audio, id, author_name, username, likes } = response.data;
+        console.log(response.data);
+        console.log(response);
 
         let newState = {
             list: [],
