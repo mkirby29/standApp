@@ -4,6 +4,8 @@ import Header from './header';
 import NewsFeed from './newsFeed';
 import Footer from './footer';
 import { formatPostData } from '../helpers';
+import axios from 'axios';
+
 
 class Home extends Component {
     constructor(props) {
