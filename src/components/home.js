@@ -20,9 +20,9 @@ class Home extends Component {
     }
 
     async getListData() {
-        const response = await axios.get('/api/stand_app.php', {
+        const response = await axios.get('api/stand_app.php', {
             params: {
-                action: 'get_all.php'
+                action: 'get_all'
             }
         })
 
@@ -32,13 +32,13 @@ class Home extends Component {
             list: [],
         };
 
-        if(listItems){
-            newState.list = listItems;
-        } else if (message){
-            newState.message = message;
-        } else {
-            newState.message = 'Error with server'
-        }
+        // if(listItems){
+        //     newState.list = listItems;
+        // } else if (message){
+        //     newState.message = message;
+        // } else {
+        //     newState.message = 'Error with server'
+        // }
 
         this.setState(newState);
     }
