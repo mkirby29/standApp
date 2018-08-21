@@ -6,30 +6,50 @@ import '../assets/css/header.css';
 import {Link} from 'react-router-dom';
 
 function Header (props) {
-    return (
-        <div className="container-fluid">
-        
-        <div className="back_button left">
-                <Link to='/avatar_select'>
-                    <ion-icon name="ios-arrow-back" size="large"></ion-icon>
-                </Link>
-            </div>
+    var currentLocation = window.location.href;
+    var result = /[^/]*$/.exec(currentLocation)[0]
+    console.log('Header: Current Url: ', result);
+    if (result === '') {
+        return (
+            <div className="container-fluid">
 
-            <div className="navBar row">
-            <div className="profile_icon col-2">
-                <Link to='/posts'>
-                    <img alt="Avatar" src={avatar} className="img-fluid avatar_image" />
-                </Link>   
+                <div className="navBar row">
+                    <div className="profile_icon col-2">
+                        <Link to='/posts'>
+                            <img alt="Avatar" src={avatar} className="img-fluid avatar_image" />
+                        </Link>
+                    </div>
+                    <div className="logo col-4 offset-2 text-center">
+                        <Link to='/avatar_select'>
+                            <img src={logo} alt="Logo" className="img-fluid" />
+                        </Link>
+                    </div>
+                    
+                </div>
+                <hr/>
             </div>
-            <div className="logo col-4 offset-2 text-center">
-                <Link to='/'>
-                    <img src={logo} alt="Logo" className="img-fluid" />
-                </Link>
+        )
+    } else {
+        return (
+            <div className="container-fluid">
+
+                <div className="navBar row">
+                    <div className="back_button col-2">
+                        <Link to='/'>
+                            <i className="fas fa-chevron-left fa-2x"></i>
+                        </Link>   
+                    </div>
+                    <div className="logo col-4 offset-2 text-center">
+                        <Link to='/'>
+                            <img src={logo} alt="Logo" className="img-fluid" />
+                        </Link>
+                    </div>
+                    
+                </div>
+                <hr/>
             </div>
-            </div>
-            <hr/>
-        </div>
-    )
+        )
+    }
 }
 
 export default Header;

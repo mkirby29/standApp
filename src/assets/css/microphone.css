@@ -1,11 +1,27 @@
-button {
+.microphone button, .microphone .fa-circle {
     color: white;
 }
 
+.microphone .fa-circle::before{
+    color: red;
+}
+
 .microphone {
-    padding-top: 70%;
+    width: 100vw
+}
+
+.centered {
+    position: fixed; /* or absolute */
+    top: 45%;
+    left: 0
 }
 
 .sound-wave {
     width: 100vw;
+}
+
+.record-controls {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
 }
