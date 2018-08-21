@@ -6,12 +6,11 @@ import AudioContainer from './audio_container';
 let responseDummy = {
     data: 
     [
-        {name: 'guitar1', image: avatar, id:'001'},
-        {name: 'guitar2', image: avatar, id:'002'},
-        {name: 'guitar3', image: avatar, id:'003'},
-        {name: 'guitar4', image: avatar, id:'004'},
-        {name: 'guitar5', image: avatar, id:'005'},
-        {name: 'guitar6', image: avatar, id:'006'}
+        {name: 'guitar1', src: avatar, id:'001'},
+        {name: 'guitar2', src: avatar, id:'002'},
+        {name: 'guitar3', src: avatar, id:'003'},
+        {name: 'guitar4', src: avatar, id:'004'},
+        {name: 'guitar5', src: avatar, id:'005'}
     ]
 }
 
@@ -19,7 +18,7 @@ class NewsFeed extends Component {
     render () {
         let renderNewsFeed = responseDummy.data.map(function(element, index){
             return(
-                <AudioContainer key={index} profile={element.image}/>
+                <AudioContainer key={index} profile={element.src}/>
             )
         })
         return (
@@ -31,7 +30,7 @@ class NewsFeed extends Component {
                 <AudioContainer profile={avatar}/>
                 <AudioContainer profile={avatar}/>
                 <AudioContainer profile={avatar}/> */}
-                {renderNewsFeed}
+                {renderNewsFeed};
             </div>
         )
     }

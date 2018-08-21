@@ -7,6 +7,7 @@ import AudioInfo from './audio_info';
 import Recording from './recording';
 import NotFound from './404';
 import Avatar from './avatar_select'
+import Post from './posts';
 
 class App extends Component {
     render () {
@@ -22,7 +23,7 @@ class App extends Component {
                 />
                 <Route path='/recording' component={Recording}/>
                 <Route path='/avatar_select' component={Avatar}/>
-
+                <Route path='/posts' component={Post}/>
                 <Route component={NotFound}/>
             </Switch>
         )

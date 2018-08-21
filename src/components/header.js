@@ -17,10 +17,14 @@ function Header (props) {
 
             <div className="navBar row">
             <div className="profile_icon col-2">
-                <img alt="Avatar" src={avatar} className="img-fluid avatar_image" />
+                <Link to='/posts'>
+                    <img alt="Avatar" src={avatar} className="img-fluid avatar_image" />
+                </Link>   
             </div>
             <div className="logo col-4 offset-2 text-center">
-                <Link to='/'><img src={logo} alt="Logo" className="img-fluid" /></Link>
+                <Link to='/'>
+                    <img src={logo} alt="Logo" className="img-fluid" />
+                </Link>
             </div>
             </div>
             <hr/>
