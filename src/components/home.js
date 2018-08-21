@@ -21,25 +21,27 @@ class Home extends Component {
     }
 
     async getListData() {
-        const response = await axios.get('/api/stand_app.php', {
+        const response = await axios.get('api/stand_app.php', {
             params: {
-                action: 'get_all.php'
+                action: 'get_all'
             }
         })
 
-        const { avatar, song, id, author_name, song_name, likes } = response.data;
+        const { avatar, audio, id, author_name, username, likes } = response.data;
+        console.log(response.data);
+        console.log(response);
 
         let newState = {
             list: [],
         };
 
-        if(listItems){
-            newState.list = listItems;
-        } else if (message){
-            newState.message = message;
-        } else {
-            newState.message = 'Error with server'
-        }
+        // if(listItems){
+        //     newState.list = listItems;
+        // } else if (message){
+        //     newState.message = message;
+        // } else {
+        //     newState.message = 'Error with server'
+        // }
 
         this.setState(newState);
     }
