@@ -30,7 +30,7 @@ class Microphone extends Component {
     console.log('chunk of real-time data is: ', recordedBlob);
   }
  
-  //unable to add async because npm install components
+  //unable to add async because npm install components: old axios
   onStop(recordedBlob) {
     console.log('recordedBlob is: ', recordedBlob);
     const blobObject = recordedBlob;
@@ -38,7 +38,7 @@ class Microphone extends Component {
       params: {
         action: 'get_all_todos'
       }
-    })
+    }).then((response)=>{console.log('recording post success', response)}).catch((error)=>{console.log('error recording posting', error.message)})
 
     console.log(response);
     
