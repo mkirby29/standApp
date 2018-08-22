@@ -87,8 +87,6 @@ class Home extends Component {
         this.getListData();
     }
 
-
-
     render () {
         return(
             <div>

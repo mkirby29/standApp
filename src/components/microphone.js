@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ReactMic } from 'react-mic';
+import axios from 'axios';
 import '../assets/css/microphone.css'
 
 class Microphone extends Component {
@@ -8,15 +9,18 @@ class Microphone extends Component {
     this.state = {
       record: false
     }
+    this.startRecording = this.startRecording.bind(this);
+    this.stopRecording = this.stopRecording.bind(this);
+    // this.postRecording = this.postRecording.bind(this);
   }
  
-  startRecording = () => {
+  startRecording(){
     this.setState({
       record: true
     });
   }
  
-  stopRecording = () => {
+  stopRecording(){
     this.setState({
       record: false
     });
@@ -26,8 +30,18 @@ class Microphone extends Component {
     console.log('chunk of real-time data is: ', recordedBlob);
   }
  
+  //unable to add async because npm install components
   onStop(recordedBlob) {
     console.log('recordedBlob is: ', recordedBlob);
+    const blobObject = recordedBlob;
+    const response = axios.post('/stand_app.php', blobObject.blobURL, {
+      params: {
+        action: 'get_all_todos'
+      }
+    })
+
+    console.log(response);
+    
   }
  
   render() {
