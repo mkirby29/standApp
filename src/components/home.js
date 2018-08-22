@@ -8,6 +8,7 @@ import { formatPostData } from '../helpers';
 import axios from 'axios';
 
 
+
 class Home extends Component {
     constructor(props) {
         super(props)
@@ -95,6 +96,7 @@ class Home extends Component {
                 <Header/>
                 <NewsFeed/>
                 <Footer/>
+
             </div>
         )
     }
