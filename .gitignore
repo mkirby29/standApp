@@ -2,3 +2,5 @@
 .DS_Store
 node_modules
 config/*.php
+aws/vendor
+secret_key.php
