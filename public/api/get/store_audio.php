@@ -1,12 +1,11 @@
 <?php
 
 require('../../aws/vendor/autoload.php');
+require('secret_key.php');
 
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
 
-$key = "AKIAJ2WSYCSTVTASC7TQ";
-$secret = "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";
 
 
 try{
@@ -20,8 +19,8 @@ try{
     ]);
     $result = $s3Client->putObject([
         'Bucket'     => "my337338",
-        'Key'        => "hello",
-        'SourceFile' => "../bucket/ukulele.mp3",
+        'Key'        => "logo",
+        'SourceFile' => "../bucket/logo.jpg",
     ]);
 } catch (S3Exception $e) {
     echo $e->getMessage() . "\n";

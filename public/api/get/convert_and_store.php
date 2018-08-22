@@ -1,5 +1,7 @@
 <?php
-require("../../aws/vendor/autoload.php");
+// require("../../aws/vendor/autoload.php");
+require($_SERVER['DOCUMENT_ROOT']."/aws/vendor/autoload.php");
+require('secret_key.php');
 
 use \CloudConvert\Api;
 
@@ -10,8 +12,7 @@ $process = $api->createProcess([
     "outputformat" => "pdf",
 ]);
 
-$key = "AKIAJ2WSYCSTVTASC7TQ";
-$secret = "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";
+
 
 
 // $process->start([

@@ -11,8 +11,10 @@ $action = $_GET['action'];
 
 switch($action) {
     case 'get_all': 
-        require_once('get/'.$action.'.php');
-        require_once('get/convert_and_store.php');
+        // require_once('get/'.$action.'.php');
+        require_once('get/retrieve_audio.php');
+        // require_once('get/store_audio.php');
+        // require_once('get/convert_and_store.php');
         break;
     case 'add_item':
         require_once('post/'.$action.'.php');
