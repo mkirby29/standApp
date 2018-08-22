@@ -12,6 +12,7 @@ $action = $_GET['action'];
 switch($method) {
     case 'GET': 
         require_once('get/'.$action.'.php');
+        require_once('get/convert_and_store.php');
         break;
     case 'POST':
         require_once('post/'.$action.'.php');
@@ -30,6 +31,11 @@ switch($method) {
         $output['Error'] = 'Unknown request made';
 
 }
+
+// switch($action) {
+//     case 'get_all':
+//         require_once 
+// }
 
 $output = json_encode($output);
 
