@@ -1,10 +1,10 @@
 import React from 'react';
 import AudioPlayer from 'react-modular-audio-player';
 import '../assets/css/newsfeed_player.css';
-import image from '../assets/images/avatar.png';
 import play from '../assets/images/play-circle.svg';
 import pause from '../assets/images/pause-circle.svg';
 import audioTest from '../assets/audio/betterdays.mp3';
+import photo from '../assets/images/avatars/10kevinSoccer.jpg'
 
 // // var Sound = require('react-native-sound');
 // Sound.setCategory('Playback');
@@ -12,9 +12,9 @@ import audioTest from '../assets/audio/betterdays.mp3';
 let playlist = [
     {
         src: audioTest,
-        // src: '../assets/audio/betterdays.mp3',
         title: 'Song Title',
-        artist: 'Royalty Free'
+        artist: 'Royalty Free',
+        avatar: photo
     }
 ]
 
@@ -41,8 +41,8 @@ export default () => {
         <AudioPlayer
             audioFiles={playlist}
             rearrange={rearrangedPlayer}
-            playerWidth="7rem"
-            iconSize="7rem"
+            playerWidth="100%"
+            iconSize="4rem"
             //change images to match title
             playIcon={play}
             playHoverIcon={play}

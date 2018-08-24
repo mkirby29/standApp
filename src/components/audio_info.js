@@ -6,7 +6,6 @@ import CommentPlayer from './comment_player';
 export default props => {
     return (
         <div>
-            <Header/>
             <CommentPlayer/>
         </div>
     )

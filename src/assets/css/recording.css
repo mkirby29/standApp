@@ -5,6 +5,5 @@
 
 #recording_page .fa-chevron-left{
     color: white;
-    position: absolute;
-    margin-top: 5%;
+    padding-top: 20px;
 }

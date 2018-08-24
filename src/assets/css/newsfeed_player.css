@@ -1,7 +1,8 @@
 .audio-player {
-    background: url('../images/avatar.png');
-    height: 7rem;
+    background: url('../images/avatars/2brettDj.jpg');
     background-size: contain;
+    background-repeat: no-repeat;
+    height: 7rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,3 +10,4 @@
   #play {
     cursor: pointer;
   }
+

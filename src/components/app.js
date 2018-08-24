@@ -8,6 +8,7 @@ import Recording from './recording';
 import NotFound from './404';
 import Avatar from './avatar_select'
 import Post from './posts';
+import '../assets/css/app.css';
 
 class App extends Component {
     render () {

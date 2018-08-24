@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/css/newsfeed.css';
-import avatar from '../assets/images/avatar.png';
+import avatar from '../assets/images/avatars/10kevinSoccer.JPG';
 import AudioContainer from './audio_container';
 import Header from './header';
 

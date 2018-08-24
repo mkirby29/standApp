@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+}
+
+.player {
+    height: 100vh
+}
+
+html, body {
+    height: 100vh;
+}
+
+.play, .pause, .prev-button, .next-button{
+    cursor: pointer;
+    opacity: 0.85;
+}
+
+.pause {
+    display: none;
+}
+
+.sound-controls {
+    padding-top: 5%;
+}
+
+.mute {
+    display: none;
+}
+
+.play:hover,
+.pause:hover {
+    opacity: 1;
+}
+
+canvas {
+    width: 100%;
+}
+
+.song {
+    padding-top: 0;
+}
+
+.display-area {
+    position: relative;
+}
+
+.comments-container {
+    position: absolute;
+    background-color: black;
+    opacity: 0.5;
+    height: 50%;
+    width: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.comments-container > * {
+    opacity: 1;
+}
+
+.time {
+    position: absolute;
+    font-size: 1.5em;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.form-group {
+    position: absolute;
+    bottom: 0;
+    width: 100%
+}
+
+#comment-input {
+    display: inline;
+    width: 80%
+}
+
+.comment-button {
+    display: inline;
+    height: 100%;
+    width: 100%;
+}
+
+.back-button {
+    padding-top: 20px;
+    padding-left: 16px;
+}
