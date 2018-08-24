@@ -73,7 +73,7 @@ class Microphone extends Component {
     }).then(function(response) {
       console.log("Response", response);
     });
-
+  }
 
   // Modal methods
   openModal() {
