@@ -54,7 +54,7 @@ class AudioContainer extends Component {
                     </div>
                     <div className="audio_display col-8 text-center">
                         <div className="audio_title">
-                            <div className="d-line align-middle">
+                            <div className="align-middle post-title">
                                 <Link to='/audio-info'>John Doe - Monday's Joke</Link>
                             </div>
                         </div>

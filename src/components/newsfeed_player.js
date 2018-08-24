@@ -48,7 +48,6 @@ export default () => {
             playHoverIcon={play}
             pauseIcon={pause}
             pauseHoverIcon={pause}
-
         />
     )
 }

@@ -36,31 +36,25 @@ class Avatar extends Component {
             ]};
         let feedbackArray = avatarArray.data.map(function(ele, index){
             return(
-                <div className="row" key={index}>
-                    <div className="col-sm-6">
-                        <Link to='/'>
-                            <img key = {index} src={ele.src} className="img-thumbnail avatar_container"/>
-                        </Link>
-                    </div>
-                </div>
+                <Link to='/' key={index}>
+                    <img src={ele.src} className="img-thumbnail avatar_container shadow-sm rounded"/>
+                </Link>
             )
         });
             return (
-                <div className='container-fluid'>
+                <div className='container'>
                     <div>
-                        <p className="display-2 text-center">Select Avatar</p>     
+                        <p className="select-avatar-title">SELECT YOUR AVATAR</p>     
                     </div>
-                    <div className='row'>
-                        <div className="text-center col-6">
-                            {feedbackArray}
+                    <div className="row justify-content-center text-center">
+                        <div className="col-6 avatar-col-1">
+                        {feedbackArray}
                         </div>
-                        <div className="text-center col-6">
-                            {feedbackArray}
+                        <div className="col-6 avatar-col-2">
+                        {feedbackArray}
                         </div>
                     </div>
                 </div>
-
-
 
     //         <div>
     //         <div className="container-fluid">
