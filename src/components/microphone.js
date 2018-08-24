@@ -53,16 +53,27 @@ class Microphone extends Component {
   //unable to add async because npm install components: old axios
   onStop(recordedBlob) {
     console.log('recordedBlob is: ', recordedBlob);
-    const blobObject = recordedBlob;
-    const response = axios.post('/stand_app.php', blobObject.blobURL, {
-      params: {
-        action: 'get_all_todos'
-      }
-    }).then((response)=>{console.log('recording post success', response)}).catch((error)=>{console.log('error recording posting', error.message)})
 
-    console.log(response);
-    
-  }
+    debugger;
+    var blob = recordedBlob.blob;
+    var audioFile = new File([blob], "music.mp3", {
+      type: "audio/mp3"
+    });
+
+    var form = new FormData();
+    form.set('audio', blob);
+    form.set('id', 'mattkirby');
+    var name = 'mikeyim'
+
+    axios({
+      method: 'post',
+      url: '/api/stand_app.php?action=add_item',
+      data: form, 
+      config: { headers: {'Content-Type': 'multipart/form-data' }}   
+    }).then(function(response) {
+      console.log("Response", response);
+    });
+
 
   // Modal methods
   openModal() {
@@ -76,6 +87,7 @@ class Microphone extends Component {
  
   closeModal() {
     this.setState({modalIsOpen: false});
+
   }
  
   render() {

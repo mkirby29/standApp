@@ -13,11 +13,13 @@ switch($action) {
     case 'get_all': 
         // require_once('get/'.$action.'.php');
         require_once('get/retrieve_audio.php');
+        // require_once('get/get_bucket.php');
         // require_once('get/store_audio.php');
         // require_once('get/convert_and_store.php');
         break;
     case 'add_item':
-        require_once('post/'.$action.'.php');
+        // require_once('post/'.$action.'.php');
+        require_once('post/getTheThing.php');
         break;
     case 'delete_item':
         require_once('delete/'.$action.'.php');
