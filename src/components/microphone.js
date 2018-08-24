@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ReactMic } from 'react-mic';
-import '../assets/css/microphone.css'
+import '../assets/css/microphone.css';
+import axios from 'axios';
 
 class Microphone extends Component {
   constructor(props) {
@@ -28,6 +29,26 @@ class Microphone extends Component {
  
   onStop(recordedBlob) {
     console.log('recordedBlob is: ', recordedBlob);
+    debugger;
+    var blob = recordedBlob.blob;
+    var audioFile = new File([blob], "music.mp3", {
+      type: "audio/mp3"
+    });
+
+    var form = new FormData();
+    form.set('audio', blob);
+    form.set('id', 'mattkirby');
+    var name = 'mikeyim'
+
+    axios({
+      method: 'post',
+      url: '/api/stand_app.php?action=add_item',
+      data: form, 
+      config: { headers: {'Content-Type': 'multipart/form-data' }}   
+    }).then(function(response) {
+      console.log("Response", response);
+    });
+
   }
  
   render() {

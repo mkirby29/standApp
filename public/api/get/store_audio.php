@@ -2,6 +2,7 @@
 
 require('../../aws/vendor/autoload.php');
 require('secret_key.php');
+require('post/fileconversion.php');
 
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
@@ -19,9 +20,11 @@ try{
     ]);
     $result = $s3Client->putObject([
         'Bucket'     => "my337338",
-        'Key'        => "logo",
-        'SourceFile' => "../bucket/logo.jpg",
+        'Key'        => "{$name}",
+        'SourceFile' => "{$target_file}",
     ]);
+
+    unlink($target_file);
 } catch (S3Exception $e) {
     echo $e->getMessage() . "\n";
 }
