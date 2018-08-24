@@ -8,6 +8,7 @@ import Recording from './recording';
 import NotFound from './404';
 import Avatar from './avatar_select'
 import Post from './posts';
+import login from './login'
 
 class App extends Component {
     render () {
@@ -24,7 +25,10 @@ class App extends Component {
                 <Route path='/recording' component={Recording}/>
                 <Route path='/avatar_select' component={Avatar}/>
                 <Route path='/posts' component={Post}/>
+                <Route path='/login' component={login}/>
                 <Route component={NotFound}/>
+
+                
             </Switch>
         )
     }
