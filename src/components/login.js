@@ -7,7 +7,9 @@ import Footer from './footer';
 import { formatPostData } from '../helpers';
 import axios from 'axios';
 import Google from './google';
-import Facebook from './facebook'
+import Facebook from './facebook';
+import '../assets/css/login.css';
+
 
 
 
@@ -16,12 +18,21 @@ class Login extends Component {
 
     render () {
         return(
-            <div>
-                <Header/>
-                <Facebook/>
+            <div className="login_div">
+              <p id="header_para" className="w3-animate-fading"><b>Stand</b><span id="card">App</span></p>
+              <hr id="hr1" />
+              <hr id="hr2" /><br /><br /><br />
+              <Facebook/>
                 <Google/>
-
             </div>
+            
+
+
+
+                // <Header/>
+
+       
+  
         )
     }
 }
