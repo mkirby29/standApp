@@ -8,7 +8,7 @@
 }
 
 .audio_title {
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 .audio_display {
@@ -17,4 +17,8 @@
 
 .audio_image {
     border: 1px solid black;
+}
+
+.audio-player {
+    height: 100% !important;
 }
