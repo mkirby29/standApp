@@ -10,6 +10,8 @@ import Avatar from './avatar_select'
 import Post from './posts';
 import '../assets/css/app.css';
 
+import VisualizerPlayer from './visualizer_player';
+
 class App extends Component {
     render () {
         return (
@@ -25,6 +27,7 @@ class App extends Component {
                 <Route path='/recording' component={Recording}/>
                 <Route path='/avatar_select' component={Avatar}/>
                 <Route path='/posts' component={Post}/>
+                <Route path='/visualizer_test' component={VisualizerPlayer}/>
                 <Route component={NotFound}/>
             </Switch>
         )
