@@ -9,8 +9,8 @@ import axios from 'axios';
 import Google from './google';
 import Facebook from './facebook';
 import '../assets/css/login.css';
-import GoogleComponent from './Google'
-import FacebookComponent from './Facebook'
+import GoogleComponent from './googleOATH'
+import FacebookComponent from './facebookOATH'
 
 
 class Login extends Component {
