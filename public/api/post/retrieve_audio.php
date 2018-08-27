@@ -5,8 +5,8 @@ require 'vendor/autoload.php';
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
 
-$bucket = 'my337338';
-$keyname = 'AKIAJ2WSYCSTVTASC7TQ';
+$bucket = 'standapp618';
+$keyname = 'AKIAITELN74MJ7GK7VOA';
 
 $s3 = new S3Client([
     'version' => 'latest',
