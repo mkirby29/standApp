@@ -21,8 +21,9 @@ class Microphone extends Component {
     super(props);
     this.state = {
       record: false,
-      modalIsOpen: false
-
+      modalIsOpen: false,
+      audiofile: '',
+      blobfile: ''
     }
     this.startRecording = this.startRecording.bind(this);
     this.stopRecording = this.stopRecording.bind(this);
@@ -54,14 +55,21 @@ class Microphone extends Component {
   onStop(recordedBlob) {
     console.log('recordedBlob is: ', recordedBlob);
 
-    debugger;
+    // debugger;
     var blob = recordedBlob.blob;
     var audioFile = new File([blob], "music.mp3", {
       type: "audio/mp3"
     });
+    console.log(audioFile);
+    console.log(blob)
+    this.setState({
+      audiofile: audioFile,
+      blobfile: blob
+
+    })
 
     var form = new FormData();
-    form.set('audio', blob);
+    form.set('audio', audioFile);
     form.set('id', 'mattkirby');
     var name = 'mikeyim'
 
@@ -91,12 +99,13 @@ class Microphone extends Component {
   }
  
   render() {
+
     return (
       <div className='microphone'>
         <ReactMic
           record={this.state.record}
           className="sound-wave centered"
-          onStop={this.onStop}
+          onStop={this.onStop.bind(this)}
           strokeColor="#FFFFFF"
           backgroundColor="black"
         />
@@ -107,7 +116,7 @@ class Microphone extends Component {
               <i className="fas fa-circle fa-stack-1x fa-inverse inner-record"></i>
             </span>
           </button>
-          <button onClick={this.stopRecording} onClick={this.openModal} type="button">
+          <button onClick={(event) => { this.stopRecording(); this.openModal();}}  type="button">
             <i className="far fa-stop-circle fa-4x"></i>
           </button>
           <Modal
@@ -124,6 +133,9 @@ class Microphone extends Component {
           <form>
             <input placeholder = "Enter audio title here"/>
             <button>Audio Player (BLOB) file</button>
+            <audio controls>
+              <source src={this.state.audiofile} type="audio/webm"/>
+            </audio>
             <button><i className="fa fa-trash" aria-hidden="false"></i></button>
             <button><i className="fas fa-sign-in-alt"></i></button>
           </form>
