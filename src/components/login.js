@@ -9,8 +9,8 @@ import axios from 'axios';
 import Google from './google';
 import Facebook from './facebook';
 import '../assets/css/login.css';
-
-
+import GoogleComponent from './Google'
+import FacebookComponent from './Facebook'
 
 
 class Login extends Component {
@@ -21,9 +21,15 @@ class Login extends Component {
             <div className="login_div">
               <p id="header_para" className="w3-animate-fading"><b>Stand</b><span id="card">App</span></p>
               <hr id="hr1" />
-              <hr id="hr2" /><br /><br /><br />
+              <hr id="hr2" />
               <Facebook/>
                 <Google/>
+
+                 <div>
+                <h1>OATH Logins</h1>
+                    <FacebookComponent />
+                    <GoogleComponent />
+                </div>
             </div>
             
 
