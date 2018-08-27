@@ -18,15 +18,20 @@ class VisualizerPlayer extends Component {
                 song: "Drew Barrymore",
                 url: song,
                 album_image: albumImage,
-            }
+            },
+            playing: false
         }
+    }
+
+    componentDidMount(){
+        this.init();
     }
 
     init() {
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
         this.context = new AudioContext();
         this.context.suspend && this.context.suspend();
-        this.firstLaunch = true;
+        this.playing = false;
         try {
             // create and connect node for processing audio
             this.javascriptNode = this.context.createScriptProcessor(2048, 1, 1);
@@ -78,16 +83,30 @@ class VisualizerPlayer extends Component {
     }
 
     play () {
-        debugger;
         this.context.resume && this.context.resume();
-        if (this.firstLaunch) {
-            this.source.start();
-            this.firstLaunch = false;
+
+        if (!this.playing) {
+            if(this.source.context.state === 'suspended' && !this.context.resume){
+                this.source.context.resume();
+            } else {
+                this.source.start();
+            }
+            
+            this.playing = true;
+
+            this.setState({
+                playing: true
+            });
         }
+        
     }
 
     pause () {
-        this.context.suspend();
+        this.source.context.suspend();
+        this.playing = false;
+        this.setState({
+            playing: false
+        });
     }
 
     initHandlers () {
@@ -101,13 +120,17 @@ class VisualizerPlayer extends Component {
     }
 
     render () {
-        this.init();
+        
         return (
             <div className="container-fluid">
                 <div className="row audio_container">
                     <div className="left_container col-4 d-flex justify-content-center text-center">
-                        <div className="avatar_container d-flex align-items-center justify-content-center">
-                            <i className="far fa-play-circle fa-3x" onClick={this.play.bind(this)}></i>
+                        <div className="avatar_container d-flex align-items-center justify-content-center" style={ { backgroundImage: `url(${this.state.tracks.album_image}})` } }>
+                            {
+                                this.state.playing
+                                    ? <i className={"far fa-pause-circle fa-3x"} onClick={this.pause.bind(this)}></i>
+                                    : <i className={"far fa-play-circle fa-3x"} onClick={this.play.bind(this)}></i>
+                            }
                         </div>
                     </div>
                     <div className="audio_display col-8 text-center">
