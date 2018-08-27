@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/css/newsfeed.css';
-import avatar from '../assets/images/avatar.png';
+import avatar from '../assets/images/avatars/10kevinSoccer.jpg';
 import AudioContainer from './audio_container';
 
 let responseDummy = {

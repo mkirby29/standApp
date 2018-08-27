@@ -1,5 +1,5 @@
 import React from 'react';
-import avatar from '../assets/images/avatar.png';
+import avatar from '../assets/images/avatars/10kevinSoccer.jpg';
 import logo from '../assets/images/logo.jpg';
 import '../assets/css/header.css';
 
@@ -14,17 +14,16 @@ function Header (props) {
             <div className="container-fluid">
 
                 <div className="navBar row">
-                    <div className="profile_icon col-2">
+                    <div className="profile_icon col-3">
                         <Link to='/posts'>
                             <img alt="Avatar" src={avatar} className="img-fluid avatar_image" />
                         </Link>
                     </div>
-                    <div className="logo col-4 offset-2 text-center">
+                    <div className="logo col-4 offset-1 text-center">
                         <Link to='/avatar_select'>
                             <img src={logo} alt="Logo" className="img-fluid" />
                         </Link>
                     </div>
-                    
                 </div>
                 <hr/>
             </div>
