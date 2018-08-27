@@ -1,0 +1,22 @@
+body{
+	background-color:white;
+}
+.login_div{
+	box-shadow: 0 20px 60px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background-color: #1a495b;
+	width: 80%;
+	height: auto;
+	margin-top: 4%;
+	border-radius: 10px;
+}
+#header_para{
+	padding-top: 10%;
+	font-size: 150%;
+	color:white;
+	margin-bottom: 0;
+}
+#card{
+	font-family:'Raleway', sans-serif;
+	opacity: .7;
+	font-size: 200%;
+}
