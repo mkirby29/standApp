@@ -33,6 +33,7 @@
     "react-modal": "^3.5.1",
     "react-modular-audio-player": "^1.1.1",
     "react-native-sound": "^0.10.9",
+    "react-oauth2": "^1.1.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-slick": "^0.23.1",
