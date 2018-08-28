@@ -19,7 +19,7 @@ try{
         'scheme' => 'http'
     ]);
     $result = $s3Client->putObject([
-        'Bucket'     => "my337338",
+        'Bucket'     => "standapp618",
         'Key'        => "{$name}",
         'SourceFile' => "{$target_file}",
     ]);
