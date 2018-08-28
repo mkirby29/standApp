@@ -64,24 +64,27 @@ class Microphone extends Component {
     console.log(blob)
     this.setState({
       audiofile: audioFile,
-      blobfile: blob
+      blobfile: recordedBlob
 
     })
-
-    var form = new FormData();
-    form.set('audio', audioFile);
-    form.set('id', 'mattkirby');
-    var name = 'mikeyim'
-
-    axios({
-      method: 'post',
-      url: '/api/stand_app.php?action=add_item',
-      data: form, 
-      config: { headers: {'Content-Type': 'multipart/form-data' }}   
-    }).then(function(response) {
-      console.log("Response", response);
-    });
   }
+
+postRecording (e){
+  e.preventDefault();
+  var form = new FormData();
+  form.set('audio', this.state.audiofile);
+  form.set('id', 'mattkirby');
+  var name = 'mikeyim'
+
+  axios({
+    method: 'post',
+    url: '/api/stand_app.php?action=add_item',
+    data: form, 
+    config: { headers: {'Content-Type': 'multipart/form-data' }}   
+  }).then(function(response) {
+    console.log("Response", response);
+  });
+}
 
   // Modal methods
   openModal() {
@@ -100,6 +103,8 @@ class Microphone extends Component {
  
   render() {
 
+    // console.log('AUDIO:', this.state.blobfile.blobURL);
+
     return (
       <div className='microphone'>
         <ReactMic
@@ -116,7 +121,7 @@ class Microphone extends Component {
               <i className="fas fa-circle fa-stack-1x fa-inverse inner-record"></i>
             </span>
           </button>
-          <button onClick={(event) => { this.stopRecording(); this.openModal();}}  type="button">
+          <button onClick={(event) => { this.stopRecording(); this.openModal()}}  type="button">
             <i className="far fa-stop-circle fa-4x"></i>
           </button>
           <Modal
@@ -134,10 +139,10 @@ class Microphone extends Component {
             <input placeholder = "Enter audio title here"/>
             <button>Audio Player (BLOB) file</button>
             <audio controls>
-              <source src={this.state.audiofile} type="audio/webm"/>
+              <source src={this.state.blobfile.blobURL} type="audio/webm"/>
             </audio>
             <button><i className="fa fa-trash" aria-hidden="false"></i></button>
-            <button><i className="fas fa-sign-in-alt"></i></button>
+            <button  onClick={(e) => {this.postRecording(e)}}><i className="fas fa-sign-in-alt"></i></button>
           </form>
         </Modal>
         </div>
