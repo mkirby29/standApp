@@ -22,8 +22,8 @@ let FacebookComponent = createReactClass({
   render: function () {
     return <div>
       <Facebook url={'http://localhost:3000/'}
-        clientId={'186195358838149'}
-        clientSecret={'b995490ddc246c21c26a835b4dc4ef0a'}
+        clientId={'232665067386248'}
+        clientSecret={'2009c8a8b67c81ba890f316931eb6478'}
         redirectUri={'http://localhost:3000/'}
         authorizationUrl={'https://www.facebook.com/v2.5/dialog/oauth'}
         scope={'email,user_location'}
