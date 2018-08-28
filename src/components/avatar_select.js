@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/css/avatar_select.css';
-import Dj from '../assets/images/avatars/2brettDj.jpg';
-import Tuba from '../assets/images/avatars/4codyTuba.jpg';
-import Piano from '../assets/images/avatars/6erinPiano.jpg';
-import Planet from '../assets/images/avatars/7frankPlanet.jpg';
-import Rapper from '../assets/images/avatars/8jennaRapper.jpg';
-import Reading from '../assets/images/avatars/9katReading.jpg';
-import Soccer from '../assets/images/avatars/10kevinSoccer.jpg';
-import Jedi from '../assets/images/avatars/12sarahJedi.jpg';
-import Celebrity from '../assets/images/avatars/16nateCelebrity.jpg';
-import Sax from '../assets/images/avatars/sax.jpg';
 import SimpleSlider from './carousel';
-import { Link } from 'react-router-dom';
+import logo from '../assets/images/logo.jpg'
 
 class Avatar extends Component {
     constructor (props) {
@@ -22,12 +12,12 @@ class Avatar extends Component {
         return (
 
             <div className='container-fluid'>
-                <div>
-                    <p className="display-2 text-center">Select Avatar</p>     
+                <div className='text-center'>
+                    <img src={logo} className='logo-avatar'/>
                 </div>
-                <div>
-                    <SimpleSlider/>
-                </div>
+                <hr/>
+                <p className="avatar-select-title text-center">Select your avatar</p>     
+                <SimpleSlider/>
             </div>
 
         )

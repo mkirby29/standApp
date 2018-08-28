@@ -2,8 +2,12 @@
     margin-bottom: 5%;
 }
 
-.select-avatar-title {
+.logo-avatar {
+    padding-top: 3%;
+    width: 25%;
+}
+
+.avatar-select-title {
     font-family: Ubuntu;
     font-size: 2em;
-    padding: 5% 0 0 0;
 }
