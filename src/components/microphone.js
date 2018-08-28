@@ -23,7 +23,8 @@ class Microphone extends Component {
       record: false,
       modalIsOpen: false,
       audiofile: '',
-      blobfile: ''
+      blobfile: '',
+
     }
     this.startRecording = this.startRecording.bind(this);
     this.stopRecording = this.stopRecording.bind(this);
@@ -131,13 +132,13 @@ postRecording (e){
         />
         <div className='record-controls text-center'>
           <button onClick={this.startRecording} type="button">
-            <span className='fa-stack fa-2x'>
+            <span className={!this.state.record ? 'fa-stack fa-2x' : 'd-none'}>
               <i className="far fa-circle fa-stack-2x"></i>
               <i className="fas fa-circle fa-stack-1x fa-inverse inner-record"></i>
             </span>
           </button>
           <button onClick={(event) => { this.stopRecording(); this.openModal()}}  type="button">
-            <i className="far fa-stop-circle fa-4x"></i>
+            <i className={!this.state.record ? 'd-none' : "far fa-stop-circle fa-4x"}></i>
           </button>
           <Modal
             isOpen={this.state.modalIsOpen}
@@ -146,7 +147,7 @@ postRecording (e){
             style={customStyles}
             contentLabel="Example Modal"
             ariaHideApp={false}
-        >
+          >
  
           <h2 ref={subtitle => this.subtitle = subtitle}>Completed Recording</h2>
           {/* <button onClick={this.closeModal}>close</button> */}

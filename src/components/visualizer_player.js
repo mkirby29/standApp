@@ -25,6 +25,7 @@ class VisualizerPlayer extends Component {
     }
 
     componentDidMount(){
+        console.log('Canvas Ref:', this.canvas);
         this.init();
     }
 
@@ -47,7 +48,8 @@ class VisualizerPlayer extends Component {
             // below means we get 256 bars' of frequency
             this.analyser.fftSize = 256;
 
-            this.canvas = document.querySelector("canvas");
+            // this.canvas = document.closest('canvas');
+            this.canvas = this.canvasRef;
             this.canvas.width = window.innerWidth * 0.4;
             this.canvas.height = window.innerHeight * 0.05;
             this.canvasContext = this.canvas.getContext("2d")
@@ -146,10 +148,9 @@ class VisualizerPlayer extends Component {
                   let r = barHeight + (25 * ( i/ this.bufferLength));
                   let g = 250 * (i/this.bufferLength);
                   let b = 50;
-          
+                
                   this.canvasContext.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
                   this.canvasContext.fillRect(x, HEIGHT - barHeight, barWidth, (barHeight - 18));
-          
                   x += barWidth + 1;
                 }
             }
@@ -183,66 +184,36 @@ class VisualizerPlayer extends Component {
         var result = /[^/]*$/.exec(currentLocation)[0]
         console.log('Header: Current Url: ', result);
 
-        if (result === '') {
-            return (
-                <div className="container-fluid">
-                    <div className="row audio_container">
-                        <div className="left_container col-4 d-flex justify-content-center text-center">
-                            <div className="avatar_container d-flex align-items-center justify-content-center" style={ { backgroundImage: `url(${this.state.tracks.album_image}})` } }>
-                                {
-                                    this.state.playing
-                                        ? <i className={"far fa-pause-circle fa-3x"} onClick={this.pause.bind(this)}></i>
-                                        : <i className={"far fa-play-circle fa-3x"} onClick={this.play.bind(this)}></i>
-                                }
-                                <div className='likes_container'>
-                                    <i onClick={this.toggleLikeButton} className={this.state.like ? "fas fa-heart fa-lg" : "far fa-heart fa-lg"}></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="audio_display col-8 text-center">
-                            <div className="audio_title">
-                                <div className="align-middle post-title">
-                                    <Link to='/audio_info'>{this.state.tracks.artist} - {this.state.tracks.song}</Link>
-                                </div>
-                            </div>
-                            <div className="audio_visualizer">
-                                <canvas></canvas>
+        return (
+            <div className="container-fluid">
+                <div className="row audio_container">
+                    <div className="left_container col-4 d-flex justify-content-center text-center">
+                        <div className="avatar_container d-flex align-items-center justify-content-center" style={ { backgroundImage: `url(${albumImage}})` } }>
+                            {
+                                this.state.playing
+                                    ? <i className={"far fa-pause-circle fa-3x"} onClick={this.pause.bind(this)}></i>
+                                    : <i className={"far fa-play-circle fa-3x"} onClick={this.play.bind(this)}></i>
+                            }
+                            <div className='likes_container'>
+                                <i onClick={this.toggleLikeButton} className={result === '' ? this.state.like ? "fas fa-heart fa-lg" : "far fa-heart fa-lg" : 'd-none'}></i>
+                                <i className={result === '' ? 'd-none' : 'fas fa-heartbeat fa-lg'}></i>
+                                <div className={result === '' ? 'd-none' : 'likes-counter'}>100</div>
                             </div>
                         </div>
                     </div>
-                </div>
-            )
-        } else {
-            return (
-                <div className="container-fluid">
-                    <div className="row audio_container">
-                        <div className="left_container col-4 d-flex justify-content-center text-center">
-                            <div className="avatar_container d-flex align-items-center justify-content-center" style={ { backgroundImage: `url(${this.state.tracks.album_image}})` } }>
-                                {
-                                    this.state.playing
-                                        ? <i className={"far fa-pause-circle fa-3x"} onClick={this.pause.bind(this)}></i>
-                                        : <i className={"far fa-play-circle fa-3x"} onClick={this.play.bind(this)}></i>
-                                }
-                                <div className='likes_container'>
-                                    <i className="fas fa-heartbeat fa-lg"></i>
-                                    <div className='likes-counter'>100</div>
-                                </div>
+                    <div className="audio_display col-8 text-center">
+                        <div className="audio_title">
+                            <div className="align-middle post-title">
+                                <Link to='/audio_info'>{this.state.tracks.artist} - {this.state.tracks.song}</Link>
                             </div>
                         </div>
-                        <div className="audio_display col-8 text-center">
-                            <div className="audio_title">
-                                <div className="align-middle post-title">
-                                    <Link to='/audio_info'>{this.state.tracks.artist} - {this.state.tracks.song}</Link>
-                                </div>
-                            </div>
-                            <div className="audio_visualizer">
-                                <canvas></canvas>
-                            </div>
+                        <div className="audio_visualizer">
+                            <canvas ref={e => this.canvasRef = e}/>
                         </div>
                     </div>
                 </div>
-            )
-        }
+            </div>
+        )
     }
 }
 
