@@ -18,7 +18,7 @@ $process->start([
         "s3" => [
             "accesskeyid" => $key,
             "secretaccesskey" => $secret,
-            "bucket" => "my337338"
+            "bucket" => "standapp618"
         ],
     ],
     "file" => "../bucket/logo.jpg",
@@ -27,7 +27,7 @@ $process->start([
         "s3" => [
             "accesskeyid" => $key,
             "secretaccesskey" => $secret,
-            "bucket" => "my337338",
+            "bucket" => "standapp618",
         ],
     ],
 ]);
