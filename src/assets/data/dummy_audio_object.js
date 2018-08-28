@@ -1,4 +1,5 @@
 import song from '../audio/betterdays.mp3'
+import song2 from '../audio/ukulele.mp3'
 import albumImage from '../images/album_art.jpg'
 
 export default {
@@ -13,7 +14,7 @@ export default {
         {
             artist: "Bryce Vince",
             song: "Drew Barrymore",
-            url: song,
+            url: song2,
             album_image: albumImage,
             _id: '002'
         },
