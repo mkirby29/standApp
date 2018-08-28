@@ -19,7 +19,8 @@ class VisualizerPlayer extends Component {
                 url: song,
                 album_image: albumImage,
             },
-            playing: false
+            playing: false,
+            like: false
         }
     }
 
@@ -169,37 +170,79 @@ class VisualizerPlayer extends Component {
         return average;
     }
 
+    // need to sync with server to save like state
+    toggleLikeButton = () => {
+        this.setState({
+            like: !this.state.like
+        })
+    }
+
     render () {
-        
-        return (
-            <div className="container-fluid">
-                <div className="row audio_container">
-                    <div className="left_container col-4 d-flex justify-content-center text-center">
-                        <div className="avatar_container d-flex align-items-center justify-content-center" style={ { backgroundImage: `url(${this.state.tracks.album_image}})` } }>
-                            {
-                                this.state.playing
-                                    ? <i className={"far fa-pause-circle fa-3x"} onClick={this.pause.bind(this)}></i>
-                                    : <i className={"far fa-play-circle fa-3x"} onClick={this.play.bind(this)}></i>
-                            }
-                            <div className='likes-container'>
-                                <i className="fas fa-heartbeat fa-lg"></i>
-                                <div className='likes-counter'>100</div>
+        // get current url and check to display correct page
+        var currentLocation = window.location.href;
+        var result = /[^/]*$/.exec(currentLocation)[0]
+        console.log('Header: Current Url: ', result);
+
+        if (result === '') {
+            return (
+                <div className="container-fluid">
+                    <div className="row audio_container">
+                        <div className="left_container col-4 d-flex justify-content-center text-center">
+                            <div className="avatar_container d-flex align-items-center justify-content-center" style={ { backgroundImage: `url(${this.state.tracks.album_image}})` } }>
+                                {
+                                    this.state.playing
+                                        ? <i className={"far fa-pause-circle fa-3x"} onClick={this.pause.bind(this)}></i>
+                                        : <i className={"far fa-play-circle fa-3x"} onClick={this.play.bind(this)}></i>
+                                }
+                                <div className='likes_container'>
+                                    <i onClick={this.toggleLikeButton} className={this.state.like ? "fas fa-heart fa-lg" : "far fa-heart fa-lg"}></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="audio_display col-8 text-center">
-                        <div className="audio_title">
-                            <div className="align-middle post-title">
-                                <Link to='/audio-info'>{this.state.tracks.artist} - {this.state.tracks.song}</Link>
+                        <div className="audio_display col-8 text-center">
+                            <div className="audio_title">
+                                <div className="align-middle post-title">
+                                    <Link to='/audio_info'>{this.state.tracks.artist} - {this.state.tracks.song}</Link>
+                                </div>
                             </div>
-                        </div>
-                        <div className="audio_visualizer">
-                            <canvas></canvas>
+                            <div className="audio_visualizer">
+                                <canvas></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <div className="container-fluid">
+                    <div className="row audio_container">
+                        <div className="left_container col-4 d-flex justify-content-center text-center">
+                            <div className="avatar_container d-flex align-items-center justify-content-center" style={ { backgroundImage: `url(${this.state.tracks.album_image}})` } }>
+                                {
+                                    this.state.playing
+                                        ? <i className={"far fa-pause-circle fa-3x"} onClick={this.pause.bind(this)}></i>
+                                        : <i className={"far fa-play-circle fa-3x"} onClick={this.play.bind(this)}></i>
+                                }
+                                <div className='likes_container'>
+                                    <i className="fas fa-heartbeat fa-lg"></i>
+                                    <div className='likes-counter'>100</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="audio_display col-8 text-center">
+                            <div className="audio_title">
+                                <div className="align-middle post-title">
+                                    <Link to='/audio_info'>{this.state.tracks.artist} - {this.state.tracks.song}</Link>
+                                </div>
+                            </div>
+                            <div className="audio_visualizer">
+                                <canvas></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
     }
 }
 
