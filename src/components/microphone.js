@@ -64,6 +64,7 @@ class Microphone extends Component {
     form.set('audio', blob);
     form.set('id', 'mattkirby');
     var name = 'mikeyim'
+    console.log('form: ', form)
 
     axios({
       method: 'post',
@@ -111,17 +112,17 @@ class Microphone extends Component {
             <i className="far fa-stop-circle fa-4x"></i>
           </button>
           <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-          ariaHideApp={false}
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+            ariaHideApp={false}
         >
  
           <h2 ref={subtitle => this.subtitle = subtitle}>Completed Recording</h2>
           {/* <button onClick={this.closeModal}>close</button> */}
-          <form>
+          <form >
             <input placeholder = "Enter audio title here"/>
             <button>Audio Player (BLOB) file</button>
             <button><i className="fa fa-trash" aria-hidden="false"></i></button>

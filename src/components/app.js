@@ -18,7 +18,7 @@ class App extends Component {
             <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route 
-                        path='/audio-info' 
+                        path='/audio_info' 
                         render={ (props) => {
                             // replace with audio_desp component
                             return <AudioInfo/>

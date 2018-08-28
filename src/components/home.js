@@ -17,7 +17,7 @@ class Home extends Component {
         }
     }
 
-    async componentWillMount() {
+    async componentWillMount () {
         this.getListData();
     }
 
@@ -94,7 +94,6 @@ class Home extends Component {
                 <Header/>
                 <NewsFeed/>
                 <Footer/>
-
             </div>
         )
     }
