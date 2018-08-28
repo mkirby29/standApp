@@ -12,7 +12,11 @@
 }
 
 .audio_display {
-    margin-top: 7%;
+    margin-top: 3%;
+}
+
+.audio_title {
+    margin-bottom: 3%;
 }
 
 .audio_image {

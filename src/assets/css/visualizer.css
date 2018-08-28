@@ -2,3 +2,8 @@
     border: 1px solid black;
     width: 80%;
 }
+
+.likes_container {
+    position: absolute;
+    right: -5%;
+}

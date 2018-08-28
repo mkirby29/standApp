@@ -13,9 +13,6 @@ $process = $api->createProcess([
     "outputformat" => "pdf",
 ]);
 
-
-
-
 $process->start([
     "input" => [
         "s3" => [
