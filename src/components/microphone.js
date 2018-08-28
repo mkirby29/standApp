@@ -65,6 +65,7 @@ class Microphone extends Component {
     this.setState({
       audiofile: audioFile,
       blobfile: recordedBlob
+    })
 
     var form = new FormData();
     form.set('audio', blob);
@@ -81,7 +82,6 @@ class Microphone extends Component {
       console.log("Response", response);
     });
 
-    })
   }
 
 postRecording (e){
