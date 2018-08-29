@@ -1,7 +1,7 @@
 <?php
 
 $thing = $_FILES['audio'];
-$name = $_FILES['id'];
+$name = $_POST['id'];
 $destination_path = getcwd().DIRECTORY_SEPARATOR;
 print($destination_path);
 
@@ -12,5 +12,5 @@ move_uploaded_file($_FILES['audio']['tmp_name'], $target_file);
 require_once('get/store_audio.php');
 // unlink($target_file);
 // file_put_contents('./sounds/thatTHANG.mp3', $thing);
-var_dump($thing);
+// var_dump($thing);
 ?>
