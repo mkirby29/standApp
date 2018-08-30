@@ -191,10 +191,10 @@ class CommentPlayer extends Component {
                     <div className="time"></div>
                 </div>
                 <div className="playarea d-flex justify-content-around">
-                    <i className="fas fa-volume-up fa-3x unmute"/>
-                    <i className="fas fa-volume-off fa-3x mute"/>
-                    <i className="fas fa-play fa-3x play" onClick={this.play.bind(this)}/>
-                    <i className="fas fa-pause fa-3x pause" onClick={this.pause.bind(this)}/>
+                    <i className={!this.state.muted ? "fas fa-volume-up fa-3x unmute" : "d-none"}/>
+                    <i className={!this.state.muted ? "d-none" : "fas fa-volume-off fa-3x mute"}/>
+                    <i className={!this.state.playing ? "fas fa-play fa-3x play" : "d-none"} onClick={this.play.bind(this)}/>
+                    <i className={!this.state.playing ? "d-none" : "fas fa-pause fa-3x pause"} onClick={this.pause.bind(this)}/>
                 </div>
                 <form>
                     <div className="form-group">
