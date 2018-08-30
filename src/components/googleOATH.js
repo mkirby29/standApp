@@ -3,7 +3,7 @@ import createReactClass from 'create-react-class';
 import { Google } from 'react-oauth2';
 
 let GoogleComponent = createReactClass({
-  getInitialState: function () {
+  getInitialState () {
     return {
       "data": {
         "id": "", "name": "", "email": "", "gender": "", "location": { "id": "", "name": "" }
@@ -11,7 +11,7 @@ let GoogleComponent = createReactClass({
     };
   },
 
-  google: function (err, res) {
+  google (err, res) {
     if (!err) {
       this.setState({ data: res.profile })
     } else {
@@ -19,8 +19,17 @@ let GoogleComponent = createReactClass({
     }
   },
 
-  render: function () {
-    return <div>
+  componentDidUpdate(prevProps, prevState){
+    if (this.state === prevState ) {
+      return;
+    } else {
+        this.props.history.push("/avatar_select")
+    }
+  },
+
+
+  render () {
+    return <div className = "text-center">
       <Google
         url={'http://localhost:3000'}
         clientId={'575268215328-e3kffueqpfhho3m57b4quq8dbe907g7r.apps.googleusercontent.com'}
@@ -30,7 +39,19 @@ let GoogleComponent = createReactClass({
         width={300}
         height={300}
         callback={this.google}
-        style={{ color: 'green' }}
+        style={{    display: 'inline-block',
+        background: '#d14836',
+        color: '#fff',
+        width: 190,
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderRadius: 2,
+        border: '1px solid transparent',
+        fontSize: 16,
+        fontWeight: 'bold',
+        fontFamily: 'Roboto',
+
+      }}
       >
         Login With Google
   </Google>
@@ -39,5 +60,4 @@ let GoogleComponent = createReactClass({
     </div>
   }
 });
-
 export default GoogleComponent;

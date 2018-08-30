@@ -11,6 +11,7 @@ import Post from './posts';
 import login from './login'
 import '../assets/css/app.css';
 import VisualizerPlayer from './visualizer_player';
+import loginGooglePage from './loginGooglePage'
 
 class App extends Component {
     render () {
