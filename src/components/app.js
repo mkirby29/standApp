@@ -29,9 +29,7 @@ class App extends Component {
                 <Route path='/posts' component={Post}/>
                 <Route path='/login' component={login}/>
                 <Route path='/visualizer_test' component={VisualizerPlayer}/>
-                <Route component={NotFound}/>
-
-                
+                <Route component={NotFound}/>   
             </Switch>
         )
     }

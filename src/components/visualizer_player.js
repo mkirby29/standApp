@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/css/visualizer.css';
-import song from '../assets/audio/betterdays.mp3'
 import albumImage from '../assets/images/album_art.jpg'
+import axios from 'axios';
 
 // takes in an array of objects container audio details
 // but one select/takes one audio object
@@ -13,12 +13,7 @@ class VisualizerPlayer extends Component {
         this.state = {
             buffer: null,
             duration: 0,
-            tracks: { 
-                artist: "Bryce Vince",
-                song: "Drew Barrymore",
-                url: song,
-                album_image: albumImage,
-            },
+            tracks: this.props.audio,
             playing: false,
             like: false
         }
@@ -119,6 +114,27 @@ class VisualizerPlayer extends Component {
         });
     }
 
+    // need id in future
+    async likedAudio () {
+        const response = await axios.post('/api/stand_app.php', {
+            params: {
+                action: 'like_post'
+            }
+        })
+
+        console.log('likedAudio: ', response);
+    }
+
+    // need audio if from previous response passed into player to 
+    async getMp3FromS3 () {
+        const response = await axios.get('/api/stand_app.php', {
+            params: {
+                action: 'get_audio_from_s3'
+            }
+        })
+        console.log('getMp3fromS3: ', response);
+    }
+
     initHandlers () {
         // when javascriptNode is called, use infomation from analyzer node to draw the volume
         this.javascriptNode.onaudioprocess = () =>{
@@ -172,7 +188,10 @@ class VisualizerPlayer extends Component {
     }
 
     // need to sync with server to save like state
-    toggleLikeButton = () => {
+    toggleLikeButton = (e) => {
+        if (!this.state.like) {
+            this.likedAudio();
+        }
         this.setState({
             like: !this.state.like
         })
@@ -182,8 +201,8 @@ class VisualizerPlayer extends Component {
         // get current url and check to display correct page
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0]
-        console.log('Header: Current Url: ', result);
 
+        console.log('props: ', this.props)
         return (
             <div className="container-fluid">
                 <div className="row audio_container">

@@ -4,7 +4,6 @@ import axios from 'axios';
 import '../assets/css/microphone.css';
 import Modal from 'react-modal';
 
-
 const customStyles = {
   content : {
     top                   : '50%',
@@ -24,8 +23,9 @@ class Microphone extends Component {
       modalIsOpen: false,
       audiofile: '',
       blobfile: '',
-
+      recording: ''
     }
+
     this.startRecording = this.startRecording.bind(this);
     this.stopRecording = this.stopRecording.bind(this);
     // this.postRecording = this.postRecording.bind(this);
@@ -61,45 +61,59 @@ class Microphone extends Component {
     var audioFile = new File([blob], "music.mp3", {
       type: "audio/mp3"
     });
-    console.log(audioFile);
-    console.log(blob)
     this.setState({
       audiofile: audioFile,
       blobfile: recordedBlob
     })
 
-    var form = new FormData();
-    form.set('audio', blob);
-    form.set('id', 'mattkirby');
-    var name = 'mikeyim'
-    console.log('form: ', form)
+    // var form = new FormData();
+    // form.set('audio', blob);
+    // form.set('id', 'mattkirby');
+    // var name = 'mikeyim';
+    // form.set('name', name);
 
-    axios({
-      method: 'post',
-      url: '/api/stand_app.php?action=add_item',
-      data: form, 
-      config: { headers: {'Content-Type': 'multipart/form-data' }}   
-    }).then(function(response) {
-      console.log("Response", response);
-    });
+    let recording = {};
+    recording.audio_name = 'Audio Testing Name';
+    recording.audio_duration = recordedBlob.stopTime - recordedBlob.startTime
+    recording.user_id = 10;
+    console.log()
 
+    this.setState({
+      recording: recording
+    })
+    // {audio_name(strings), audio_duration('string'), user_id(number)}
   }
 
-postRecording (e){
+async postRecording (e){
   e.preventDefault();
-  var form = new FormData();
-  form.set('audio', this.state.audiofile);
-  form.set('id', 'mattkirby');
-  var name = 'mikeyim'
+  // var form = new FormData();
+  // form.set('audio', this.state.audiofile);
+  // form.set('id', 'mattkirby');
+  // var name = 'mikeyim'
+  // console.log('form post on recording: ', form);
+  console.log('postRecording: ', this.state.recording);
+  const resp = await axios.post('/api/stand_app.php', this.state.recording,{
+    params: {
+      action: 'add_item'
+    }
+  })
 
-  axios({
-    method: 'post',
-    url: '/api/stand_app.php?action=add_item',
-    data: form, 
-    config: { headers: {'Content-Type': 'multipart/form-data' }}   
-  }).then(function(response) {
-    console.log("Response", response);
-  });
+  const { errors, success } = resp.data;
+
+  if(!success){
+      return this.setState({ 
+        errors 
+      });
+  }
+  
+  // axios({
+  //   method: 'post',
+  //   url: '/api/stand_app.php?action=add_item',
+  //   data: form, 
+  //   config: { headers: {'Content-Type': 'multipart/form-data' }}   
+  // }).then(function(response) {
+  //   console.log("Response", response);
+  // });
 }
 
   // Modal methods

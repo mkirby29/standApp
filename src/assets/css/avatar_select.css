@@ -9,5 +9,8 @@
 
 .avatar-select-title {
     font-family: Ubuntu;
-    font-size: 2em;
+    font-size: 2rem;
+}
+
+.slick-track {
 }

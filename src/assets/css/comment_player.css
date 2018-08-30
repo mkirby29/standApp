@@ -10,7 +10,7 @@
 }
 
 .player {
-    height: 100vh
+    
 }
 
 html, body {
@@ -20,10 +20,6 @@ html, body {
 .play, .pause, .prev-button, .next-button{
     cursor: pointer;
     opacity: 0.85;
-}
-
-.pause {
-    display: none;
 }
 
 .sound-controls {
