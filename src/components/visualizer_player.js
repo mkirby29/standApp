@@ -1,3 +1,5 @@
+"use strict";
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/css/visualizer.css';
@@ -27,6 +29,10 @@ class VisualizerPlayer extends Component {
     init() {
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
         this.context = new AudioContext();
+        // Object.defineProperty(this, "context", {
+        //     value: new AudioContext(),
+        //     writable: false
+        // })
         this.context.suspend && this.context.suspend();
         this.playing = false;
         try {
@@ -70,7 +76,9 @@ class VisualizerPlayer extends Component {
     }
 
     loadTrack() {
+        console.log('loadTrack context before XHR: ', this.context);
         // create XMLHttpRequest to exchange data with url without reload
+        const context = this.context;
         var request = new XMLHttpRequest();
 
         var track = this.state.tracks;
@@ -81,7 +89,8 @@ class VisualizerPlayer extends Component {
 
         // if request successful, decode audio data from response and apply buffer object
         request.onload = () => {
-            this.context.decodeAudioData(request.response, (buffer) => {
+            console.log('loadTrack context after XHR: ', context);
+            context.decodeAudioData(request.response, (buffer) => {
                 this.source.buffer = buffer;
             });
         };
@@ -136,9 +145,10 @@ class VisualizerPlayer extends Component {
     }
 
     initHandlers () {
+        console.log('initHandlers context: ', this.context);
         // when javascriptNode is called, use infomation from analyzer node to draw the volume
         this.javascriptNode.onaudioprocess = () =>{
-            
+            console.log('onaurdioprocess context: ', this.context);
             let array = new Uint8Array(this.analyser.frequencyBinCount);
 
             let WIDTH = this.canvas.width;
@@ -202,7 +212,7 @@ class VisualizerPlayer extends Component {
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0]
 
-        console.log('props: ', this.props)
+        console.log('props.audio: ', this.props.audio)
         return (
             <div className="container-fluid">
                 <div className="row audio_container">
