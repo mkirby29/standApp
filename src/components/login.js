@@ -9,14 +9,20 @@ import axios from 'axios';
 import Google from './google';
 import Facebook from './facebook';
 import '../assets/css/login.css';
-import GoogleComponent from './googleOATH'
-import FacebookComponent from './facebookOATH'
+import GoogleComponent from './googleOATH';
+import FacebookComponent from './facebookOATH';
+import { GoogleLogout } from 'react-google-login';
+
 
 
 class Login extends Component {
 
 
     render () {
+        const logout = () => {
+            console.log('logout')
+          }
+          
         return(
             <div className="login_div">
               <p id="header_para" className="w3-animate-fading"><b>Stand</b><span id="card">App</span></p>
@@ -29,6 +35,13 @@ class Login extends Component {
                 <h1>OATH Logins</h1>
                     <FacebookComponent />
                     <GoogleComponent />
+                </div>
+                <div>
+                <GoogleLogout
+                buttonText="Google Logout"
+                onLogoutSuccess={logout}
+                >
+                </GoogleLogout>
                 </div>
             </div>
             
