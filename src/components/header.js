@@ -8,7 +8,6 @@ import {Link} from 'react-router-dom';
 function Header (props) {
     var currentLocation = window.location.href;
     var result = /[^/]*$/.exec(currentLocation)[0]
-    console.log('Header: Current Url: ', result);
     if (result === '') {
         return (
             <div className="container-fluid">

@@ -6,34 +6,32 @@ import Footer from './footer';
 
 import { formatPostData } from '../helpers';
 import axios from 'axios';
-
-
+import { connect } from 'react-redux';
 
 class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            list: [],
+            newsFeed: [],
         }
     }
 
-    async componentWillMount () {
-        this.getListData();
+    async componentDidMount () {
+        this.getNewsFeedData();
     }
 
-    async getListData() {
-        const response = await axios.get('api/stand_app.php', {
+    async getNewsFeedData () {
+        const response = await axios.get('/api/stand_app.php', {
             params: {
                 action: 'get_all'
             }
         })
 
         const { avatar, audio, id, author_name, username, likes } = response.data;
-        console.log(response.data);
-        console.log(response);
+        console.log('getNewsFeedData response: ', response);
 
         let newState = {
-            list: [],
+            newsFeed: [response.data],
         };
 
         // if(listItems){
@@ -56,7 +54,7 @@ class Home extends Component {
             }
         })
 
-        this.getListData();
+        this.getNewsFeedData();
     }
 
     async addItem(event) {
@@ -85,7 +83,7 @@ class Home extends Component {
             errors: []
         })
 
-        this.getListData();
+        this.getNewsFeedData();
     }
 
     render () {
@@ -99,4 +97,5 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default connect(null, {
+})(Home);
