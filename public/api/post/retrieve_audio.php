@@ -6,7 +6,7 @@ use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
 
 $bucket = 'standapp618';
-$keyname = 'AKIAITELN74MJ7GK7VOA';
+$keyname = 'AKIAIZ35A26WV3FIL6NQ';
 
 $s3 = new S3Client([
     'version' => 'latest',
