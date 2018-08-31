@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 $output = [
-    'success' => false
+    'success' => true
 ];
 
 require_once('db_connect.php');

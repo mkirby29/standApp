@@ -19,13 +19,14 @@ try{
         'scheme' => 'http'
     ]);
     $result = $s3Client->putObject([
-        'Bucket'     => "standapp618",
+        'Bucket'     => "standup618",
         'Key'        => "{$name}",
         'SourceFile' => "{$target_file}",
     ]);
-
+        
     // unlink($target_file);
 } catch (S3Exception $e) {
     echo $e->getMessage() . "\n";
+     
 }
 ?>
