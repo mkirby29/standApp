@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 import '../assets/css/comment_player.css';
-import song from '../assets/audio/betterdays.mp3';
-import albumImage from '../assets/images/album_art.jpg'
+import { Link } from 'react-router-dom';
 
-// need to fix here, not audio_info!
-
-class CommentPlayer extends Component {
+class TestPlayer extends Component {
     constructor (props) {
         super(props)
         this.state = {
@@ -32,7 +28,7 @@ class CommentPlayer extends Component {
     createAudio () {
         this.audio = new Audio(this.state.tracks.url)
         this.audio.crossOrigin = "anonymous";
-        // this.audio.controls = true
+        this.audio.controls = true
     }
 
     createVisualizer () {
@@ -134,7 +130,6 @@ class CommentPlayer extends Component {
     render() {
         return (
             <div className="player container text-center">
-                <canvas id='comment-canvas'></canvas>
                 <div className="row">
                     <Link to='/'><i className="fas fa-chevron-left fa-2x back-button"/></Link>
                 </div>
@@ -143,6 +138,7 @@ class CommentPlayer extends Component {
                     <h3 className="artist">{this.state.tracks.artist}</h3>
                 </div>
                 <div className="display-area">
+                    <canvas id='comment-canvas'></canvas>
                     <div className="comments-container">Comment Container</div>
                     <div className="time"></div>
                 </div>
@@ -168,4 +164,4 @@ class CommentPlayer extends Component {
     }
 }
 
-export default CommentPlayer;
+export default TestPlayer;

@@ -10,8 +10,8 @@ import Avatar from './avatar_select'
 import Post from './posts';
 import login from './login'
 import '../assets/css/app.css';
-import VisualizerPlayer from './visualizer_player';
 import loginGooglePage from './loginGooglePage'
+import TestPlayer from './test_player';
 
 class App extends Component {
     render () {
@@ -29,7 +29,7 @@ class App extends Component {
                 <Route path='/avatar_select' component={Avatar}/>
                 <Route path='/posts' component={Post}/>
                 <Route path='/login' component={login}/>
-                <Route path='/visualizer_test' component={VisualizerPlayer}/>
+                <Route path='/test_player' component={TestPlayer}/>
                 <Route component={NotFound}/>   
             </Switch>
         )
