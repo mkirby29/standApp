@@ -14,7 +14,7 @@ class GoogleComponent extends Component {
     }
   }
 
-  google (err, res) {
+  google = (err, res) =>{
     if (!err) {
       this.setState({ data: res.profile })
     } else {
