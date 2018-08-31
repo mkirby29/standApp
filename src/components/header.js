@@ -4,6 +4,7 @@ import logo from '../assets/images/logo.jpg';
 import '../assets/css/header.css';
 
 import {Link} from 'react-router-dom';
+import LoginConditional from './loginConditional'
 
 function Header (props) {
     var currentLocation = window.location.href;
@@ -23,6 +24,7 @@ function Header (props) {
                             <img src={logo} alt="Logo" className="img-fluid" />
                         </Link>
                     </div>
+                    {/* <LoginConditional/> */}
                 </div>
                 <hr/>
             </div>
@@ -42,7 +44,6 @@ function Header (props) {
                             <img src={logo} alt="Logo" className="img-fluid" />
                         </Link>
                     </div>
-                    
                 </div>
                 <hr/>
             </div>
