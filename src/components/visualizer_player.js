@@ -1,3 +1,5 @@
+"use strict";
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/css/visualizer.css';
@@ -26,17 +28,21 @@ class VisualizerPlayer extends Component {
 
     init() {
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        this.context = new AudioContext();
-        this.context.suspend && this.context.suspend();
+        this.ctx = new AudioContext();
+        // Object.defineProperty(this, "context", {
+        //     value: new AudioContext(),
+        //     writable: false
+        // })
+        this.ctx.suspend && this.ctx.suspend();
         this.playing = false;
         try {
             // create and connect node for processing audio (this will called every 2048 frames)
-            this.javascriptNode = this.context.createScriptProcessor(2048, 1, 1);
-            this.javascriptNode.connect(this.context.destination);
+            this.javascriptNode = this.ctx.createScriptProcessor(2048, 1, 1);
+            this.javascriptNode.connect(this.ctx.destination);
 
             // below if for visualizer, node, connect, and variables 
             // create and connect node for visualizer of audio
-            this.analyser = this.context.createAnalyser();
+            this.analyser = this.ctx.createAnalyser();
             // this.analyser.connect(this.javascriptNode);
             this.analyser.smoothingTimeConstant = 0.5;
             // Fast Fourier Transform (use to determine frequency domain)
@@ -51,12 +57,12 @@ class VisualizerPlayer extends Component {
 
             this.bufferLength = this.analyser.frequencyBinCount
 
-            this.source = this.context.createBufferSource();
-            this.destination = this.context.destination;
+            this.source = this.ctx.createBufferSource();
+            this.destination = this.ctx.destination;
             this.loadTrack();
 
             // create and connect node for volume control
-            this.gainNode = this.context.createGain();
+            this.gainNode = this.ctx.createGain();
             this.source.connect(this.gainNode);
             this.gainNode.connect(this.analyser);
             this.gainNode.connect(this.destination);
@@ -70,7 +76,9 @@ class VisualizerPlayer extends Component {
     }
 
     loadTrack() {
+        // console.log('loadTrack context before XHR: ', this.ctx);
         // create XMLHttpRequest to exchange data with url without reload
+        const context = this.ctx;
         var request = new XMLHttpRequest();
 
         var track = this.state.tracks;
@@ -81,7 +89,8 @@ class VisualizerPlayer extends Component {
 
         // if request successful, decode audio data from response and apply buffer object
         request.onload = () => {
-            this.context.decodeAudioData(request.response, (buffer) => {
+            // console.log('loadTrack context after XHR: ', context);
+            context.decodeAudioData(request.response, (buffer) => {
                 this.source.buffer = buffer;
             });
         };
@@ -89,10 +98,10 @@ class VisualizerPlayer extends Component {
     }
 
     play () {
-        this.context.resume && this.context.resume();
+        this.ctx.resume && this.ctx.resume();
 
         if (!this.playing) {
-            if(this.source.context.state === 'suspended' && !this.context.resume){
+            if(this.source.context.state === 'suspended' && !this.ctx.resume){
                 this.source.context.resume();
             } else {
                 this.source.start();
@@ -136,9 +145,10 @@ class VisualizerPlayer extends Component {
     }
 
     initHandlers () {
+        // console.log('initHandlers context: ', this.ctx);
         // when javascriptNode is called, use infomation from analyzer node to draw the volume
         this.javascriptNode.onaudioprocess = () =>{
-            
+            // console.log('onaurdioprocess context: ', this.ctx);
             let array = new Uint8Array(this.analyser.frequencyBinCount);
 
             let WIDTH = this.canvas.width;
@@ -202,7 +212,7 @@ class VisualizerPlayer extends Component {
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0]
 
-        console.log('props: ', this.props)
+        console.log('props.audio: ', this.props.audio)
         return (
             <div className="container-fluid">
                 <div className="row audio_container">

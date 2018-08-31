@@ -67,32 +67,35 @@ class Microphone extends Component {
     })
 
     // var form = new FormData();
-    // form.set('audio', blob);
-    // form.set('id', 'mattkirby');
+    // form.set('audio_name', blob);
+    // form.set('user_id', 'mattkirby');
     // var name = 'mikeyim';
-    // form.set('name', name);
+    // form.set('audio_duration', 100);
 
-    let recording = {};
-    recording.audio_name = 'Audio Testing Name';
-    recording.audio_duration = recordedBlob.stopTime - recordedBlob.startTime
-    recording.user_id = 10;
-    console.log()
+    // let recording = {};
+    // recording.audio_name = 'Audio Testing Name';
+    // recording.audio_duration = recordedBlob.stopTime - recordedBlob.startTime
+    // recording.user_id = 10;
+    // console.log()
 
-    this.setState({
-      recording: recording
-    })
+    // this.setState({
+    //   // recording: recording,
+    //   form: form
+    // })
+
     // {audio_name(strings), audio_duration('string'), user_id(number)}
   }
 
 async postRecording (e){
   e.preventDefault();
-  // var form = new FormData();
-  // form.set('audio', this.state.audiofile);
-  // form.set('id', 'mattkirby');
-  // var name = 'mikeyim'
-  // console.log('form post on recording: ', form);
-  console.log('postRecording: ', this.state.recording);
-  const resp = await axios.post('/api/stand_app.php', this.state.recording,{
+  var form = new FormData();
+  form.set('audio', this.state.audiofile);
+  form.set('audio_name', 'heloo')
+  form.set('id', 'mattkirby2');
+  form.set('user_id', 120);
+  form.set('audio_duration', 500)
+
+  const resp = await axios.post('/api/stand_app.php', form,{
     params: {
       action: 'add_item'
     }
