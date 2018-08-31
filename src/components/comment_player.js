@@ -148,7 +148,7 @@ class CommentPlayer extends Component {
                 </div>
                 {this.state.audio}
                 <div className="playarea d-flex justify-content-around">
-                    <i className="fas fa-undo-alt fa-3x" onClick={this.rewind.bind(this)}/>
+                    <i className="fas fa-undo-alt fa-3x rewind" onClick={this.rewind.bind(this)}/>
                     <i className={!this.state.playing ? "fas fa-play fa-3x play" : "d-none"} onClick={this.play.bind(this)}/>
                     <i className={!this.state.playing ? "d-none" : "fas fa-pause fa-3x pause"} onClick={this.pause.bind(this)}/>
                     <i className={!this.state.muted ? "fas fa-volume-up fa-3x unmute" : "d-none"} onClick={this.mute.bind(this)}/>
