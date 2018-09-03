@@ -16,10 +16,41 @@ class CommentPlayer extends Component {
                 song: "Goodbye",
                 url: "https://api.soundcloud.com/tracks/436771803/stream?client_id=b1495e39071bd7081a74093816f77ddb",
                 album_image: '',
+                comment: [
+                    {
+                        time: 0.1,
+                        message: "first!!"
+                    },
+                    {
+                        time: 1, 
+                        message: 'NOOOOOOOO!!!!!!'
+                    },
+                    {
+                        time: 3,
+                        message: 'we made it!'
+                    },
+                    {
+                        time: 5.52, 
+                        message: 'this sucks'
+                    },
+                    {
+                        time: 6.00, 
+                        message: 'NOOOOOOOO!!!!!!'
+                    },
+                    {
+                        time: 8,
+                        message: 'we made it!'
+                    },
+                    {
+                        time: 20, 
+                        message: 'this is awesome!!!'
+                    }
+                ]
             },
             playing: false,
             like: false,
-            muted: false
+            muted: false, 
+            displayed_comment: ''
         }
     }
 
@@ -88,6 +119,7 @@ class CommentPlayer extends Component {
                 ctx.closePath();
                 ctx.stroke();
             }
+            this.checkComment();
         }
         draw();
     }
@@ -124,6 +156,17 @@ class CommentPlayer extends Component {
         });
     }
 
+    checkComment () {
+        console.log('check time: ', Math.floor(this.audio.currentTime))
+        for (let i = 0; i < this.state.tracks.comment.length; i++) {
+            if (this.state.tracks.comment[i].time <= Math.floor(this.audio.currentTime)) {
+                this.setState({
+                    displayed_comment: this.state.tracks.comment[i].message
+                })
+            }
+        }
+    }
+
     toggleLikeButton = () => {
         this.setState({
             like: !this.state.like
@@ -140,10 +183,10 @@ class CommentPlayer extends Component {
                 <div className="song">
                     <h1 className="name">{this.state.tracks.song}</h1>
                     <h3 className="artist">{this.state.tracks.artist}</h3>
-                    <i onClick={this.toggleLikeButton} className={this.state.like ? "fas fa-heart fa-lg fa-2x" : "far fa-heart fa-lg fa-2x"}></i>
+                    <i id='like-container' onClick={this.toggleLikeButton} className={this.state.like ? "fas fa-heart fa-lg fa-2x" : "far fa-heart fa-lg fa-2x"}></i>
                 </div>
                 <div className="display-area">
-                    <div className="comments-container">Comment Container</div>
+                    <div className="comments-container">{this.state.displayed_comment}</div>
                     <div className="time"></div>
                 </div>
                 {this.state.audio}

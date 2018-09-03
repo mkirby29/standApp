@@ -4,6 +4,7 @@ import Header from './header';
 import NewsFeed from './news_feed';
 import Footer from './footer';
 import SearchBar from './search_bar';
+import Sidebar from './sidebar'
 
 import { formatPostData } from '../helpers';
 import axios from 'axios';
@@ -90,10 +91,13 @@ class Home extends Component {
     render () {
         return(
             <div>
-                <Header/>
-                <SearchBar/>
-                <NewsFeed/>
-                <Footer/>
+                {/* <Sidebar/> */}
+                <div id="page-content-wrapper">
+                    <Header/>
+                    <SearchBar/>
+                    <NewsFeed/>
+                    <Footer/>
+                </div>
             </div>
         )
     }

@@ -21,3 +21,11 @@
     white-space: nowrap;
     font-size: 0.9rem;
 }
+
+.audio_visualizer canvas {
+    width: 100%
+}
+
+.audio_visualizer {
+    display: inline-block;
+}

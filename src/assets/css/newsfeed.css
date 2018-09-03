@@ -1,6 +1,6 @@
 .audio_container {
     margin: 4% auto;
-    height: 15vh;
+    /* height: 15vh; */
 }
 
 .title_text {
@@ -12,7 +12,7 @@
 }
 
 .audio_display {
-    margin-top: 3%;
+    padding-top: 1%;
 }
 
 .audio_title {
@@ -21,10 +21,6 @@
 
 .audio_image {
     border: 1px solid black;
-}
-
-.audio-player {
-    height: 100% !important;
 }
 
 a {

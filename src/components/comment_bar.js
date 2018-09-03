@@ -8,7 +8,7 @@ class CommentBar extends Component {
                 <input type="text" className="comment-field form-control" placeholder="Comment Here"/>
                 <div className="comment-button input-group-append">
                     <button className="btn btn-outline-secondary" type="button">
-                        <i class="fas fa-comment"/>
+                        <i className="fas fa-comment"/>
                     </button>
                 </div>
             </div>
