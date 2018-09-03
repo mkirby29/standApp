@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import Header from './header';
 import NewsFeed from './news_feed';
 import Footer from './footer';
+import SearchBar from './search_bar';
 
 import { formatPostData } from '../helpers';
 import axios from 'axios';
@@ -90,6 +91,7 @@ class Home extends Component {
         return(
             <div>
                 <Header/>
+                <SearchBar/>
                 <NewsFeed/>
                 <Footer/>
             </div>

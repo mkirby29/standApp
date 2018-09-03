@@ -57,14 +57,14 @@ class CommentPlayer extends Component {
         let dataArray = new Uint8Array(bufferLength);
 
         let gradient = ctx.createLinearGradient(0, 0, 0, height);
-        gradient.addColorStop(0, "#ff6464");
+        gradient.addColorStop(0, "#D4AF37");
         gradient.addColorStop(1, "#6464ff");
 
         const draw = () => {
             requestAnimationFrame(draw);
             analyser.getByteFrequencyData(dataArray);
 
-            ctx.fillStyle = "#e6e6e6";
+            ctx.fillStyle = "black";
             ctx.fillRect(0, 0, width, height);
 
             let segments = dataArray.length / 2;

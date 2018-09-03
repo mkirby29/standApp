@@ -1,9 +1,23 @@
 .avatar_container {
-    border: 1px solid black;
+    border: 1px solid grey;
     width: 80%;
 }
 
 .likes_container {
     position: absolute;
     right: -5%;
+}
+
+.fa-play-circle,
+.fa-pause-circle {
+    color: rgb(177, 141, 52);
+}
+
+.likes_container {
+    color: grey;
+}
+
+.post-title {
+    white-space: nowrap;
+    font-size: 0.9rem;
 }

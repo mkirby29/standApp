@@ -12,10 +12,14 @@
 }
 
 .back_button .fa-chevron-left {
-    color: black;
+    color: white;
 }
 
 .back_button {
     padding-top: 2%;
     text-align: center;
+}
+
+hr {
+    border-color: grey;
 }
