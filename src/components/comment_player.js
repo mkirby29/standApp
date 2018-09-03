@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import '../assets/css/comment_player.css';
-import song from '../assets/audio/betterdays.mp3';
-import albumImage from '../assets/images/album_art.jpg'
+import CommentBar from './comment_bar';
 
 // need to fix here, not audio_info!
 
@@ -141,28 +140,23 @@ class CommentPlayer extends Component {
                 <div className="song">
                     <h1 className="name">{this.state.tracks.song}</h1>
                     <h3 className="artist">{this.state.tracks.artist}</h3>
+                    <i onClick={this.toggleLikeButton} className={this.state.like ? "fas fa-heart fa-lg fa-2x" : "far fa-heart fa-lg fa-2x"}></i>
                 </div>
                 <div className="display-area">
                     <div className="comments-container">Comment Container</div>
                     <div className="time"></div>
                 </div>
                 {this.state.audio}
-                <div className="playarea d-flex justify-content-around">
-                    <i className="fas fa-undo-alt fa-3x rewind" onClick={this.rewind.bind(this)}/>
-                    <i className={!this.state.playing ? "fas fa-play fa-3x play" : "d-none"} onClick={this.play.bind(this)}/>
-                    <i className={!this.state.playing ? "d-none" : "fas fa-pause fa-3x pause"} onClick={this.pause.bind(this)}/>
-                    <i className={!this.state.muted ? "fas fa-volume-up fa-3x unmute" : "d-none"} onClick={this.mute.bind(this)}/>
-                    <i className={!this.state.muted ? "d-none" : "fas fa-volume-off fa-3x mute"} onClick={this.unmute.bind(this)}/>
-                </div>
-                <form>
-                    <div className="form-group">
-                        <input type="email" className="form-control" id='comment-input' placeholder="Comment Here"/>
-                        <div className='comment-button'>
-                            <i className="fas fa-comment fa-2x"/>
-                            <i onClick={this.toggleLikeButton} className={this.state.like ? "fas fa-heart fa-lg" : "far fa-heart fa-lg"}></i>
-                        </div>
+                <div className='controls-container'>
+                    <div className="controls d-flex justify-content-around">
+                        <i className="fas fa-undo-alt fa-3x rewind" onClick={this.rewind.bind(this)}/>
+                        <i className={!this.state.playing ? "fas fa-play fa-3x play" : "d-none"} onClick={this.play.bind(this)}/>
+                        <i className={!this.state.playing ? "d-none" : "fas fa-pause fa-3x pause"} onClick={this.pause.bind(this)}/>
+                        <i className={!this.state.muted ? "fas fa-volume-up fa-3x unmute" : "d-none"} onClick={this.mute.bind(this)}/>
+                        <i className={!this.state.muted ? "d-none" : "fas fa-volume-off fa-3x mute"} onClick={this.unmute.bind(this)}/>
                     </div>
-                </form>
+                </div>
+                <CommentBar/>
             </div>
         )
     }
