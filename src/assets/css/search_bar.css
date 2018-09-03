@@ -1,0 +1,10 @@
+input.search-field {
+    background-color: black;
+    border-color: grey;
+}
+
+input.search-field:focus {
+    background-color: rgb(54, 53, 53);
+    border-color: grey;
+    color: white;
+}

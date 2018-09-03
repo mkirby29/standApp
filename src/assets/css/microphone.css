@@ -26,3 +26,24 @@
     width: 100%;
     left: 0;
 }
+
+.record-controls button {
+    border-color: black;
+    background-color: black;
+}
+
+.record-controls * {
+    padding: 0
+}
+
+.fa-stop-circle {
+    color: white;
+}
+
+.ReactModal__Content {
+    text-align: center;
+}
+
+.title-input{
+    display: block;
+}

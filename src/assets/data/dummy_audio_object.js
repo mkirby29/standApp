@@ -5,53 +5,179 @@ import albumImage from '../images/album_art.jpg'
 export default {
     data: [
         {
-            artist: "Bryce Vince",
-            song: "Drew Barrymore",
-            url: song,
+            artist: "Amadeus",
+            song: "Goodbye",
+            url: "https://api.soundcloud.com/tracks/436771803/stream?client_id=b1495e39071bd7081a74093816f77ddb",
             album_image: albumImage,
-            _id: '001'
+            _id: '001', 
+            comment: [
+                {
+                    time: 3,
+                    message: "first!!"
+                },
+                {
+                    time: 5, 
+                    message: 'NOOOOOOOO!!!!!!'
+                },
+                {
+                    time: 10,
+                    message: 'we made it!'
+                },
+                {
+                    time: 20, 
+                    message: 'this sucks'
+                }
+            ]
         },
         {
-            artist: "Bryce Vince",
-            song: "Drew Barrymore",
+            artist: "Random Guitar Guy",
+            song: "Ukulele",
             url: song2,
             album_image: albumImage,
-            _id: '002'
+            _id: '002',
+            comment: [
+                {
+                    time: 3,
+                    message: "first!!"
+                },
+                {
+                    time: 5, 
+                    message: 'NOOOOOOOO!!!!!!'
+                },
+                {
+                    time: 10,
+                    message: 'we made it!'
+                },
+                {
+                    time: 20, 
+                    message: 'this sucks'
+                }
+            ]
+        },
+        {
+            artist: "Better Days",
+            song: "Royalty Free",
+            url: song,
+            album_image: albumImage,
+            _id: '003',
+            comment: [
+                {
+                    time: 3,
+                    message: "first!!"
+                },
+                {
+                    time: 5, 
+                    message: 'NOOOOOOOO!!!!!!'
+                },
+                {
+                    time: 10,
+                    message: 'we made it!'
+                },
+                {
+                    time: 20, 
+                    message: 'this sucks'
+                }
+            ]
         },
         {
             artist: "Bryce Vince",
             song: "Drew Barrymore",
             url: song,
             album_image: albumImage,
-            _id: '003'
+            _id: '004',
+            comment: [
+                {
+                    time: 3,
+                    message: "first!!"
+                },
+                {
+                    time: 5, 
+                    message: 'NOOOOOOOO!!!!!!'
+                },
+                {
+                    time: 10,
+                    message: 'we made it!'
+                },
+                {
+                    time: 20, 
+                    message: 'this sucks'
+                }
+            ]
         },
         {
             artist: "Bryce Vince",
             song: "Drew Barrymore",
             url: song,
             album_image: albumImage,
-            _id: '004'
+            _id: '005',
+            comment: [
+                {
+                    time: 3,
+                    message: "first!!"
+                },
+                {
+                    time: 5, 
+                    message: 'NOOOOOOOO!!!!!!'
+                },
+                {
+                    time: 10,
+                    message: 'we made it!'
+                },
+                {
+                    time: 20, 
+                    message: 'this sucks'
+                }
+            ]
         },
         {
             artist: "Bryce Vince",
             song: "Drew Barrymore",
             url: song,
             album_image: albumImage,
-            _id: '005'
+            _id: '006',
+            comment: [
+                {
+                    time: 3,
+                    message: "first!!"
+                },
+                {
+                    time: 5, 
+                    message: 'NOOOOOOOO!!!!!!'
+                },
+                {
+                    time: 10,
+                    message: 'we made it!'
+                },
+                {
+                    time: 20, 
+                    message: 'this sucks'
+                }
+            ]
         },
         {
             artist: "Bryce Vince",
             song: "Drew Barrymore",
             url: song,
             album_image: albumImage,
-            _id: '006'
-        },
-        {
-            artist: "Bryce Vince",
-            song: "Drew Barrymore",
-            url: song,
-            album_image: albumImage,
-            _id: '007'
+            _id: '007',
+            comment: [
+                {
+                    time: 3,
+                    message: "first!!"
+                },
+                {
+                    time: 5, 
+                    message: 'NOOOOOOOO!!!!!!'
+                },
+                {
+                    time: 10,
+                    message: 'we made it!'
+                },
+                {
+                    time: 20, 
+                    message: 'this sucks'
+                }
+            ]
         }
     ]
 }

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import '../assets/css/comment_player.css';
-import song from '../assets/audio/betterdays.mp3';
-import albumImage from '../assets/images/album_art.jpg'
+import CommentBar from './comment_bar';
 
 // need to fix here, not audio_info!
 
@@ -17,10 +16,41 @@ class CommentPlayer extends Component {
                 song: "Goodbye",
                 url: "https://api.soundcloud.com/tracks/436771803/stream?client_id=b1495e39071bd7081a74093816f77ddb",
                 album_image: '',
+                comment: [
+                    {
+                        time: 0.1,
+                        message: "first!!"
+                    },
+                    {
+                        time: 1, 
+                        message: 'NOOOOOOOO!!!!!!'
+                    },
+                    {
+                        time: 3,
+                        message: 'we made it!'
+                    },
+                    {
+                        time: 5.52, 
+                        message: 'this sucks'
+                    },
+                    {
+                        time: 6.00, 
+                        message: 'NOOOOOOOO!!!!!!'
+                    },
+                    {
+                        time: 8,
+                        message: 'we made it!'
+                    },
+                    {
+                        time: 20, 
+                        message: 'this is awesome!!!'
+                    }
+                ]
             },
             playing: false,
             like: false,
-            muted: false
+            muted: false, 
+            displayed_comment: ''
         }
     }
 
@@ -57,14 +87,14 @@ class CommentPlayer extends Component {
         let dataArray = new Uint8Array(bufferLength);
 
         let gradient = ctx.createLinearGradient(0, 0, 0, height);
-        gradient.addColorStop(0, "#ff6464");
+        gradient.addColorStop(0, "#D4AF37");
         gradient.addColorStop(1, "#6464ff");
 
         const draw = () => {
             requestAnimationFrame(draw);
             analyser.getByteFrequencyData(dataArray);
 
-            ctx.fillStyle = "#e6e6e6";
+            ctx.fillStyle = "black";
             ctx.fillRect(0, 0, width, height);
 
             let segments = dataArray.length / 2;
@@ -89,6 +119,7 @@ class CommentPlayer extends Component {
                 ctx.closePath();
                 ctx.stroke();
             }
+            this.checkComment();
         }
         draw();
     }
@@ -125,6 +156,17 @@ class CommentPlayer extends Component {
         });
     }
 
+    checkComment () {
+        console.log('check time: ', Math.floor(this.audio.currentTime))
+        for (let i = 0; i < this.state.tracks.comment.length; i++) {
+            if (this.state.tracks.comment[i].time <= Math.floor(this.audio.currentTime)) {
+                this.setState({
+                    displayed_comment: this.state.tracks.comment[i].message
+                })
+            }
+        }
+    }
+
     toggleLikeButton = () => {
         this.setState({
             like: !this.state.like
@@ -141,28 +183,23 @@ class CommentPlayer extends Component {
                 <div className="song">
                     <h1 className="name">{this.state.tracks.song}</h1>
                     <h3 className="artist">{this.state.tracks.artist}</h3>
+                    <i id='like-container' onClick={this.toggleLikeButton} className={this.state.like ? "fas fa-heart fa-lg fa-2x" : "far fa-heart fa-lg fa-2x"}></i>
                 </div>
                 <div className="display-area">
-                    <div className="comments-container">Comment Container</div>
+                    <div className="comments-container">{this.state.displayed_comment}</div>
                     <div className="time"></div>
                 </div>
                 {this.state.audio}
-                <div className="playarea d-flex justify-content-around">
-                    <i className="fas fa-undo-alt fa-3x rewind" onClick={this.rewind.bind(this)}/>
-                    <i className={!this.state.playing ? "fas fa-play fa-3x play" : "d-none"} onClick={this.play.bind(this)}/>
-                    <i className={!this.state.playing ? "d-none" : "fas fa-pause fa-3x pause"} onClick={this.pause.bind(this)}/>
-                    <i className={!this.state.muted ? "fas fa-volume-up fa-3x unmute" : "d-none"} onClick={this.mute.bind(this)}/>
-                    <i className={!this.state.muted ? "d-none" : "fas fa-volume-off fa-3x mute"} onClick={this.unmute.bind(this)}/>
-                </div>
-                <form>
-                    <div className="form-group">
-                        <input type="email" className="form-control" id='comment-input' placeholder="Comment Here"/>
-                        <div className='comment-button'>
-                            <i className="fas fa-comment fa-2x"/>
-                            <i onClick={this.toggleLikeButton} className={this.state.like ? "fas fa-heart fa-lg" : "far fa-heart fa-lg"}></i>
-                        </div>
+                <div className='controls-container'>
+                    <div className="controls d-flex justify-content-around">
+                        <i className="fas fa-undo-alt fa-3x rewind" onClick={this.rewind.bind(this)}/>
+                        <i className={!this.state.playing ? "fas fa-play fa-3x play" : "d-none"} onClick={this.play.bind(this)}/>
+                        <i className={!this.state.playing ? "d-none" : "fas fa-pause fa-3x pause"} onClick={this.pause.bind(this)}/>
+                        <i className={!this.state.muted ? "fas fa-volume-up fa-3x unmute" : "d-none"} onClick={this.mute.bind(this)}/>
+                        <i className={!this.state.muted ? "d-none" : "fas fa-volume-off fa-3x mute"} onClick={this.unmute.bind(this)}/>
                     </div>
-                </form>
+                </div>
+                <CommentBar/>
             </div>
         )
     }

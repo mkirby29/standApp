@@ -1,6 +1,13 @@
+"use strict";
+
 import React, { Component } from 'react';
-import '../assets/css/comment_player.css';
 import { Link } from 'react-router-dom';
+import '../assets/css/visualizer.css';
+import albumImage from '../assets/images/album_art.jpg'
+import axios from 'axios';
+
+// takes in an array of objects container audio details
+// but one select/takes one audio object
 
 class TestPlayer extends Component {
     constructor (props) {
@@ -15,8 +22,7 @@ class TestPlayer extends Component {
                 album_image: '',
             },
             playing: false,
-            like: false,
-            muted: false
+            like: false
         }
     }
 
@@ -28,16 +34,17 @@ class TestPlayer extends Component {
     createAudio () {
         this.audio = new Audio(this.state.tracks.url)
         this.audio.crossOrigin = "anonymous";
-        this.audio.controls = true
+        // this.audio.controls = true
     }
 
     createVisualizer () {
-        const canvas = document.getElementById("comment-canvas");
+        const canvas = this.canvasRef;
         const ctx = canvas.getContext("2d");
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-        console.log("wight height: ", width, height);
-
+        // let width = canvas.width = window.innerWidth;
+        // let height = canvas.height = window.innerHeight;
+        let width = canvas.width = window.innerWidth * 0.4;
+        let height = canvas.height = window.innerWidth * 0.15;
+        
         let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         let analyser = audioCtx.createAnalyser();
         let audioSrc = audioCtx.createMediaElementSource(this.audio);
@@ -45,7 +52,7 @@ class TestPlayer extends Component {
         audioSrc.connect(analyser);
         audioSrc.connect(audioCtx.destination);
 
-        analyser.fftSize = 2048;
+        analyser.fftSize = 256;
         analyser.minDecibels = -90;
         analyser.maxDecibels = 0;
 
@@ -53,37 +60,34 @@ class TestPlayer extends Component {
         let dataArray = new Uint8Array(bufferLength);
 
         let gradient = ctx.createLinearGradient(0, 0, 0, height);
-        gradient.addColorStop(0, "#ff6464");
+        gradient.addColorStop(0, "#D4AF37");
         gradient.addColorStop(1, "#6464ff");
+
+        let barWidth = (width / bufferLength) * 2.5;
+        let barHeight;
+
+        let x = 0;
 
         const draw = () => {
             requestAnimationFrame(draw);
+
+            x = 0;
+
             analyser.getByteFrequencyData(dataArray);
 
-            ctx.fillStyle = "#e6e6e6";
+            ctx.fillStyle = "black";
             ctx.fillRect(0, 0, width, height);
 
-            let segments = dataArray.length / 2;
-            let radius = (height + dataArray[0]) / 5;
-            let angle = (Math.PI * 2) / segments;
-
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = gradient;
-
-            for(let i = 0; i < segments; i++) {
-                let barHeight = dataArray[i] > 0 ? dataArray[i] : 1;
-
-                let x1 = width / 2 + Math.cos(angle * i) * radius;
-                let x2 = width / 2 + Math.cos(angle * i) * (radius + barHeight);
-
-                let y1 = height / 2 + Math.sin(angle * i) * radius;
-                let y2 = height / 2 + Math.sin(angle * i) * (radius + barHeight);
-
-                ctx.beginPath();
-                ctx.moveTo(x1, y1);
-                ctx.lineTo(x2, y2);
-                ctx.closePath();
-                ctx.stroke();
+            for (let i = 0; i < bufferLength; i++) {
+                barHeight = dataArray[i]/2;
+                
+                let r = 177 + (barHeight / 2);
+                let g = 141 + (barHeight - 10 / 2);
+                let b = 52;
+              
+                ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+                ctx.fillRect(x, (height - barHeight)/2, barWidth, barHeight - 5);
+                x += barWidth + 1;
             }
         }
         draw();
@@ -121,44 +125,69 @@ class TestPlayer extends Component {
         });
     }
 
-    toggleLikeButton = () => {
+    // need id in future
+    async likedAudio () {
+        const response = await axios.post('/api/stand_app.php', {
+            params: {
+                action: 'like_post'
+            }
+        })
+
+        console.log('likedAudio: ', response);
+    }
+
+    // need audio if from previous response passed into player to 
+    async getMp3FromS3 () {
+        const response = await axios.get('/api/stand_app.php', {
+            params: {
+                action: 'get_audio_from_s3'
+            }
+        })
+        console.log('getMp3fromS3: ', response);
+    }
+
+    // need to sync with server to save like state
+    toggleLikeButton = (e) => {
+        if (!this.state.like) {
+            this.likedAudio();
+        }
         this.setState({
             like: !this.state.like
         })
     }
 
-    render() {
+    render () {
+        // get current url and check to display correct page
+        var currentLocation = window.location.href;
+        var result = /[^/]*$/.exec(currentLocation)[0]
+
+        console.log('props.audio: ', this.props.audio)
         return (
-            <div className="player container text-center">
-                <div className="row">
-                    <Link to='/'><i className="fas fa-chevron-left fa-2x back-button"/></Link>
-                </div>
-                <div className="song">
-                    <h1 className="name">{this.state.tracks.song}</h1>
-                    <h3 className="artist">{this.state.tracks.artist}</h3>
-                </div>
-                <div className="display-area">
-                    <canvas id='comment-canvas'></canvas>
-                    <div className="comments-container">Comment Container</div>
-                    <div className="time"></div>
-                </div>
-                {this.state.audio}
-                <div className="playarea d-flex justify-content-around">
-                    <i className="fas fa-undo-alt fa-3x" onClick={this.rewind.bind(this)}/>
-                    <i className={!this.state.playing ? "fas fa-play fa-3x play" : "d-none"} onClick={this.play.bind(this)}/>
-                    <i className={!this.state.playing ? "d-none" : "fas fa-pause fa-3x pause"} onClick={this.pause.bind(this)}/>
-                    <i className={!this.state.muted ? "fas fa-volume-up fa-3x unmute" : "d-none"} onClick={this.mute.bind(this)}/>
-                    <i className={!this.state.muted ? "d-none" : "fas fa-volume-off fa-3x mute"} onClick={this.unmute.bind(this)}/>
-                </div>
-                <form>
-                    <div className="form-group">
-                        <input type="email" className="form-control" id='comment-input' placeholder="Comment Here"/>
-                        <div className='comment-button'>
-                            <i className="fas fa-comment fa-2x"/>
-                            <i onClick={this.toggleLikeButton} className={this.state.like ? "fas fa-heart fa-lg" : "far fa-heart fa-lg"}></i>
+            <div className="container-fluid">
+                <div className="row audio_container">
+                    <div className="left_container col-4 d-flex justify-content-center text-center">
+                        <div className="avatar_container d-flex align-items-center justify-content-center" style={ { backgroundImage: `url(${albumImage}})` } }>
+                            {
+                                this.state.playing
+                                    ? <i className={"far fa-pause-circle fa-3x"} onClick={this.pause.bind(this)}></i>
+                                    : <i className={"far fa-play-circle fa-3x"} onClick={this.play.bind(this)}></i>
+                            }
+                            <div className='likes_container'>
+                                <i onClick={this.toggleLikeButton} className={result === '' ? this.state.like ? "fas fa-heart fa-lg" : "far fa-heart fa-lg" : 'd-none'}></i>
+                                <i className={result === '' ? 'd-none' : 'fas fa-heartbeat fa-lg'}></i>
+                                <div className={result === '' ? 'd-none' : 'likes-counter'}>100</div>
+                            </div>
                         </div>
                     </div>
-                </form>
+                    <div className="audio_display col-8 text-center">
+                        <div className="align-middle post-title">
+                            <Link className='text-white' to='/audio_info'>{this.state.tracks.artist} - {this.state.tracks.song}</Link>
+                        </div>
+                        <div className="audio_visualizer">
+                            <canvas ref={e => this.canvasRef = e}/>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

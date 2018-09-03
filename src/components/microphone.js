@@ -6,12 +6,14 @@ import Modal from 'react-modal';
 
 const customStyles = {
   content : {
+    width                 : '80%',
     top                   : '50%',
     left                  : '50%',
     right                 : 'auto',
     bottom                : 'auto',
     marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    transform             : 'translate(-50%, -50%)',
+    height: '60%'
   }
 };
 
@@ -148,15 +150,11 @@ async postRecording (e){
           backgroundColor="black"
         />
         <div className='record-controls text-center'>
-          <button onClick={this.startRecording} type="button">
-            <span className={!this.state.record ? 'fa-stack fa-2x' : 'd-none'}>
+            <span className={!this.state.record ? 'fa-stack fa-2x' : 'd-none'} onClick={this.startRecording}>
               <i className="far fa-circle fa-stack-2x"></i>
-              <i className="fas fa-circle fa-stack-1x fa-inverse inner-record"></i>
+              <i className="fas fa-circle fa-stack-1x fa-inverse inner-record"/>
             </span>
-          </button>
-          <button onClick={(event) => { this.stopRecording(); this.openModal()}}  type="button">
-            <i className={!this.state.record ? 'd-none' : "far fa-stop-circle fa-4x"}></i>
-          </button>
+            <i className={!this.state.record ? 'd-none' : "far fa-stop-circle fa-4x"} onClick={(event) => { this.stopRecording(); this.openModal()}}/>
           <Modal
             isOpen={this.state.modalIsOpen}
             onAfterOpen={this.afterOpenModal}
@@ -167,15 +165,19 @@ async postRecording (e){
           >
  
           <h2 ref={subtitle => this.subtitle = subtitle}>Completed Recording</h2>
-          {/* <button onClick={this.closeModal}>close</button> */}
-          <form >
-            <input placeholder = "Enter audio title here"/>
-            <button>Audio Player (BLOB) file</button>
-            <audio controls>
-              <source src={this.state.blobfile.blobURL} type="audio/webm"/>
-            </audio>
-            <button><i className="fa fa-trash" aria-hidden="false"></i></button>
-            <button  onClick={(e) => {this.postRecording(e)}}><i className="fas fa-sign-in-alt"></i></button>
+          <form className='container center-align'>
+            <div className='d-flex justify-content-center'>
+              <input placeholder = "Enter audio title here" className='title-input'/>
+            </div>
+            <div className='recorded-audio-player d-flex justify-content-center'>
+              <audio controls>
+                <source src={this.state.blobfile.blobURL} type="audio/webm"/>
+              </audio>
+            </div>
+            <div className='post-controls d-flex justify-content-center'>
+              <button><i className="fa fa-trash" aria-hidden="false"></i></button>
+              <button  onClick={(e) => {this.postRecording(e)}}><i className="fas fa-sign-in-alt"></i></button>
+            </div>
           </form>
         </Modal>
         </div>

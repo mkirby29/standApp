@@ -1,5 +1,3 @@
-"use strict";
-
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/css/visualizer.css';
@@ -22,104 +20,101 @@ class VisualizerPlayer extends Component {
     }
 
     componentDidMount(){
-        console.log('Canvas Ref:', this.canvas);
-        this.init();
+        this.createAudio();
+        this.createVisualizer();
     }
 
-    init() {
-        window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        this.ctx = new AudioContext();
-        // Object.defineProperty(this, "context", {
-        //     value: new AudioContext(),
-        //     writable: false
-        // })
-        this.ctx.suspend && this.ctx.suspend();
-        this.playing = false;
-        try {
-            // create and connect node for processing audio (this will called every 2048 frames)
-            this.javascriptNode = this.ctx.createScriptProcessor(2048, 1, 1);
-            this.javascriptNode.connect(this.ctx.destination);
+    createAudio () {
+        this.audio = new Audio(this.state.tracks.url)
+        this.audio.crossOrigin = "anonymous";
+        // this.audio.controls = true
+    }
 
-            // below if for visualizer, node, connect, and variables 
-            // create and connect node for visualizer of audio
-            this.analyser = this.ctx.createAnalyser();
-            // this.analyser.connect(this.javascriptNode);
-            this.analyser.smoothingTimeConstant = 0.5;
-            // Fast Fourier Transform (use to determine frequency domain)
-            // below means we get 256 bars' of frequency
-            this.analyser.fftSize = 256;
+    createVisualizer () {
+        const canvas = this.canvasRef;
+        const ctx = canvas.getContext("2d");
+        // let width = canvas.width = window.innerWidth;
+        // let height = canvas.height = window.innerHeight;
+        let width = canvas.width = window.innerWidth * 0.4;
+        let height = canvas.height = window.innerWidth * 0.15;
+        
+        let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let analyser = audioCtx.createAnalyser();
+        let audioSrc = audioCtx.createMediaElementSource(this.audio);
 
-            // this.canvas = document.closest('canvas');
-            this.canvas = this.canvasRef;
-            this.canvas.width = window.innerWidth * 0.4;
-            this.canvas.height = window.innerHeight * 0.05;
-            this.canvasContext = this.canvas.getContext("2d")
+        audioSrc.connect(analyser);
+        audioSrc.connect(audioCtx.destination);
 
-            this.bufferLength = this.analyser.frequencyBinCount
+        analyser.fftSize = 256;
+        analyser.minDecibels = -90;
+        analyser.maxDecibels = 0;
 
-            this.source = this.ctx.createBufferSource();
-            this.destination = this.ctx.destination;
-            this.loadTrack();
+        let bufferLength = analyser.frequencyBinCount;
+        let dataArray = new Uint8Array(bufferLength);
 
-            // create and connect node for volume control
-            this.gainNode = this.ctx.createGain();
-            this.source.connect(this.gainNode);
-            this.gainNode.connect(this.analyser);
-            this.gainNode.connect(this.destination);
+        let gradient = ctx.createLinearGradient(0, 0, 0, height);
+        gradient.addColorStop(0, "#D4AF37");
+        gradient.addColorStop(1, "#6464ff");
 
-            this.initHandlers();
-        } catch (e) {
-            console.log("Init Error: Catch")
+        let barWidth = (width / bufferLength) * 2.5;
+        let barHeight;
+
+        let x = 0;
+
+        const draw = () => {
+            requestAnimationFrame(draw);
+
+            x = 0;
+
+            analyser.getByteFrequencyData(dataArray);
+
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, width, height);
+
+            for (let i = 0; i < bufferLength; i++) {
+                barHeight = dataArray[i]/2;
+                
+                let r = 177 + (barHeight / 2);
+                let g = 141 + (barHeight - 10 / 2);
+                let b = 52;
+              
+                ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+                ctx.fillRect(x, (height - barHeight)/2, barWidth, barHeight - 5);
+                x += barWidth + 1;
+            }
         }
-        // framer.setLoadingPercent(1);
-        // scene.init();
-    }
-
-    loadTrack() {
-        // console.log('loadTrack context before XHR: ', this.ctx);
-        // create XMLHttpRequest to exchange data with url without reload
-        const context = this.ctx;
-        var request = new XMLHttpRequest();
-
-        var track = this.state.tracks;
-
-        // using XMLhttpRequest to GET, mp3 file, async
-        request.open('GET', track.url, true);
-        request.responseType = 'arraybuffer';
-
-        // if request successful, decode audio data from response and apply buffer object
-        request.onload = () => {
-            // console.log('loadTrack context after XHR: ', context);
-            context.decodeAudioData(request.response, (buffer) => {
-                this.source.buffer = buffer;
-            });
-        };
-        request.send();
+        draw();
     }
 
     play () {
-        this.ctx.resume && this.ctx.resume();
-
-        if (!this.playing) {
-            if(this.source.context.state === 'suspended' && !this.ctx.resume){
-                this.source.context.resume();
-            } else {
-                this.source.start();
-            }
-            
-            this.playing = true;
-
-            this.setState({
-                playing: true
-            });
-        }
+        this.audio.play();
+        this.setState({
+            playing: true
+        })
     }
 
     pause () {
-        this.source.context.suspend();
-        this.playing = false;
+        this.audio.pause();
         this.setState({
             playing: false
+        });
+    }
+
+    rewind () {
+        this.audio.currentTime = this.audio.currentTime - 5;
+    }
+
+    mute () {
+        this.audio.muted = true;
+        this.setState({
+            muted: true
+        });
+    }
+
+    unmute () {
+        this.audio.muted = false;
+        this.setState({
+            muted: false
         });
     }
 
@@ -142,59 +137,6 @@ class VisualizerPlayer extends Component {
             }
         })
         console.log('getMp3fromS3: ', response);
-    }
-
-    initHandlers () {
-        // console.log('initHandlers context: ', this.ctx);
-        // when javascriptNode is called, use infomation from analyzer node to draw the volume
-        this.javascriptNode.onaudioprocess = () =>{
-            // console.log('onaurdioprocess context: ', this.ctx);
-            let array = new Uint8Array(this.analyser.frequencyBinCount);
-
-            let WIDTH = this.canvas.width;
-            let HEIGHT = this.canvas.height;
-
-            let barWidth = (WIDTH / this.bufferLength) * 2.5;
-            let barHeight;
-            let x = 0;
-
-            this.renderFrame = () => {
-                requestAnimationFrame(this.renderFrame);
-          
-                x = 0;
-          
-                this.analyser.getByteFrequencyData(array);
-          
-                this.canvasContext.fillStyle = "#ffffff";
-                this.canvasContext.fillRect(0, 0, WIDTH, HEIGHT);
-          
-                for (var i = 0; i < this.bufferLength; i++) {
-                  barHeight = array[i];
-                  
-                  let r = barHeight + (25 * ( i/ this.bufferLength));
-                  let g = 250 * (i/this.bufferLength);
-                  let b = 50;
-                
-                  this.canvasContext.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
-                  this.canvasContext.fillRect(x, HEIGHT - barHeight, barWidth, (barHeight - 18));
-                  x += barWidth + 1;
-                }
-            }
-            // audio.play();
-            this.renderFrame();
-        };
-    }
-
-    getAverageVolume (array) {
-        let values = 0;
-        let average;
-
-        for (var i = 0; i < array.length; i++) {
-            values =  values + array[i];
-        }
-
-        average = values / array.length;
-        return average;
     }
 
     // need to sync with server to save like state
@@ -231,10 +173,8 @@ class VisualizerPlayer extends Component {
                         </div>
                     </div>
                     <div className="audio_display col-8 text-center">
-                        <div className="audio_title">
-                            <div className="align-middle post-title">
-                                <Link to='/audio_info'>{this.state.tracks.artist} - {this.state.tracks.song}</Link>
-                            </div>
+                        <div className="align-middle post-title">
+                            <Link className='text-white' to='/audio_info'>{this.props.audio.artist} - {this.props.audio.song}</Link>
                         </div>
                         <div className="audio_visualizer">
                             <canvas ref={e => this.canvasRef = e}/>
