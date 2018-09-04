@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/css/avatar_select.css';
 import SimpleSlider from './carousel';
-import logo from '../assets/images/logo.jpg'
+import logo from '../assets/images/stand_app_logo.png'
 
 class Avatar extends Component {
     constructor (props) {

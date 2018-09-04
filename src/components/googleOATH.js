@@ -1,31 +1,35 @@
-import React from 'react';
+import React, {Component} from 'react';
 import createReactClass from 'create-react-class';
 import { Google } from 'react-oauth2';
 
-let GoogleComponent = createReactClass({
-  getInitialState () {
-    return {
-      "data": {
-        "id": "", "name": "", "email": "", "gender": "", "location": { "id": "", "name": "" }
-      }
-    };
-  },
 
-  google (err, res) {
+class GoogleComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      "data": {
+      "id": "", "name": "", "email": "", "gender": "", "location": { "id": "", "name": "" }
+    },
+    loggedin: false
+    }
+  }
+
+  google = (err, res) =>{
     if (!err) {
       this.setState({ data: res.profile })
     } else {
       this.setState({ data: 'something happen wrong' })
     }
-  },
+  }
 
   componentDidUpdate(prevProps, prevState){
     if (this.state === prevState ) {
       return;
     } else {
-        this.props.history.push("/avatar_select")
+        this.props.history.push("/avatar_select");
+        this.setState({loggedin: true})
     }
-  },
+  }
 
 
   render () {
@@ -59,5 +63,5 @@ let GoogleComponent = createReactClass({
       {JSON.stringify(this.state)}
     </div>
   }
-});
+};
 export default GoogleComponent;

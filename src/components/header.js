@@ -1,9 +1,10 @@
 import React from 'react';
 import avatar from '../assets/images/avatars/10kevinSoccer.jpg';
-import logo from '../assets/images/logo.jpg';
+import logo from '../assets/images/stand_app_logo.png';
 import '../assets/css/header.css';
 
 import {Link} from 'react-router-dom';
+import LoginConditional from './loginConditional'
 
 function Header (props) {
     var currentLocation = window.location.href;
@@ -23,8 +24,9 @@ function Header (props) {
                             <img src={logo} alt="Logo" className="img-fluid" />
                         </Link>
                     </div>
+                    {/* <LoginConditional/> */}
                 </div>
-                <hr/>
+                <hr className="white"/>
             </div>
         )
     } else {
@@ -42,7 +44,6 @@ function Header (props) {
                             <img src={logo} alt="Logo" className="img-fluid" />
                         </Link>
                     </div>
-                    
                 </div>
                 <hr/>
             </div>

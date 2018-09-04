@@ -1,3 +1,5 @@
+"use strict";
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/css/visualizer.css';
@@ -7,13 +9,18 @@ import axios from 'axios';
 // takes in an array of objects container audio details
 // but one select/takes one audio object
 
-class VisualizerPlayer extends Component {
+class TestPlayer extends Component {
     constructor (props) {
         super(props)
         this.state = {
             buffer: null,
             duration: 0,
-            tracks: this.props.audio,
+            tracks: { 
+                artist: "Amadeus",
+                song: "Goodbye",
+                url: "https://api.soundcloud.com/tracks/436771803/stream?client_id=b1495e39071bd7081a74093816f77ddb",
+                album_image: '',
+            },
             playing: false,
             like: false
         }
@@ -174,7 +181,7 @@ class VisualizerPlayer extends Component {
                     </div>
                     <div className="audio_display col-8 text-center">
                         <div className="align-middle post-title">
-                            <Link className='text-white' to='/audio_info'>{this.props.audio.artist} - {this.props.audio.song}</Link>
+                            <Link className='text-white' to='/audio_info'>{this.state.tracks.artist} - {this.state.tracks.song}</Link>
                         </div>
                         <div className="audio_visualizer">
                             <canvas ref={e => this.canvasRef = e}/>
@@ -186,4 +193,4 @@ class VisualizerPlayer extends Component {
     }
 }
 
-export default VisualizerPlayer;
+export default TestPlayer;

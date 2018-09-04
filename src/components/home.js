@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import Header from './header';
 import NewsFeed from './news_feed';
 import Footer from './footer';
+import SearchBar from './search_bar';
+import Sidebar from './sidebar'
 
 import { formatPostData } from '../helpers';
 import axios from 'axios';
@@ -27,7 +29,7 @@ class Home extends Component {
             }
         })
 
-        const { avatar, audio, id, author_name, username, likes } = response.data;
+        const { avatar, audio, id, username, likes } = response.data;
         console.log('getNewsFeedData response: ', response);
 
         let newState = {
@@ -89,9 +91,13 @@ class Home extends Component {
     render () {
         return(
             <div>
-                <Header/>
-                <NewsFeed/>
-                <Footer/>
+                {/* <Sidebar/> */}
+                <div id="page-content-wrapper">
+                    <Header/>
+                    <SearchBar/>
+                    <NewsFeed/>
+                    <Footer/>
+                </div>
             </div>
         )
     }

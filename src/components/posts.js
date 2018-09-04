@@ -14,9 +14,9 @@ let responseDummy = dummyAudioObject;
 
 class NewsFeed extends Component {
     render () {
-        let renderUserPosts = responseDummy.data.map(function(element, index){
+        let renderUserPosts = responseDummy.data.map(function(element){
             return(
-                <VisualizerPlayer key={index} profile={element.src}/>
+                <VisualizerPlayer key={element._id} audio={element}/>
             )
         })
         return (
@@ -24,7 +24,7 @@ class NewsFeed extends Component {
                 <Header/>
                 <div className='container text-center'>
                     <img className='post_avatar_container' src={avatar}/>
-                    <div className='d-flex align-items-center justify-content-around'>
+                    <div className='account-info d-flex align-items-center justify-content-around'>
                         <div> <strong>Posts:</strong> 12</div>
                         <div> <strong>Likes:</strong> 158</div>
                     </div>

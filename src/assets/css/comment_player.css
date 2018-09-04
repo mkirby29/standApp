@@ -9,15 +9,22 @@
         user-select: none;
 }
 
+#comment-canvas {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
 .player {
-    
+    color: white
 }
 
-html, body {
-    height: 100vh;
-}
-
-.play, .pause, .prev-button, .next-button{
+.play, 
+.pause, 
+.mute, 
+.unmute, 
+.rewind{
     cursor: pointer;
     opacity: 0.85;
 }
@@ -26,17 +33,12 @@ html, body {
     padding-top: 5%;
 }
 
-.mute {
-    display: none;
-}
-
 .play:hover,
-.pause:hover {
+.pause:hover,
+.mute:hover,
+.unmute:hover,
+.rewind:hover {
     opacity: 1;
-}
-
-canvas {
-    width: 100%;
 }
 
 .song {
@@ -44,30 +46,19 @@ canvas {
 }
 
 .display-area {
-    position: relative;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .comments-container {
-    position: absolute;
-    background-color: black;
-    opacity: 0.5;
-    height: 50%;
-    width: 80%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%)
-}
-
-.comments-container > * {
-    opacity: 1;
+    border: 1px solid grey;
 }
 
 .time {
-    position: absolute;
     font-size: 1.5em;
-    bottom: 0%;
-    left: 50%;
-    transform: translate(-50%, -50%)
 }
 
 .form-group {
@@ -78,16 +69,55 @@ canvas {
 
 #comment-input {
     display: inline;
-    width: 80%
 }
 
 .comment-button {
     display: inline;
-    height: 100%;
-    width: 100%;
 }
 
 .back-button {
     padding-top: 20px;
     padding-left: 16px;
+    color: white;
+}
+
+.controls-container {
+    position: absolute;
+    bottom: 18%;
+    width: 100%;
+    left: 0;
+    padding: 0 4%
+}
+
+#like-container {
+    padding-top: 4%;
+}
+
+@media only screen and (orientation: landscape) {
+    /* #comment-canvas {
+        position: fixed;
+        left: 0;
+        top: -30%;
+        width: 50%;
+        display: inline-block;
+        z-index: -1;
+    }
+    .display-area {
+        width: 50%;
+        z-index: -1;
+        transform: translate(-10%, -50%);
+    }
+    #like-container {
+        position: fixed;
+        right: 5%;
+        display: inline-block;
+        z-index: -1;
+        padding-top: 0;
+    } */
+    .song h1 {
+        font-size: 2rem;
+    }
+    .song h3 {
+        font-size: 1.5rem;
+    }
 }

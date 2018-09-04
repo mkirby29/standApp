@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import '../assets/css/comment_player.css';
-import song from '../assets/audio/betterdays.mp3';
-import albumImage from '../assets/images/album_art.jpg'
+import CommentBar from './comment_bar';
 
 // need to fix here, not audio_info!
 
@@ -13,160 +12,157 @@ class CommentPlayer extends Component {
             buffer: null,
             duration: 0,
             tracks: { 
-                artist: "Bryce Vince",
-                song: "Drew Barrymore",
-                url: song,
-                album_image: albumImage,
+                artist: "Amadeus",
+                song: "Goodbye",
+                url: "https://api.soundcloud.com/tracks/436771803/stream?client_id=b1495e39071bd7081a74093816f77ddb",
+                album_image: '',
+                comment: [
+                    {
+                        time: 0.1,
+                        message: "first!!"
+                    },
+                    {
+                        time: 1, 
+                        message: 'NOOOOOOOO!!!!!!'
+                    },
+                    {
+                        time: 3,
+                        message: 'we made it!'
+                    },
+                    {
+                        time: 5.52, 
+                        message: 'this sucks'
+                    },
+                    {
+                        time: 6.00, 
+                        message: 'NOOOOOOOO!!!!!!'
+                    },
+                    {
+                        time: 8,
+                        message: 'we made it!'
+                    },
+                    {
+                        time: 20, 
+                        message: 'this is awesome!!!'
+                    }
+                ]
             },
             playing: false,
-            like: false
+            like: false,
+            muted: false, 
+            displayed_comment: ''
         }
     }
 
     componentDidMount(){
-        console.log('Canvas Ref:', this.canvas);
-        this.init();
+        this.createAudio();
+        this.createVisualizer();
     }
 
-    init() {
-        window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        this.context = new AudioContext();
-        this.context.suspend && this.context.suspend();
-        this.playing = false;
-        try {
-            // create and connect node for processing audio (this will called every 2048 frames)
-            this.javascriptNode = this.context.createScriptProcessor(2048, 1, 1);
-            this.javascriptNode.connect(this.context.destination);
+    createAudio () {
+        this.audio = new Audio(this.state.tracks.url)
+        this.audio.crossOrigin = "anonymous";
+        // this.audio.controls = true
+    }
 
-            // below if for visualizer, node, connect, and variables 
-            // create and connect node for visualizer of audio
-            this.analyser = this.context.createAnalyser();
-            // this.analyser.connect(this.javascriptNode);
-            this.analyser.smoothingTimeConstant = 0.9;
-            // Fast Fourier Transform (use to determine frequency domain)
-            this.analyser.fftSize = 512;
+    createVisualizer () {
+        const canvas = document.getElementById("comment-canvas");
+        const ctx = canvas.getContext("2d");
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
 
-            this.canvas = document.querySelector('canvas');
-            // this.canvas = this.canvasRef;
-            this.canvas.width = window.innerWidth * 0.4;
-            this.canvas.height = window.innerHeight * 0.25;
-            this.canvasContext = this.canvas.getContext("2d")
+        let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let analyser = audioCtx.createAnalyser();
+        let audioSrc = audioCtx.createMediaElementSource(this.audio);
 
-            this.bufferLength = this.analyser.frequencyBinCount
+        audioSrc.connect(analyser);
+        audioSrc.connect(audioCtx.destination);
 
-            this.source = this.context.createBufferSource();
-            this.destination = this.context.destination;
-            this.loadTrack();
+        analyser.fftSize = 2048;
+        analyser.minDecibels = -90;
+        analyser.maxDecibels = 0;
 
-            // create and connect node for volume control
-            this.gainNode = this.context.createGain();
-            this.source.connect(this.gainNode);
-            this.gainNode.connect(this.analyser);
-            this.gainNode.connect(this.destination);
+        let bufferLength = analyser.frequencyBinCount;
+        let dataArray = new Uint8Array(bufferLength);
 
-            this.initHandlers();
-        } catch (e) {
-            console.log("Init Error: Catch")
+        let gradient = ctx.createLinearGradient(0, 0, 0, height);
+        gradient.addColorStop(0, "#D4AF37");
+        gradient.addColorStop(1, "#6464ff");
+
+        const draw = () => {
+            requestAnimationFrame(draw);
+            analyser.getByteFrequencyData(dataArray);
+
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, width, height);
+
+            let segments = dataArray.length / 2;
+            let radius = (height + dataArray[0]) / 5;
+            let angle = (Math.PI * 2) / segments;
+
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = gradient;
+
+            for(let i = 0; i < segments; i++) {
+                let barHeight = dataArray[i] > 0 ? dataArray[i] : 1;
+
+                let x1 = width / 2 + Math.cos(angle * i) * radius;
+                let x2 = width / 2 + Math.cos(angle * i) * (radius + barHeight);
+
+                let y1 = height / 2 + Math.sin(angle * i) * radius;
+                let y2 = height / 2 + Math.sin(angle * i) * (radius + barHeight);
+
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.closePath();
+                ctx.stroke();
+            }
+            this.checkComment();
         }
-        // framer.setLoadingPercent(1);
-        // scene.init();
-    }
-
-    loadTrack() {
-        // create XMLHttpRequest to exchange data with url without reload
-        var request = new XMLHttpRequest();
-
-        var track = this.state.tracks;
-
-        // using XMLhttpRequest to GET, mp3 file, async
-        request.open('GET', track.url, true);
-        request.responseType = 'arraybuffer';
-
-        // if request successful, decode audio data from response and apply buffer object
-        request.onload = () => {
-            this.context.decodeAudioData(request.response, (buffer) => {
-                this.source.buffer = buffer;
-            });
-        };
-        request.send();
+        draw();
     }
 
     play () {
-        this.context.resume && this.context.resume();
-
-        if (!this.playing) {
-            if(this.source.context.state === 'suspended' && !this.context.resume){
-                this.source.context.resume();
-            } else {
-                this.source.start();
-            }
-            
-            this.playing = true;
-
-            this.setState({
-                playing: true
-            });
-        }
+        this.audio.play();
+        this.setState({
+            playing: true
+        })
     }
 
     pause () {
-        this.source.context.suspend();
-        this.playing = false;
+        this.audio.pause();
         this.setState({
             playing: false
         });
     }
 
-    initHandlers () {
-        // when javascriptNode is called, use infomation from analyzer node to draw the volume
-        this.javascriptNode.onaudioprocess = () =>{
-            
-            let array = new Uint8Array(this.analyser.frequencyBinCount);
-
-            let WIDTH = this.canvas.width;
-            let HEIGHT = this.canvas.height;
-
-            let barWidth = (WIDTH / this.bufferLength) * 2.5;
-            let barHeight;
-            let x = 0;
-
-            this.renderFrame = () => {
-                requestAnimationFrame(this.renderFrame);
-          
-                x = 0;
-          
-                this.analyser.getByteFrequencyData(array);
-          
-                this.canvasContext.fillStyle = "#ffffff";
-                this.canvasContext.fillRect(0, 0, WIDTH, HEIGHT);
-          
-                for (var i = 0; i < this.bufferLength; i++) {
-                  barHeight = array[i];
-                  
-                  let r = barHeight + (25 * ( i/ this.bufferLength));
-                  let g = 250 * (i/this.bufferLength);
-                  let b = 50;
-                
-                  this.canvasContext.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
-                  this.canvasContext.fillRect(x, HEIGHT - barHeight, barWidth, (barHeight));
-                  x += barWidth + 1;
-                }
-            }
-            // audio.play();
-            this.renderFrame();
-        };
+    rewind () {
+        this.audio.currentTime = this.audio.currentTime - 5;
     }
 
-    getAverageVolume (array) {
-        let values = 0;
-        let average;
+    mute () {
+        this.audio.muted = true;
+        this.setState({
+            muted: true
+        });
+    }
 
-        for (var i = 0; i < array.length; i++) {
-            values =  values + array[i];
+    unmute () {
+        this.audio.muted = false;
+        this.setState({
+            muted: false
+        });
+    }
+
+    checkComment () {
+        for (let i = 0; i < this.state.tracks.comment.length; i++) {
+            if (this.state.tracks.comment[i].time <= this.audio.currentTime) {
+                this.setState({
+                    displayed_comment: this.state.tracks.comment[i].message
+                })
+            }
         }
-
-        average = values / array.length;
-        return average;
     }
 
     toggleLikeButton = () => {
@@ -178,33 +174,30 @@ class CommentPlayer extends Component {
     render() {
         return (
             <div className="player container text-center">
+                <canvas id='comment-canvas'></canvas>
                 <div className="row">
                     <Link to='/'><i className="fas fa-chevron-left fa-2x back-button"/></Link>
                 </div>
                 <div className="song">
-                    <h1 className="name">Song's Name</h1>
-                    <h3 className="artist">Artist Name</h3>
+                    <h1 className="name">{this.state.tracks.song}</h1>
+                    <h3 className="artist">{this.state.tracks.artist}</h3>
+                    <i id='like-container' onClick={this.toggleLikeButton} className={this.state.like ? "fas fa-heart fa-lg fa-2x" : "far fa-heart fa-lg fa-2x"}></i>
                 </div>
                 <div className="display-area">
-                    <canvas></canvas>
-                    <div className="comments-container">Comment Container</div>
+                    <div className="comments-container">{this.state.displayed_comment}</div>
                     <div className="time"></div>
                 </div>
-                <div className="playarea d-flex justify-content-around">
-                    <i className={!this.state.muted ? "fas fa-volume-up fa-3x unmute" : "d-none"}/>
-                    <i className={!this.state.muted ? "d-none" : "fas fa-volume-off fa-3x mute"}/>
-                    <i className={!this.state.playing ? "fas fa-play fa-3x play" : "d-none"} onClick={this.play.bind(this)}/>
-                    <i className={!this.state.playing ? "d-none" : "fas fa-pause fa-3x pause"} onClick={this.pause.bind(this)}/>
-                </div>
-                <form>
-                    <div className="form-group">
-                        <input type="email" className="form-control" id='comment-input' placeholder="Comment Here"/>
-                        <div className='comment-button'>
-                            <i className="fas fa-comment fa-2x"/>
-                            <i onClick={this.toggleLikeButton} className={this.state.like ? "fas fa-heart fa-lg" : "far fa-heart fa-lg"}></i>
-                        </div>
+                {this.state.audio}
+                <div className='controls-container'>
+                    <div className="controls d-flex justify-content-around">
+                        <i className="fas fa-undo-alt fa-3x rewind" onClick={this.rewind.bind(this)}/>
+                        <i className={!this.state.playing ? "fas fa-play fa-3x play" : "d-none"} onClick={this.play.bind(this)}/>
+                        <i className={!this.state.playing ? "d-none" : "fas fa-pause fa-3x pause"} onClick={this.pause.bind(this)}/>
+                        <i className={!this.state.muted ? "fas fa-volume-up fa-3x unmute" : "d-none"} onClick={this.mute.bind(this)}/>
+                        <i className={!this.state.muted ? "d-none" : "fas fa-volume-off fa-3x mute"} onClick={this.unmute.bind(this)}/>
                     </div>
-                </form>
+                </div>
+                <CommentBar/>
             </div>
         )
     }
