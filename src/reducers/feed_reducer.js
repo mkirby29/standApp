@@ -1,4 +1,4 @@
-import types from '../action/types';
+import types from '../actions/types';
 
 const DEFAULT_STATE = {
     all: [],
