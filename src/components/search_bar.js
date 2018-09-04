@@ -8,7 +8,7 @@ class SearchBar extends Component {
                 <input type="text" className="search-field form-control" placeholder="Search title"/>
                 <div className="search-button input-group-append">
                     <button className="btn btn-outline-secondary" type="button">
-                        <i class="fas fa-search"/>
+                        <i className="fas fa-search"/>
                     </button>
                 </div>
             </div>
