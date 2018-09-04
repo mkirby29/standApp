@@ -24,7 +24,9 @@ function Header (props) {
                             <img src={logo} alt="Logo" className="img-fluid" />
                         </Link>
                     </div>
-                    <LoginConditional/>
+                    <div className = "col-3 pull-md-right pull-xl-right pull-lg-right pull-sm-right pull-xs-right">
+                        <LoginConditional/>
+                    </div>
                 </div>
                 <hr className="white"/>
             </div>

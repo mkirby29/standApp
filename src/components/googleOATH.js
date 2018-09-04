@@ -33,7 +33,7 @@ class GoogleComponent extends Component {
 
 
   render () {
-    return <div className = "text-center">
+    return <div className = "text-center pull-md-right pull-xl-right pull-lg-right pull-sm-right pull-xs-right">
       <Google
         url={'http://localhost:3000'}
         clientId={'575268215328-e3kffueqpfhho3m57b4quq8dbe907g7r.apps.googleusercontent.com'}
