@@ -70,7 +70,6 @@ class CommentPlayer extends Component {
         const ctx = canvas.getContext("2d");
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
-        console.log("wight height: ", width, height);
 
         let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         let analyser = audioCtx.createAnalyser();
@@ -157,7 +156,6 @@ class CommentPlayer extends Component {
     }
 
     checkComment () {
-        console.log('check time: ', this.audio.currentTime)
         for (let i = 0; i < this.state.tracks.comment.length; i++) {
             if (this.state.tracks.comment[i].time <= this.audio.currentTime) {
                 this.setState({
