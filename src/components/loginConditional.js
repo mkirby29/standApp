@@ -22,7 +22,7 @@ class LoginConditional extends Component {
           }
           
         return(
-            <div className="login_div text-center">
+            <div className="right">
          
               {
                 this.props.loggedin ?
