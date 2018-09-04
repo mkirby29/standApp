@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 $output = [
-    'success' => false
+    'success' => true
 ];
 
 require_once('db_connect.php');
@@ -23,7 +23,7 @@ switch($action) {
         require_once('post/fileconversion.php');
         break;
     case 'delete_item':
-        require_once('delete/'.$action.'.php');
+        require_once('delete/delete_item.php');
         break;
     // case 'PATCH':
     //     $_PATCH = json_decode(file_get_contents('php://input'), true);

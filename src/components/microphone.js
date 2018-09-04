@@ -60,7 +60,7 @@ class Microphone extends Component {
 
     // debugger;
     var blob = recordedBlob.blob;
-    var audioFile = new File([blob], "music.mp3", {
+    var audioFile = new File([blob], "music2.mp3", {
       type: "audio/mp3"
     });
     this.setState({
@@ -68,11 +68,11 @@ class Microphone extends Component {
       blobfile: recordedBlob
     })
 
-    // var form = new FormData();
-    // form.set('audio_name', blob);
-    // form.set('user_id', 'mattkirby');
-    // var name = 'mikeyim';
-    // form.set('audio_duration', 100);
+    var form = new FormData();
+    form.set('audio_name', blob);
+    form.set('user_id', 'mattkirby');
+    var name = 'mikeyim';
+    form.set('audio_duration', 100);
 
     // let recording = {};
     // recording.audio_name = 'Audio Testing Name';
@@ -81,6 +81,8 @@ class Microphone extends Component {
     // console.log()
 
     // this.setState({
+    //   recording: recording
+    // })
     //   // recording: recording,
     //   form: form
     // })
@@ -103,22 +105,28 @@ async postRecording (e){
     }
   })
 
-  const { errors, success } = resp.data;
+  // const resp = await axios.post('/api/stand_app.php', this.state.recording,{
+  //   params: {
+  //     action: 'add_item'
+  //   }
+  // })
 
-  if(!success){
-      return this.setState({ 
-        errors 
-      });
-  }
+  // const { errors, success } = resp.data;
+
+  // if(!success){
+  //     return this.setState({ 
+  //       errors 
+  //     });
+  // }
   
-  // axios({
-  //   method: 'post',
-  //   url: '/api/stand_app.php?action=add_item',
-  //   data: form, 
-  //   config: { headers: {'Content-Type': 'multipart/form-data' }}   
-  // }).then(function(response) {
-  //   console.log("Response", response);
-  // });
+  axios({
+    method: 'post',
+    url: '/api/stand_app.php?action=add_item',
+    data: form, 
+    config: { headers: {'Content-Type': 'multipart/form-data' }}   
+  }).then(function(response) {
+    console.log("Response", response);
+  });
 }
 
   // Modal methods

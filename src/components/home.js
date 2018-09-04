@@ -29,7 +29,7 @@ class Home extends Component {
             }
         })
 
-        const { avatar, audio, id, author_name, username, likes } = response.data;
+        const { avatar, audio, id, username, likes } = response.data;
         console.log('getNewsFeedData response: ', response);
 
         let newState = {
