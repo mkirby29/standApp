@@ -12,6 +12,7 @@ import login from './login'
 import '../assets/css/app.css';
 import loginGooglePage from './loginGooglePage'
 import TestPlayer from './test_player';
+import redirect from '../hoc/redirect';
 
 class App extends Component {
     render () {
@@ -28,7 +29,7 @@ class App extends Component {
                 <Route path='/recording' component={Recording}/>
                 <Route path='/avatar_select' component={Avatar}/>
                 <Route path='/posts' component={Post}/>
-                <Route path='/login' component={login}/>
+                <Route path='/login' component={redirect(login, '/')}/>
                 <Route path='/test_player' component={TestPlayer}/>
                 <Route component={NotFound}/>   
             </Switch>

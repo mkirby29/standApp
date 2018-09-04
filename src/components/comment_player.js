@@ -157,9 +157,9 @@ class CommentPlayer extends Component {
     }
 
     checkComment () {
-        console.log('check time: ', Math.floor(this.audio.currentTime))
+        console.log('check time: ', this.audio.currentTime)
         for (let i = 0; i < this.state.tracks.comment.length; i++) {
-            if (this.state.tracks.comment[i].time <= Math.floor(this.audio.currentTime)) {
+            if (this.state.tracks.comment[i].time <= this.audio.currentTime) {
                 this.setState({
                     displayed_comment: this.state.tracks.comment[i].message
                 })
