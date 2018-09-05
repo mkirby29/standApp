@@ -31,7 +31,9 @@ class App extends Component {
                 <Route path='/avatar_select' component={Avatar}/>
                 {/* public identify here */}
                 <Route path='/posts' component={Post}/>
-                <Route path='/login' component={redirect(login, '/')}/>
+                {/* <Route path='/login' component={redirect(login, '/')}/> */}
+                <Route path='/login' component={login}/>
+
                 <Route path='/test_player' component={TestPlayer}/>
                 <Route component={NotFound}/>   
             </Switch>
