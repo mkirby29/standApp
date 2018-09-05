@@ -71,41 +71,35 @@ class Microphone extends Component {
     var form = new FormData();
     form.set('audio_name', blob);
     form.set('user_id', 'mattkirby');
-    var name = 'mikeyim';
     form.set('audio_duration', 100);
-
-    // let recording = {};
-    // recording.audio_name = 'Audio Testing Name';
-    // recording.audio_duration = recordedBlob.stopTime - recordedBlob.startTime
-    // recording.user_id = 10;
-    // console.log()
-
-    // this.setState({
-    //   recording: recording
-    // })
-    //   // recording: recording,
-    //   form: form
-    // })
-
-    // {audio_name(strings), audio_duration('string'), user_id(number)}
   }
 
 async postRecording (e){
   e.preventDefault();
   var form = new FormData();
   form.set('audio', this.state.audiofile);
-  form.set('id', 'mattkirby2');
+  form.set('audio_name', 'helllo')
+  form.set('id', 'mattkirby9');
+  form.set('user_id', 121);
   form.set('avatar_id', 5);
   form.set('author_name', 'matt');
-  form.set('audio_name', 'heloo');
   form.set('audio_duration', 500)
   
 
-  const resp = await axios.post('/api/stand_app.php', form,{
-    params: {
-      action: 'add_item'
-    }
-  })
+  axios({
+    method: 'post',
+    url: '/api/stand_app.php?action=add_item',
+    data: form, 
+    config: { headers: {'Content-Type': 'multipart/form-data' }}   
+  }).then(function(response) {
+    console.log("Response", response);
+  });
+
+  // const resp = await axios.post('/api/stand_app.php', form,{
+  //   params: {
+  //     action: 'add_item'
+  //   }
+  // })
 
   // const resp = await axios.post('/api/stand_app.php', this.state.recording,{
   //   params: {
@@ -120,18 +114,8 @@ async postRecording (e){
   //       errors 
   //     });
   // }
-  
-  axios({
-    method: 'post',
-    url: '/api/stand_app.php?action=add_item',
-    data: form, 
-    config: { headers: {'Content-Type': 'multipart/form-data' }}   
-  }).then(function(response) {
-    console.log("Response", response);
-  });
 }
 
-  // Modal methods
   openModal() {
     this.setState({modalIsOpen: true});
   }
@@ -185,8 +169,8 @@ async postRecording (e){
               </audio>
             </div>
             <div className='post-controls d-flex justify-content-center'>
-              <button><i className="fa fa-trash" aria-hidden="false"></i></button>
-              <button  onClick={(e) => {this.postRecording(e)}}><i className="fas fa-sign-in-alt"></i></button>
+              <button className='btn btn-dark'><i className="fas fa-times"/></button>
+              <button className='btn btn-warning' onClick={(e) => {this.postRecording(e)}}><i className="fas fa-check"/></button>
             </div>
           </form>
         </Modal>

@@ -1,14 +1,29 @@
 import types from './types'
 import axios from 'axios';
-import userID from '../user_id'
 
 const BASE_URL = 'http://api.reactprototypes.com';
 const API_KEY = '?key=ps_todo_list';
 
-export function getUserID () {
+export function getNewsfeed () {
+    const resp = axios.get(`/api/stand_app.php?action=get_all`);
     return {
-        type: types.GET_USER_ID,
-        payload: userID
+        type: types.GET_NEWSFEED,
+        payload: resp
+    }
+}
+
+export const getSingleAudio = (id) => async dispatch => {
+    try {
+        const resp = await axios.get('/api/stand_app.php', id)
+        dispatch ({
+            type: types.GET_SINGLE_AUDIO,
+            payload: resp
+        })
+    } catch (err) {
+        dispatch ({
+            type: types.LIST_ERROR,
+            error: "No audio found"
+        })
     }
 }
 

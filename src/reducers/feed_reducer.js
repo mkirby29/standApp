@@ -8,8 +8,10 @@ const DEFAULT_STATE = {
 
 export default (state = DEFAULT_STATE, action) => {
     switch (action.type) {
-        case types.GET_USER_ID:
-            return {...state, single: action.payload._id}
+        case types.GET_SINGLE_AUDIO:
+            return {...state, single: action.payload.data}
+        case types.LIST_ERROR:
+            return {...state, single: {}, error: action.error}
         default: 
             return state;
     }

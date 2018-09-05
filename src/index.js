@@ -5,12 +5,13 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import think from './middleware/think';
+import reduxPromise from './middleware/redux_promise';
 import registerServiceWorker from './helpers/registerServiceWorker';
 import types from './actions/types';
 
 import { Provider } from 'react-redux';
 
-const store = createStore(rootReducer, {}, applyMiddleware(think));
+const store = createStore(rootReducer, {}, applyMiddleware(think, reduxPromise));
 
 if(localStorage.getItem('token')) {
     store.dispatch({ type: types.LOG_IN });
