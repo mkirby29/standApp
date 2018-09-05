@@ -94,10 +94,12 @@ async postRecording (e){
   e.preventDefault();
   var form = new FormData();
   form.set('audio', this.state.audiofile);
-  form.set('audio_name', 'heloo')
   form.set('id', 'mattkirby2');
-  form.set('user_id', 120);
+  form.set('avatar_id', 5);
+  form.set('author_name', 'matt');
+  form.set('audio_name', 'heloo');
   form.set('audio_duration', 500)
+  
 
   const resp = await axios.post('/api/stand_app.php', form,{
     params: {
