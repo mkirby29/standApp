@@ -11,15 +11,16 @@ move_uploaded_file($_FILES['audio']['tmp_name'], $target_file);
 
 require_once('get/store_audio.php');
 
-if(empty($_GET)){ 
+if(empty($_POST)){ 
 	$output['errors'] = 'missing data';
 }
 
-$audioName=$_GET['audio_name'];
-$duration=$_GET['audio_duration'];
-$userId=$_GET['user_id'];
+$avatar=$_POST['avatar_id'];
+$author=$_POST['author_name'];
+$audioName=$_POST['audio_name'];
+$duration=$_POST['audio_duration'];
 
-$query = "INSERT INTO `audio`(`audio_name`, `audio_duration`, `user_id`) VALUES ('$audioName', '$duration', '$userId')";
+$query = "INSERT INTO `audio`(`avatar_id`, `author_name`, `audio_name`, `audio_duration`) VALUES ('$avatar', '$author', '$audioName', '$duration')";
 
 $result = mysqli_query($conn, $query);
 
