@@ -29,7 +29,9 @@ class App extends Component {
                 <Route path='/recording' component={Recording}/>
                 <Route path='/avatar_select' component={Avatar}/>
                 <Route path='/posts' component={Post}/>
-                <Route path='/login' component={redirect(login, '/')}/>
+                {/* <Route path='/login' component={redirect(login, '/')}/> */}
+                <Route path='/login' component={login}/>
+
                 <Route path='/test_player' component={TestPlayer}/>
                 <Route component={NotFound}/>   
             </Switch>
