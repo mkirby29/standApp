@@ -36,12 +36,14 @@ try {
     echo $e->getMessage() . PHP_EOL;
 }
 
-$query = "SELECT `id`, `avatar_id`, `username`, `audio_name`, `likes`
-                FROM `users` AS `u`
-                JOIN `audio` AS `a`
-                    ON `u`.`id` = `a`.`user_id`
-                JOIN `user_feedback` AS `f`
-                    ON `f`.`audio_id` = `a`.`audio_id`";
+$query = "SELECT `id`, `avatar_id`, `username`, `audio_name`, `likes`, `comment`, `comment_time` 
+                FROM `users` AS `u` 
+                JOIN `audio` AS `a` 
+                    ON `u`.`id` = `a`.`user_id` 
+                JOIN `user_feedback` AS `f` 
+                    ON `f`.`audio_id` = `a`.`audio_id` 
+                JOIN `comments` AS `c` 
+                    ON `c`.`comment_id` = `a`.`audio_id`";
 
 $result = mysqli_query($conn, $query);
 

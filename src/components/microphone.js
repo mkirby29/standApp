@@ -81,7 +81,10 @@ async postRecording (e){
   form.set('audio_name', 'helllo')
   form.set('id', 'mattkirby9');
   form.set('user_id', 121);
+  form.set('avatar_id', 5);
+  form.set('author_name', 'matt');
   form.set('audio_duration', 500)
+  
 
   axios({
     method: 'post',
