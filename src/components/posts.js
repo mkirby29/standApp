@@ -9,6 +9,8 @@ import VisualizerPlayer from './visualizer_player';
 import dummyAudioObject from '../assets/data/dummy_audio_object';
 
 import avatar from '../assets/images/avatars/10kevinSoccer.jpg';
+import Dm from './dm'
+
 
 let responseDummy = dummyAudioObject;
 
@@ -21,6 +23,9 @@ class NewsFeed extends Component {
         })
         return (
             <div>
+                <div>
+                    <Dm/>
+                </div>
                 <Header/>
                 <div className='container text-center'>
                     <img className='post_avatar_container' src={avatar}/>
@@ -30,6 +35,7 @@ class NewsFeed extends Component {
                     </div>
                 </div>
                 {renderUserPosts};
+             
                 <Footer/>
             </div>
         )
