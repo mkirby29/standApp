@@ -118,6 +118,7 @@ class CommentPlayer extends Component {
                 ctx.closePath();
                 ctx.stroke();
             }
+            // toggle this on play and pause
             this.checkComment();
         }
         draw();

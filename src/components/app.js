@@ -20,6 +20,7 @@ class App extends Component {
             <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route 
+                        // pass id through path
                         path='/audio_info' 
                         render={ (props) => {
                             // replace with audio_desp component
@@ -28,6 +29,7 @@ class App extends Component {
                 />
                 <Route path='/recording' component={Recording}/>
                 <Route path='/avatar_select' component={Avatar}/>
+                {/* public identify here */}
                 <Route path='/posts' component={Post}/>
                 <Route path='/login' component={redirect(login, '/')}/>
                 <Route path='/test_player' component={TestPlayer}/>

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import '../assets/css/visualizer.css';
 import albumImage from '../assets/images/album_art.jpg'
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { getSingleAudio } from '../actions'
 
 // takes in an array of objects container audio details
 // but one select/takes one audio object
@@ -174,6 +176,7 @@ class VisualizerPlayer extends Component {
                     </div>
                     <div className="audio_display col-8 text-center">
                         <div className="align-middle post-title">
+                            {/* to=audio-info/:id */}
                             <Link className='text-white' to='/audio_info'>{this.props.audio.artist} - {this.props.audio.song}</Link>
                         </div>
                         <div className="audio_visualizer">
