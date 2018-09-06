@@ -13,6 +13,7 @@ import '../assets/css/app.css';
 import loginGooglePage from './loginGooglePage'
 import TestPlayer from './test_player';
 import redirect from '../hoc/redirect';
+import About from './about'
 
 class App extends Component {
     render () {
@@ -33,7 +34,7 @@ class App extends Component {
                 <Route path='/posts' component={Post}/>
                 {/* <Route path='/login' component={redirect(login, '/')}/> */}
                 <Route path='/login' component={login}/>
-
+                <Route path='/about' component={About}/>
                 <Route path='/test_player' component={TestPlayer}/>
                 <Route component={NotFound}/>   
             </Switch>
