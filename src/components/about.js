@@ -47,9 +47,9 @@ class About extends Component {
                 <h2>Mike Yim</h2>
                 <i>Backend Developer</i>
                 <div>Favorite Hobby: Live Stream Video Games</div>
-                <a href="#"><i className="fa fa-github" /></a>
-                <a href="#"><i className="fab fa-linkedin"/></a>
-                <a href="#"><i className="fas fa-briefcase"/></a>
+                <a href=""><i className="fa fa-github" /></a>
+                <a href=""><i className="fab fa-linkedin"/></a>
+                <a href=""><i className="fas fa-briefcase"/></a>
             </div>
             </div>
             <div className="card">
@@ -58,9 +58,9 @@ class About extends Component {
                 <h2>Matthew Kirby</h2>
                 <i>Backend Developer</i>
                 <div>Favorite Hobby: Video Games</div>
-                <a href="#"><i className="fa fa-github" /></a>
-                <a href="#"><i className="fab fa-linkedin"/></a>
-                <a href="#"><i className="fas fa-briefcase"/></a>
+                <a href="http://github.com/rag329"><i className="fa fa-github" /></a>
+                <a href="http://linkedin.com/in/matthew-kirby-270a3329/"><i className="fab fa-linkedin"/></a>
+                <a href="https://matt-kirby.us"><i className="fas fa-briefcase"/></a>
             </div>
             </div>
         </section>
