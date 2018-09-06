@@ -6,3 +6,4 @@ aws/vendor
 secret_key.php
 api_key.php
 public/api/post/sounds/*
+standapp.sql
