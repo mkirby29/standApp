@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import '../assets/css/comment_player.css';
 import CommentBar from './comment_bar';
+import axios from 'axios';
+import { postComment } from '../actions';
+import { connect } from 'react-redux';
 
 // need to fix here, not audio_info!
 
@@ -166,6 +169,16 @@ class CommentPlayer extends Component {
         }
     }
 
+    async postComment (comment) {
+        if(!comment) {
+            throw new Error('Missing Message')
+        }
+        await this.props.postComment(comment);
+        this.setState({
+            displayed_comment: comment.message
+        })
+    }
+
     toggleLikeButton = () => {
         this.setState({
             like: !this.state.like
@@ -198,10 +211,10 @@ class CommentPlayer extends Component {
                         <i className={!this.state.muted ? "d-none" : "fas fa-volume-off fa-3x mute"} onClick={this.unmute.bind(this)}/>
                     </div>
                 </div>
-                <CommentBar/>
+                <CommentBar post={this.postComment}/>
             </div>
         )
     }
 }
 
-export default CommentPlayer;
+export default connect(null, {postComment})(CommentPlayer);

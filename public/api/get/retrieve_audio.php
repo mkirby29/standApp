@@ -30,7 +30,7 @@ try {
     ]);
 
     header("Content-Type: {$result['ContentType']}");
-    echo $result['Body'];
+    // echo $result['Body'];
     
 } catch (S3Exception $e) {
     echo $e->getMessage() . PHP_EOL;
@@ -46,6 +46,10 @@ $query = "SELECT `id`, `avatar_id`, `username`, `audio_name`, `likes`, `comment`
                     ON `c`.`comment_id` = `a`.`audio_id`";
 
 $result = mysqli_query($conn, $query);
+
+print $query;
+
+
 
 if(empty($result)){  
 	$output['errors'] = 'database error';
