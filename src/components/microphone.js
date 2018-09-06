@@ -3,6 +3,8 @@ import { ReactMic } from 'react-mic';
 import axios from 'axios';
 import '../assets/css/microphone.css';
 import Modal from 'react-modal';
+import CategoryModal from './category_modal';
+import { Fragment } from 'react';
 
 const customStyles = {
   content : {
@@ -25,7 +27,8 @@ class Microphone extends Component {
       modalIsOpen: false,
       audiofile: '',
       blobfile: '',
-      recording: ''
+      recording: '',
+      category: 'comedy'
     }
 
     this.startRecording = this.startRecording.bind(this);
@@ -130,14 +133,23 @@ async postRecording (e){
 
   }
 
-  
- 
+  selectCategory = (string) => {
+    if(string === 'comedy') {
+      return;
+    } else {
+      this.setState ({
+        category: 'others'
+      })
+    }
+  }
+
   render() {
 
     // console.log('AUDIO:', this.state.blobfile.blobURL);
 
     return (
       <div className='microphone'>
+        <CategoryModal select={this.selectCategory}/>
         <ReactMic
           record={this.state.record}
           className="sound-wave centered"
@@ -151,7 +163,26 @@ async postRecording (e){
               <i className="fas fa-circle fa-stack-1x fa-inverse inner-record"/>
             </span>
             <i className={!this.state.record ? 'd-none' : "far fa-stop-circle fa-4x"} onClick={(event) => { this.stopRecording(); this.openModal()}}/>
-          <Modal
+        </div>
+        <div className='effect-button'>
+        
+          {
+            (this.state.category === 'comedy') ?
+              <i className="fas fa-laugh-squint fa-4x"/>
+              :
+              <i className="fas fa-hands fa-4x"/>
+          }
+
+          <label className='speaker-text'>Speakers Needed</label>
+        </div>
+        <div id="bubbles">
+            <div className="bubble x1"></div>
+            <div className="bubble x2"></div>
+            <div className="bubble x3"></div>
+            <div className="bubble x4"></div>
+            <div className="bubble x5"></div>
+          </div>
+        <Modal
             isOpen={this.state.modalIsOpen}
             onAfterOpen={this.afterOpenModal}
             onRequestClose={this.closeModal}
@@ -176,7 +207,6 @@ async postRecording (e){
             </div>
           </form>
         </Modal>
-        </div>
       </div>
     )
   }
