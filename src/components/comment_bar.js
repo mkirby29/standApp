@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import '../assets/css/comment_bar.css';
 
 class CommentBar extends Component {
-    state = {
-        comment: '',
-        time: null
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            comment: '',
+            time: null
+        };
+
+    }
 
     handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -15,9 +19,9 @@ class CommentBar extends Component {
         })
     }
 
-    togglePost=(e)=> {
+    togglePost = (e) => {
         e.preventDefault();
-        this.props.post.postComment(this.state);
+        this.props.post(this.state);
     }
 
     render () {

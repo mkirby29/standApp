@@ -92,8 +92,9 @@ class CommentPlayer extends Component {
         gradient.addColorStop(0, "#D4AF37");
         gradient.addColorStop(1, "#6464ff");
 
-        const draw = () => {
-            requestAnimationFrame(draw);
+        this.draw = () => {
+            console.log(this.audio.currentTime);
+            requestAnimationFrame(this.draw);
             analyser.getByteFrequencyData(dataArray);
 
             ctx.fillStyle = "black";
@@ -124,7 +125,7 @@ class CommentPlayer extends Component {
             // toggle this on play and pause
             this.checkComment();
         }
-        draw();
+        this.draw();
     }
 
     play () {
@@ -139,6 +140,7 @@ class CommentPlayer extends Component {
         this.setState({
             playing: false
         });
+        cancelAnimationFrame(this.draw);
     }
 
     rewind () {
@@ -169,14 +171,15 @@ class CommentPlayer extends Component {
         }
     }
 
-    async postComment (comment) {
-        if(!comment) {
+    async postComment (commentObject) {
+        if(!commentObject) {
             throw new Error('Missing Message')
         }
-        await this.props.postComment(comment);
+        commentObject.time = this.audio.currentTime;
         this.setState({
-            displayed_comment: comment.message
+            displayed_comment: commentObject.comment
         })
+        await this.props.postComment(commentObject);
     }
 
     toggleLikeButton = () => {
@@ -211,7 +214,7 @@ class CommentPlayer extends Component {
                         <i className={!this.state.muted ? "d-none" : "fas fa-volume-off fa-3x mute"} onClick={this.unmute.bind(this)}/>
                     </div>
                 </div>
-                <CommentBar post={this.postComment}/>
+                <CommentBar post={this.postComment.bind(this)}/>
             </div>
         )
     }
