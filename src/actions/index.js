@@ -50,6 +50,15 @@ export const logIn = (credentials) => async dispatch => {
     }
 }
 
+export function postComment (message) {
+    const resp = axios.post('/api/stand_app.php', message)
+    
+    return {
+        type: types.POST_COMMENT,
+        payload: resp
+    }
+}
+
 export function unlikePost () {
     const resp = axios.post(`${BASE_URL}/todos${API_KEY}`);
 }
