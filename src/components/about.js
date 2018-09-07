@@ -47,7 +47,7 @@ class About extends Component {
                 <i>Backend Developer</i>
                 <div>Favorite Hobby: Live Stream Video Games</div>
                 <a href="http://github.com/mikeyim337"><i className="fa fa-github" /></a>
-                <a href="http//www.linkedin.com/in/mike-yim-033356135/"><i className="fab fa-linkedin"/></a>
+                <a href="http//linkedin.com/in/mike-yim-033356135/"><i className="fab fa-linkedin"/></a>
                 <a href="http://mikeyim.com/"><i className="fas fa-briefcase"/></a>
             </div>
             </div>
