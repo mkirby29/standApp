@@ -36,18 +36,17 @@ try {
     echo $e->getMessage() . PHP_EOL;
 }
 
-$query = "SELECT `id`, `avatar_id`, `username`, `audio_name`, `likes`, `comment`, `comment_time` 
-                FROM `users` AS `u` 
+$query = "SELECT `u`.`id`, `avatar`, `username`, `audio_name`, `likes`, `comment`, `comment_time`
+                FROM `users` AS `u`
                 JOIN `audio` AS `a` 
-                    ON `u`.`id` = `a`.`user_id` 
-                JOIN `user_feedback` AS `f` 
-                    ON `f`.`audio_id` = `a`.`audio_id` 
+                    ON `a`.`user_id` = `u`.`id` 
+                JOIN `user_feedback` AS `f`
+                    ON `f`.`audio_id` = `a`.`id` 
                 JOIN `comments` AS `c` 
-                    ON `c`.`comment_id` = `a`.`audio_id`";
+                    ON `c`.`audio_id` = `a`.`id` 
+                ORDER BY `date_added` ASC";
 
 $result = mysqli_query($conn, $query);
-
-//print $query;
 
 if(empty($result)){  
 	$output['errors'] = 'database error';

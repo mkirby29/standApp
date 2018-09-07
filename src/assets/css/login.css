@@ -28,7 +28,16 @@ body{
     transform: translate(-50%, 30%);
 }
 
-@media only screen and (max-width: 700px) and (orientation: landscape) {
+.loading {
+	font-size: 10rem;
+	color: rgb(241, 205, 112);
+	position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translate(-50%, 30%);
+}
+
+@media only screen and (max-width: 900px) and (orientation: landscape) {
 	.microphone-login {
 		font-size: 5rem;
 		color: rgb(241, 205, 112);
