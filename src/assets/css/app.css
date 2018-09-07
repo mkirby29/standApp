@@ -1,5 +1,6 @@
-* {
-    font-family: 'Open Sans', 'Helvetica Neue', sans-serif
+@font-face {
+    font-family: 'Alcubierre';
+    src: url(../fonts/Alcubierre.otf);
 }
 
 body {

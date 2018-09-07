@@ -1,20 +1,22 @@
 body{
   margin:0;
   color:#333;
-  background:#0e1013;
   font-family:sans-serif;
 }
-h1{
+
+.about-title{
   text-align:center;
   font-family:serif;
   font-size:3em;
-  color:#bbb
+  color: rgb(177, 141, 52)
 }
+
 #team{
   display:flex;
   flex-wrap: wrap;
   flex-grow:3;
 }
+
 .card {
   width:33%;
   min-width: 250px;
@@ -24,17 +26,21 @@ h1{
   margin:0 0.5% 1% 0;
   display:inline-block
 }
+
 .card:nth-of-type(3n){
   margin-right:0;
 }
+
 .card img {
   width: 100%;
   min-height:100%;
   transition:all 0.9s
 }
+
 .card:hover img{
  transform:scale(1.2,1.2)
 }
+
 .data {
   position: absolute;
   bottom: 5%;
@@ -81,15 +87,17 @@ h1{
   padding:20px;
   opacity:0
 }
+
 .data a:hover,.card:hover h2{
   color:#38c
 }
 
 @media (max-width:550px){
-  .card {width:100%;margin-right:0}
+  .card {
+    width:100%;
+    margin-right:0
+  }
 }
-
-
 
 .btn-twtr{
   color:#ddd;

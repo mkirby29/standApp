@@ -59,8 +59,7 @@ class GoogleComponent extends Component {
       >
         Login With Google
   </Google>
-      <hr />
-      {JSON.stringify(this.state)}
+      {/* {JSON.stringify(this.state)} */}
     </div>
   }
 };

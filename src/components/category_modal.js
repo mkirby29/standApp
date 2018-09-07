@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../assets/css/category_modal.css';
-import '../assets/audio/applause.mp3';
 
 class CategoryModal extends Component {
     state = {

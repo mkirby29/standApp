@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { ReactMic } from 'react-mic';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import '../assets/css/microphone.css';
 import Modal from 'react-modal';
 import CategoryModal from './category_modal';
-import { Fragment } from 'react';
+import applauseTrack from '../assets/audio/applause.mp3';
+import laughTrack from '../assets/audio/laugh.mp3';
 
 const customStyles = {
   content : {
@@ -87,7 +89,6 @@ async postRecording (e){
   form.set('avatar_id', 5);
   form.set('author_name', 'matt');
   form.set('audio_duration', 500)
-  
 
   axios({
     method: 'post',
@@ -135,20 +136,29 @@ async postRecording (e){
 
   selectCategory = (string) => {
     if(string === 'comedy') {
+      this.audio = new Audio(laughTrack);
       return;
     } else {
+      this.audio = new Audio(applauseTrack);
       this.setState ({
         category: 'others'
       })
     }
   }
 
+  playEffect () {
+    this.audio.play();
+  }
+
+  pauseEffect () {
+    this.audio.pause();
+  }
+
   render() {
-
-    // console.log('AUDIO:', this.state.blobfile.blobURL);
-
+    
     return (
       <div className='microphone'>
+      <Link to='/'><i className="fas fa-chevron-left fa-2x" onClick={this.pauseEffect.bind(this)}></i></Link>
         <CategoryModal select={this.selectCategory}/>
         <ReactMic
           record={this.state.record}
@@ -168,9 +178,9 @@ async postRecording (e){
         
           {
             (this.state.category === 'comedy') ?
-              <i className="fas fa-laugh-squint fa-4x"/>
+              <i className="fas fa-laugh-squint fa-4x" onClick={this.playEffect.bind(this)}/>
               :
-              <i className="fas fa-hands fa-4x"/>
+              <i className="fas fa-hands fa-4x" onClick={this.playEffect.bind(this)}/>
           }
 
           <label className='speaker-text'>Speakers Needed</label>
@@ -181,7 +191,7 @@ async postRecording (e){
             <div className="bubble x3"></div>
             <div className="bubble x4"></div>
             <div className="bubble x5"></div>
-          </div>
+        </div>
         <Modal
             isOpen={this.state.modalIsOpen}
             onAfterOpen={this.afterOpenModal}
