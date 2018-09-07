@@ -10,14 +10,12 @@ class Avatar extends Component {
 
     render() {
         return (
-
             <div className='container-fluid'>
                 <Logo/>
                 <hr/>
                 <p className="avatar-select-title text-center">Select your avatar</p>     
                 <SimpleSlider/>
             </div>
-
         )
     }
 }
