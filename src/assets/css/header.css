@@ -27,8 +27,12 @@ hr {
 
 .profile_icon {
     text-align: center;
+    padding-top: 22px;
 }
 
+.col-4 #logo-text {
+  padding: 0
+}
 
 
 /* Position and sizing of burger button */
@@ -93,6 +97,11 @@ hr {
     height: 30px;
     left: 36px;
     top: 0;
+  }
+
+  .bm-menu-wrap {
+    left: 0;
+    top: 0
   }
 
 /* @media only screen and (min-width: 600px) {
