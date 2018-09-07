@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-export default function (WrappedComponent, path ='/') {
+export default function (WrappedComponent, path ='/login') {
     class Auth extends Component {
         componentDidMount () {
             this.checkAuth();
@@ -12,8 +12,11 @@ export default function (WrappedComponent, path ='/') {
         }
 
         checkAuth () {
+            console.log('check auth: ', this.props);
             const {auth, history} = this.props;
-            if(!auth) {
+            let token = localStorage.getItem('token');
+            console.log(token)
+            if(!token || token === 'undefined') {
                 history.push(path);
             }
         }

@@ -17,7 +17,7 @@ class About extends Component {
             <div className='container-fluid'>
             <Header/>
             <h1 className='about-title'>Our Team</h1>
-                <section id="team">
+                <section id="team" className="d-flex justify-content-around">
                 <div className="card">
                     <img src={kevin} />
                 <div className="data">
