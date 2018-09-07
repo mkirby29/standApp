@@ -29,7 +29,6 @@ class NewsFeed extends Component {
 }
 
 function mapStateToProps (state) {
-    console.log('newsfeed state: ', state)
     return {
         list: state.feed
     }

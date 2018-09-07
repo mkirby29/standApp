@@ -47,9 +47,7 @@ $query = "SELECT `id`, `avatar_id`, `username`, `audio_name`, `likes`, `comment`
 
 $result = mysqli_query($conn, $query);
 
-print $query;
-
-
+//print $query;
 
 if(empty($result)){  
 	$output['errors'] = 'database error';

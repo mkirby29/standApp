@@ -32,6 +32,9 @@ class Header extends React.Component {
                 avatar: {defaultAvatar}
             })
         } else {
+            this.setState({
+                avatar: {avatar}
+            })
             // this.setState({
             //     avatar: this.props.avatar
             // })
