@@ -19,7 +19,7 @@
 
 .post-title {
     white-space: nowrap;
-    font-size: 0.9rem;
+    font-size: 1.3rem;
 }
 
 .audio_visualizer canvas {
@@ -28,4 +28,11 @@
 
 .audio_visualizer {
     display: inline-block;
+}
+
+@media only screen and (max-width: 600px) {
+    .post-title {
+        white-space: nowrap;
+        font-size: 1rem;
+    }
 }

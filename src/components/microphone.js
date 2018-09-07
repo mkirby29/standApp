@@ -162,7 +162,7 @@ async postRecording (e){
         <CategoryModal select={this.selectCategory}/>
         <ReactMic
           record={this.state.record}
-          className="sound-wave centered"
+          className="sound-wave"
           onStop={this.onStop.bind(this)}
           strokeColor="#FFFFFF"
           backgroundColor="black"

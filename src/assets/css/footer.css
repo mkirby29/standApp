@@ -2,7 +2,7 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: rgb(94, 90, 90, .5);
+    background-color: rgba(68, 64, 64, 0.5);
     transition: bottom 0.3s;
 }
 
@@ -11,5 +11,9 @@
 }
 
 .fa-circle, .fa-microphone {
-    color: rgb(177, 141, 52);
+    color: rgb(241, 205, 112);
+}
+
+ .fa-microphone:hover {
+    color:rgb(206, 168, 73)
 }
