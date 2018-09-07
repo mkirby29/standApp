@@ -24,9 +24,8 @@ class Header extends React.Component {
         if (result === '') {
         return (
             <div className="container-fluid">
-
-                <div className="navBar row">
-                    <div className="profile_icon col-2">
+                <div className="navBar d-flex justify-content-between">
+                    {/* <div className="side-menu"> */}
                     <Menu>
                         <Link to='/posts'>
                             <img alt="Avatar" src={avatar} className="img-fluid avatar_image" />
@@ -37,8 +36,8 @@ class Header extends React.Component {
                         <a id="contact" className="menu-item" href="/login">Log Out</a>
                         <a onClick={ this.showSettings } className="menu-item--small" href=""></a>
                     </Menu>
-                    </div>
-                    <div className='col-4 offset-2'>
+                    {/* </div> */}
+                    <div className='logo'>
                         <Logo/>
                     </div>
                 </div>
@@ -48,14 +47,15 @@ class Header extends React.Component {
     } else {
         return (
             <div className="container-fluid">
-
-                <div className="navBar row">
-                    <div className="back_button col-2">
+                <div className="navBar d-flex justify-content-between">
+                    <div className="back_button">
                         <Link to='/'>
-                            <i className="fas fa-chevron-left fa-2x"></i>
+                            <i className="fas fa-chevron-left fa-2x"/>
                         </Link>   
                     </div>
-          
+                    <div className='logo'>
+                        <Logo/>
+                    </div>
                 </div>
                 <hr/>
             </div>

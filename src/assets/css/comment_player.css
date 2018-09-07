@@ -43,6 +43,7 @@
 
 .song {
     padding-top: 0;
+    font-family: 'Helvetica Neue', sans-serif;
 }
 
 .display-area {
@@ -94,30 +95,20 @@
 }
 
 @media only screen and (orientation: landscape) {
-    /* #comment-canvas {
-        position: fixed;
-        left: 0;
-        top: -30%;
-        width: 50%;
-        display: inline-block;
-        z-index: -1;
+    .song h1 {
+        font-size: 2.5rem;
     }
-    .display-area {
-        width: 50%;
-        z-index: -1;
-        transform: translate(-10%, -50%);
+    .song h3 {
+        font-size: 1.5rem;
     }
-    #like-container {
-        position: fixed;
-        right: 5%;
-        display: inline-block;
-        z-index: -1;
-        padding-top: 0;
-    } */
+}
+
+
+@media only screen and (max-width: 600px) {
     .song h1 {
         font-size: 2rem;
     }
     .song h3 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 }
