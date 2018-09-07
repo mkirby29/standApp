@@ -16,7 +16,6 @@ class Avatar extends Component {
                 <hr/>
                 <p className="avatar-select-title text-center">Select your avatar</p>     
                 <SimpleSlider/>
-
             </div>
 
         )

@@ -17,7 +17,7 @@
 }
 
 .player {
-    color: white
+    color: rgb(241, 205, 112)
 }
 
 .play, 
@@ -26,7 +26,7 @@
 .unmute, 
 .rewind{
     cursor: pointer;
-    opacity: 0.85;
+    opacity: 1;
 }
 
 .sound-controls {
@@ -38,7 +38,7 @@
 .mute:hover,
 .unmute:hover,
 .rewind:hover {
-    opacity: 1;
+    opacity: 0.85;
 }
 
 .song {
@@ -55,7 +55,6 @@
 }
 
 .comments-container {
-    border: 1px solid grey;
 }
 
 .time {
@@ -87,7 +86,7 @@
     bottom: 18%;
     width: 100%;
     left: 0;
-    padding: 0 4%
+    padding: 0 4%;
 }
 
 #like-container {
@@ -102,7 +101,6 @@
         font-size: 1.5rem;
     }
 }
-
 
 @media only screen and (max-width: 600px) {
     .song h1 {

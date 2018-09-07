@@ -99,6 +99,14 @@ body{
   }
 }
 
+@media (max-width:2000px){
+  .card {
+    width:20%;
+    margin-right:0;
+    margin-top: 5%;
+  }
+}
+
 .btn-twtr{
   color:#ddd;
   border:2px solid;
