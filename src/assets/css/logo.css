@@ -1,0 +1,13 @@
+#logo-text {
+	padding-top: 16px;
+	font-size: 2rem;
+	color:white;
+	margin-bottom: 0;
+	font-family: Alcubierre;
+}
+
+#app-text{
+	opacity: .7;
+	font-size: 3rem;
+	color: rgb(241, 205, 112);
+}

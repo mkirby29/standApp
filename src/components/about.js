@@ -14,10 +14,9 @@ class About extends Component {
 
     render() {
         return (
-
             <div className='container-fluid'>
             <Header/>
-            <h1>Our Team</h1>
+            <h1 className='about-title'>Our Team</h1>
                 <section id="team">
                 <div className="card">
                     <img src={kevin} />
