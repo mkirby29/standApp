@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { ReactMic } from 'react-mic';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import '../assets/css/microphone.css';
 import Modal from 'react-modal';
+import CategoryModal from './category_modal';
+import applauseTrack from '../assets/audio/applause.mp3';
+import laughTrack from '../assets/audio/laugh.mp3';
 
 const customStyles = {
   content : {
@@ -25,7 +29,8 @@ class Microphone extends Component {
       modalIsOpen: false,
       audiofile: '',
       blobfile: '',
-      recording: ''
+      recording: '',
+      category: 'comedy'
     }
 
     this.startRecording = this.startRecording.bind(this);
@@ -79,12 +84,11 @@ async postRecording (e){
   var form = new FormData();
   form.set('audio', this.state.audiofile);
   form.set('audio_name', 'helllo')
-  form.set('id', 'mattkirby9');
+  form.set('id', 'test.mp3');
   form.set('user_id', 121);
   form.set('avatar_id', 5);
   form.set('author_name', 'matt');
   form.set('audio_duration', 500)
-  
 
   axios({
     method: 'post',
@@ -130,17 +134,35 @@ async postRecording (e){
 
   }
 
-  
- 
+  selectCategory = (string) => {
+    if(string === 'comedy') {
+      this.audio = new Audio(laughTrack);
+      return;
+    } else {
+      this.audio = new Audio(applauseTrack);
+      this.setState ({
+        category: 'others'
+      })
+    }
+  }
+
+  playEffect () {
+    this.audio.play();
+  }
+
+  pauseEffect () {
+    this.audio.pause();
+  }
+
   render() {
-
-    // console.log('AUDIO:', this.state.blobfile.blobURL);
-
+    
     return (
       <div className='microphone'>
+      <Link to='/'><i className="fas fa-chevron-left fa-2x" onClick={this.pauseEffect.bind(this)}></i></Link>
+        <CategoryModal select={this.selectCategory}/>
         <ReactMic
           record={this.state.record}
-          className="sound-wave centered"
+          className="sound-wave"
           onStop={this.onStop.bind(this)}
           strokeColor="#FFFFFF"
           backgroundColor="black"
@@ -151,7 +173,26 @@ async postRecording (e){
               <i className="fas fa-circle fa-stack-1x fa-inverse inner-record"/>
             </span>
             <i className={!this.state.record ? 'd-none' : "far fa-stop-circle fa-4x"} onClick={(event) => { this.stopRecording(); this.openModal()}}/>
-          <Modal
+        </div>
+        <div className='effect-button'>
+        
+          {
+            (this.state.category === 'comedy') ?
+              <i className="fas fa-laugh-squint fa-4x" onClick={this.playEffect.bind(this)}/>
+              :
+              <i className="fas fa-hands fa-4x" onClick={this.playEffect.bind(this)}/>
+          }
+
+          <label className='speaker-text'>Speakers Needed</label>
+        </div>
+        <div id="bubbles">
+            <div className="bubble x1"></div>
+            <div className="bubble x2"></div>
+            <div className="bubble x3"></div>
+            <div className="bubble x4"></div>
+            <div className="bubble x5"></div>
+        </div>
+        <Modal
             isOpen={this.state.modalIsOpen}
             onAfterOpen={this.afterOpenModal}
             onRequestClose={this.closeModal}
@@ -176,7 +217,6 @@ async postRecording (e){
             </div>
           </form>
         </Modal>
-        </div>
       </div>
     )
   }

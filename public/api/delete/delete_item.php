@@ -1,6 +1,22 @@
 <?php
 
+require('../../aws/vendor/autoload.php');
 
+use Aws\S3\S3Client;
+
+$bucket = 'standup618';
+$keyname = 'mattkirby';
+
+$s3 = new S3Client([
+    'version' => 'latest',
+    'region'  => 'us-west-1'
+]);
+
+// Delete an object from the bucket.
+$s3->deleteObject([
+    'Bucket' => $bucket,
+    'Key'    => $keyname
+]);
 
 
 if(empty($_GET)){  

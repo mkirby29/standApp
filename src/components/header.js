@@ -1,31 +1,69 @@
 import React from 'react';
 import avatar from '../assets/images/avatars/10kevinSoccer.jpg';
-import logo from '../assets/images/stand_app_logo.png';
+import defaultAvatar from '../assets/images/avatars/default_avatar.png';
 import '../assets/css/header.css';
 
 import {Link} from 'react-router-dom';
-import LoginConditional from './loginConditional'
+import LoginConditional from './loginConditional';
+import Hamburger from './hamburger';
+import { slide as Menu } from 'react-burger-menu'
+import Logo from './logo';
 
-function Header (props) {
-    var currentLocation = window.location.href;
-    var result = /[^/]*$/.exec(currentLocation)[0]
-    if (result === '') {
+
+class Header extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            avatar: ''
+        }
+    }
+    showSettings (event) {
+        event.preventDefault();
+    }
+    
+    logOut () {
+        localStorage.removeItem('token');
+    }
+
+    checkAvatar () {
+        let token = localStorage.getItem('token');
+        if(!token || token === 'undefined') {
+            this.setState({
+                avatar: {defaultAvatar}
+            })
+        } else {
+            this.setState({
+                avatar: {avatar}
+            })
+            // this.setState({
+            //     avatar: this.props.avatar
+            // })
+            return
+        }
+    }
+
+    render(){
+        var currentLocation = window.location.href;
+        var result = /[^/]*$/.exec(currentLocation)[0];
+
+        if (result === '') {
         return (
             <div className="container-fluid">
-
-                <div className="navBar row">
-                    <div className="profile_icon col-3">
+                <div className="navBar d-flex justify-content-between">
+                    {/* <div className="side-menu"> */}
+                    <Menu>
                         <Link to='/posts'>
-                            <img alt="Avatar" src={avatar} className="img-fluid avatar_image" />
+                            <img alt="Avatar" src={this.state.avatar} className="img-fluid avatar_image" />
                         </Link>
-                    </div>
-                    <div className="logo col-4 offset-1 text-center">
-                        <Link to='/avatar_select'>
-                            <img src={logo} alt="Logo" className="img-fluid" />
-                        </Link>
-                    </div>
-                    <div className = "col-3 pull-md-right pull-xl-right pull-lg-right pull-sm-right pull-xs-right">
-                        <LoginConditional/>
+                        <a id="home" className="menu-item" href="/posts">My Account</a>
+                        <a id="about" className="menu-item" href="/avatar_select">Avatar Select</a>
+                        <a id="contact" className="menu-item" href="/about">About Us</a>
+                        <a id="contact" className="menu-item" href="/login" onClick={this.logOut.bind()}>Log Out</a>
+                        <a onClick={ this.showSettings } className="menu-item--small" href=""></a>
+                    </Menu>
+                    {/* </div> */}
+                    <div className='logo'>
+                        <Logo/>
                     </div>
                 </div>
                 <hr className="white"/>
@@ -34,23 +72,21 @@ function Header (props) {
     } else {
         return (
             <div className="container-fluid">
-
-                <div className="navBar row">
-                    <div className="back_button col-2">
+                <div className="navBar d-flex justify-content-between">
+                    <div className="back_button">
                         <Link to='/'>
-                            <i className="fas fa-chevron-left fa-2x"></i>
+                            <i className="fas fa-chevron-left fa-2x"/>
                         </Link>   
                     </div>
-                    <div className="logo col-4 offset-2 text-center">
-                        <Link to='/'>
-                            <img src={logo} alt="Logo" className="img-fluid" />
-                        </Link>
+                    <div className='logo'>
+                        <Logo/>
                     </div>
                 </div>
                 <hr/>
             </div>
         )
-    }
+    }}
+
 }
 
 export default Header;

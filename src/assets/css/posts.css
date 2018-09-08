@@ -1,9 +1,15 @@
 .post_avatar_container {
     border-radius: 50%;
     border: 1px solid black;
-    width: 40%
+    width: 25%
 }
 
 .account-info {
     color: white;
+}
+
+@media only screen and (max-width: 600px) {
+    .post_avatar_container {
+        width: 40%
+    }
 }

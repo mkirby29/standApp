@@ -12,7 +12,10 @@ export default (state = DEFAULT_STATE, action) => {
             return {...state, single: action.payload.data}
         case types.LIST_ERROR:
             return {...state, single: {}, error: action.error}
-        default: 
+        case types.GET_NEWSFEED:
+            console.log('GET NEWS FEED:', action.payload);
+            return {...state, single: {}, all: action.payload.data};
+        default:
             return state;
     }
 }

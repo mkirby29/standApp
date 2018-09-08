@@ -36,17 +36,26 @@ export function likePost () {
     }
 }
 
-export const logIn = (credentials) => async dispatch => {
-    try {
-        const resp = await axios.post('http://api.reactprototypes.com/signin', credentials);
-
-        localStorage.setItem('token', resp.data.token);
-        dispatch({ type: types.LOG_IN });
-    } catch (err) {
+export const logIn = (token) => async dispatch => {
+    if (localStorage.getItem('token')) {
+        localStorage.setItem('token', token);
+        dispatch(
+            { type: types.LOG_IN }
+        );
+    } else {
         dispatch({
             type: types.AUTH_ERROR,
-            error: 'Invalid email and/or password'
+            error: 'Please sign up with Google Plus'
         })
+    }
+}
+
+export function postComment (message) {
+    const resp = axios.post('/api/stand_app.php', message)
+    
+    return {
+        type: types.POST_COMMENT,
+        payload: resp
     }
 }
 

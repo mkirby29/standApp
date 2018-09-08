@@ -156,7 +156,6 @@ class VisualizerPlayer extends Component {
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0]
 
-        console.log('props.audio: ', this.props.audio)
         return (
             <div className="container-fluid">
                 <div className="row audio_container">

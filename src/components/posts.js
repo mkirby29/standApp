@@ -35,7 +35,6 @@ class NewsFeed extends Component {
                     </div>
                 </div>
                 {renderUserPosts};
-             
                 <Footer/>
             </div>
         )

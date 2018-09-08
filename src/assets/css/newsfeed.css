@@ -1,6 +1,9 @@
 .audio_container {
-    margin: 4% auto;
-    /* height: 15vh; */
+    margin: 15% auto;
+}
+
+.audio_container:first-child {
+    margin: 10% auto 15%;
 }
 
 .title_text {
@@ -30,4 +33,14 @@ a {
 
 .audio-player {
     border: 0.2px solid black
+}
+
+@media only screen and (min-width: 600px) {
+    .audio_container:first-child {
+        margin: 5% auto 10%;
+    }
+
+    .audio_container {
+        margin: 10% auto;
+    }
 }

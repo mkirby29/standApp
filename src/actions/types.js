@@ -5,5 +5,6 @@ export default {
     LIKE_POST: 'like_post',
     LIST_ERROR: 'list_error',
     LOG_IN: 'log_in',
+    POST_COMMENT: 'post_comment',
     UNLIKE_POST: 'unlike_post'
 }

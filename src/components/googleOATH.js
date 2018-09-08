@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import createReactClass from 'create-react-class';
 import { Google } from 'react-oauth2';
-
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { logIn } from '../actions';
 
 class GoogleComponent extends Component {
   constructor(props){
@@ -23,15 +25,25 @@ class GoogleComponent extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if (this.state === prevState ) {
+    const { data: { name, email, email_verified, sub }} = this.state;
+    let currentToken = localStorage.getItem('token');
+    console.log('currentToken before set: ', currentToken)
+    this.props.logIn();
+    if (this.state === prevState) {
       return;
-    } else {
+    } 
+    else if (currentToken !== sub) {
         this.props.history.push("/avatar_select");
         this.setState({loggedin: true})
+        localStorage.setItem('token', sub);
+    } else {
+        this.props.history.push("/");
     }
+    // console.log(JSON.stringify(this.state))
+    console.log('googleOuth name, email, verified: ', name, email, email_verified)
+    console.log(this.state)
   }
-
-
+  
   render () {
     return <div className = "text-center pull-md-right pull-xl-right pull-lg-right pull-sm-right pull-xs-right">
       <Google
@@ -59,9 +71,7 @@ class GoogleComponent extends Component {
       >
         Login With Google
   </Google>
-      <hr />
-      {JSON.stringify(this.state)}
     </div>
   }
 };
-export default GoogleComponent;
+export default connect(null, {logIn})(GoogleComponent);
