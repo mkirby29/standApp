@@ -23,18 +23,23 @@ class Home extends Component {
     }
 
     async getNewsFeedData () {
-        const response = await axios.get('/api/stand_app.php', {
-            params: {
-                action: 'get_all'
-            }
-        })
+        try {
+            const response = await axios.get('/api/stand_app.php', {
+                params: {
+                    action: 'get_all'
+                }
+            })
+            const { avatar, audio, id, username, likes } = response.data;
+            console.log('getNewsFeedData response: ', response);
 
-        const { avatar, audio, id, username, likes } = response.data;
-        console.log('getNewsFeedData response: ', response);
-
-        let newState = {
-            newsFeed: [response.data],
-        };
+            let newState = {
+                newsFeed: [response.data],
+            };
+            this.setState(newState);
+            console.log('newState: ', this.state.newsFeed)
+        } catch (err) {
+            console.log('error get all')
+        }
 
         // if(listItems){
         //     newState.list = listItems;
@@ -43,8 +48,6 @@ class Home extends Component {
         // } else {
         //     newState.message = 'Error with server'
         // }
-
-        this.setState(newState);
     }
 
     async deleteItem(id) {
