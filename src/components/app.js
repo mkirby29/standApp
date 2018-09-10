@@ -28,8 +28,8 @@ class App extends Component {
                             return <AudioInfo/>
                         }}
                 />
-                <Route path='/recording' component={Recording}/>
-                <Route path='/avatar_select' component={Avatar}/>
+                <Route path='/recording' component={auth(Recording)}/>
+                <Route path='/avatar_select' component={auth(Avatar)}/>
                 {/* public identify here */}
                 <Route path='/posts' component={auth(Post)}/>
                 <Route path='/login' component={login}/>

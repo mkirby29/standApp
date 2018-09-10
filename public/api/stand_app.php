@@ -10,6 +10,9 @@ require_once('db_connect.php');
 $action = $_GET['action'];
 
 switch($action) {
+    case 'get_user':
+        require_once('get/get_user.php');
+        break;
     case 'get_all': 
         require_once('get/retrieve_audio.php');
         break;

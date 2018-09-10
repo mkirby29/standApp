@@ -20,6 +20,7 @@ $audioName=$_POST['audio_name'];
 $user_id=$_POST['user_id'];
 
 $query = "INSERT INTO `audio`(`author_name`, `audio_name`, `user_id`) VALUES ('$author', '$audioName', '$user_id')";
+// INSERT INTO `user_feedback` (`id`, `likes`, *`audio_id`*) VALUES (NULL, '0', ' *audio_id* ');
 
 $result = mysqli_query($conn, $query);
 
