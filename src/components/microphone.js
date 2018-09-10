@@ -20,7 +20,6 @@ const customStyles = {
     height: '40%',
     backgroundColor: 'grey',
     borderRadius: '20px'
-
   }
 };
 
