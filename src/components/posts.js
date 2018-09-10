@@ -4,7 +4,6 @@ import '../assets/css/posts.css'
 
 import Header from './header';
 import Footer from './footer';
-
 import VisualizerPlayer from './visualizer_player';
 import dummyAudioObject from '../assets/data/dummy_audio_object';
 

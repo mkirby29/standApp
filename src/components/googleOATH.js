@@ -3,7 +3,7 @@ import createReactClass from 'create-react-class';
 import { Google } from 'react-oauth2';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { logIn } from '../actions';
+import { logIn, addNewUser } from '../actions';
 
 class GoogleComponent extends Component {
   constructor(props){
@@ -40,7 +40,13 @@ class GoogleComponent extends Component {
         this.props.history.push("/");
     }
     // console.log(JSON.stringify(this.state))
+    let userInfo = {
+      username: name,
+      email: email,
+      token: sub
+    }
     console.log('googleOuth name, email, verified: ', name, email, email_verified)
+    addNewUser(userInfo)
     console.log(this.state)
   }
   
@@ -74,4 +80,5 @@ class GoogleComponent extends Component {
     </div>
   }
 };
-export default connect(null, {logIn})(GoogleComponent);
+
+export default connect(null, {logIn, addNewUser})(GoogleComponent);

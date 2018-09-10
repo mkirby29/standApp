@@ -15,15 +15,13 @@ if(empty($_POST)){
 	$output['errors'] = 'missing data';
 }
 
-$avatar=$_POST['avatar_id'];
 $author=$_POST['author_name'];
 $audioName=$_POST['audio_name'];
-$duration=$_POST['audio_duration'];
+$user_id=$_POST['user_id'];
 
-$query = "INSERT INTO `audio`(`avatar_id`, `author_name`, `audio_name`, `audio_duration`) VALUES ('$avatar', '$author', '$audioName', '$duration')";
+$query = "INSERT INTO `audio`(`author_name`, `audio_name`, `user_id`) VALUES ('$author', '$audioName', '$user_id')";
 
 $result = mysqli_query($conn, $query);
-
 
 if(empty($result)){ 
 	$output['errors'] = 'database error';

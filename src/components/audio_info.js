@@ -1,14 +1,22 @@
-import React from 'react';
-
-import Header from './header';
+import React, { Component } from 'react';
 import CommentPlayer from './comment_player';
+import { connect } from 'react-redux';
+import { getSingleAudio } from '../actions';
 
-export default props => {
-    return (
-        <div>
-            <CommentPlayer/>
-        </div>
-    )
+class AudioInfo extends Component {
+    componentDidMount () {
+        console.log('ID: ', window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1));
+        let id = window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1);
+        this.props.getSingleAudio(id)
+    }
+
+    render () {
+        return (
+            <div>
+                <CommentPlayer/>
+            </div>
+        )
+    }
 }
 
-// fix is needed in comment_player! not here
+export default connect(null, { getSingleAudio } )(AudioInfo);

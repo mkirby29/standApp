@@ -4,8 +4,36 @@ import axios from 'axios';
 const BASE_URL = 'http://api.reactprototypes.com';
 const API_KEY = '?key=ps_todo_list';
 
+export function addNewUser (info) {
+    const resp = axios.post('/api/stand_app.php', {
+        params: {
+            action: 'add_new_user'
+        }
+    })
+    return {
+        types: types.ADD_NEW_USER,
+        payload: resp
+    }
+}
+
+export function addAvatar (token, avatar) {
+    const resp = axios.post('/api/stand_app.php', {
+        params: {
+            action: 'add_avatar'
+        }
+    })
+    return {
+        types: types.ADD_AVATAR,
+        payload: resp
+    }
+}
+
 export function getNewsfeed () {
-    const resp = axios.get(`/api/stand_app.php?action=get_all`);
+    const resp = axios.get('/api/stand_app.php', {
+        params: {
+            action: 'get_all'
+        }
+    })
     return {
         type: types.GET_NEWSFEED,
         payload: resp
@@ -56,6 +84,22 @@ export function postComment (message) {
     return {
         type: types.POST_COMMENT,
         payload: resp
+    }
+}
+
+export function retrieveAvatars () {
+    try {
+        const resp = axios.get('/api/stand_app.php', {
+            params: {
+                action: 'retrieve_avatars'
+            }
+        })
+        return {
+            type: types.RETRIEVE_AVATARS,
+            payload: resp
+        }
+    } catch (err) {
+        console.log('RETRIEVE AVATARS: ERROR')
     }
 }
 

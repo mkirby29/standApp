@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import Header from './header';
 import NewsFeed from './news_feed';
 import Footer from './footer';
@@ -19,47 +18,7 @@ class Home extends Component {
     }
 
     async componentDidMount () {
-        this.getNewsFeedData();
-    }
-
-    async getNewsFeedData () {
-        try {
-            const response = await axios.get('/api/stand_app.php', {
-                params: {
-                    action: 'get_all'
-                }
-            })
-            const { avatar, audio, id, username, likes } = response.data;
-            console.log('getNewsFeedData response: ', response);
-
-            let newState = {
-                newsFeed: [response.data],
-            };
-            this.setState(newState);
-            console.log('newState: ', this.state.newsFeed)
-        } catch (err) {
-            console.log('error get all')
-        }
-
-        // if(listItems){
-        //     newState.list = listItems;
-        // } else if (message){
-        //     newState.message = message;
-        // } else {
-        //     newState.message = 'Error with server'
-        // }
-    }
-
-    async deleteItem(id) {
-        // Use delete method to delete a to do item based on ID
-
-        const response = await axios.delete('/api/stand_app.php', id, {
-            params: {
-                action: 'delete_item'
-            }
-        })
-
-        this.getNewsFeedData();
+        
     }
 
     async addItem(event) {
