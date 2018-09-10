@@ -4,7 +4,7 @@ import '../assets/css/visualizer.css';
 import albumImage from '../assets/images/album_art.jpg'
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { likeAudio, unlikeAudio } from '../actions';
+import { likeAudio, unlikeAudio} from '../actions';
 import Modal from 'react-modal';
 import CategoryModal from './category_modal';
 
@@ -151,16 +151,19 @@ class VisualizerPlayer extends Component {
 
     // need id in future
     toggleLike = async () => {
-        if (!this.state.liked) {
+        if (this.state.liked === '1') {
             this.props.unlikeAudio();
             console.log('unliked');
+            await this.setState({
+                liked: '0'
+            })
         } else {
             this.props.likeAudio();
             console.log('liked');
+            await this.setState({
+                liked: '1'
+            })
         }
-        await this.setState({
-            liked: !this.state.liked
-        })
     }
 
     // need audio if from previous response passed into player to 
@@ -203,7 +206,7 @@ class VisualizerPlayer extends Component {
                                     : <i className={"far fa-play-circle fa-3x"} onClick={this.play.bind(this)}></i>
                             }
                             <div className='likes_container' onClick={() => this.toggleLike()}>
-                                <i className={result === '' ? (!this.state.liked) ? "fas fa-heart fa-lg" : "far fa-heart fa-lg" : 'd-none'}></i>
+                                <i className={result === '' ? (this.state.liked && this.state.liked !== '0') ? "fas fa-heart fa-lg" : "far fa-heart fa-lg" : 'd-none'}></i>
                                 <i className={result === '' ? 'd-none' : 'fas fa-heartbeat fa-lg'}></i>
                                 <div className={result === '' ? 'd-none' : 'likes-counter'}>100</div>
                             </div>
