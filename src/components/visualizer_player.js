@@ -3,8 +3,29 @@ import { Link } from 'react-router-dom';
 import '../assets/css/visualizer.css';
 import albumImage from '../assets/images/album_art.jpg'
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { getSingleAudio } from '../actions';
+import Modal from 'react-modal';
+import CategoryModal from './category_modal';
+
 // takes in an array of objects container audio details
 // but one select/takes one audio object
+
+const customStyles = {
+    content : {
+      width                 : '80%',
+      top                   : '50%',
+      left                  : '50%',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '-50%',
+      transform             : 'translate(-50%, -50%)',
+      height: '20%',
+      backgroundColor: 'grey',
+      borderRadius: '20px'
+    }
+  };
+
 
 class VisualizerPlayer extends Component {
     constructor (props) {
@@ -14,8 +35,13 @@ class VisualizerPlayer extends Component {
             duration: 0,
             tracks: this.props.audio,
             playing: false,
-            like: false
+            like: false,
+            modalIsOpen: false
+
         }
+        this.openModal = this.openModal.bind(this);
+        this.afterOpenModal = this.afterOpenModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     avatarImage = {
@@ -155,6 +181,20 @@ class VisualizerPlayer extends Component {
         })
     }
 
+    openModal() {
+        this.setState({modalIsOpen: true});
+      }
+     
+      afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        this.subtitle.style.color = '#f00';
+      }
+     
+      closeModal() {
+        this.setState({modalIsOpen: false});
+    
+      }
+
     render () {
         // get current url and check to display correct page
         var currentLocation = window.location.href;
@@ -184,9 +224,29 @@ class VisualizerPlayer extends Component {
                         </div>
                         <div className="audio_visualizer">
                             <canvas ref={e => this.canvasRef = e}/>
+                            <i className="fa fa-trash fa-4x" onClick={(event) => {this.openModal()}} aria-hidden="true"></i>
+  
                         </div>
                     </div>
                 </div>
+        <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+            ariaHideApp={false}
+          >
+ 
+          <h2 ref={subtitle => this.subtitle = subtitle}>Are you sure you want to delete?</h2>
+          <form className='container center-align'>
+         
+            <div className='post-controls d-flex justify-content-center'>
+              <button className='btn btn-dark'><i className="fas fa-times"/></button>
+              <button className='btn btn-warning' onClick={(e) => {this.deletePost(e)}}><i className="fas fa-check"/></button>
+            </div>
+          </form>
+        </Modal>
             </div>
         )
     }

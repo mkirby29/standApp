@@ -18,6 +18,7 @@ class NewsFeed extends Component {
         let renderUserPosts = responseDummy.data.map(function(element){
             return(
                 <VisualizerPlayer key={element._id} audio={element}/>
+
             )
         })
         return (
