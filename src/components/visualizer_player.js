@@ -57,6 +57,7 @@ class VisualizerPlayer extends Component {
     }
 
     createAudio () {
+        console.log('create audio: ', this.props.audio.audio_url)
         this.audio = new Audio(this.props.audio.audio_url)
         this.audio.crossOrigin = "anonymous";
         // this.audio.controls = true
@@ -210,8 +211,8 @@ class VisualizerPlayer extends Component {
                                     ? <i className={"far fa-pause-circle fa-3x"} onClick={this.pause.bind(this)}></i>
                                     : <i className={"far fa-play-circle fa-3x"} onClick={this.play.bind(this)}></i>
                             }
-                            <div className='likes_container'>
-                                <i onClick={this.toggleLikeButton} className={result === '' ? this.state.like ? "fas fa-heart fa-lg" : "far fa-heart fa-lg" : 'd-none'}></i>
+                            <div className='likes_container' onClick={this.toggleLikeButton}>
+                                <i className={result === '' ? this.state.like ? "fas fa-heart fa-lg" : "far fa-heart fa-lg" : 'd-none'}></i>
                                 <i className={result === '' ? 'd-none' : 'fas fa-heartbeat fa-lg'}></i>
                                 <div className={result === '' ? 'd-none' : 'likes-counter'}>100</div>
                             </div>
@@ -224,8 +225,7 @@ class VisualizerPlayer extends Component {
                         </div>
                         <div className="audio_visualizer">
                             <canvas ref={e => this.canvasRef = e}/>
-                            <i className="fa fa-trash fa-4x" onClick={(event) => {this.openModal()}} aria-hidden="true"></i>
-  
+                            <i className={result === '' ? 'd-none' : 'fa fa-trash fa-4x'} onClick={(event) => {this.openModal()}} aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>

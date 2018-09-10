@@ -3,7 +3,8 @@ import types from '../actions/types'
 const DEFAULT_STATE = {
     auth: false,
     error: '', 
-    all: ''
+    all: '', 
+    avatar: ''
 }
 
 export default (state = DEFAULT_STATE, action) => {

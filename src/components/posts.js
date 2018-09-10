@@ -10,17 +10,26 @@ import dummyAudioObject from '../assets/data/dummy_audio_object';
 import avatar from '../assets/images/avatars/10kevinSoccer.jpg';
 import Dm from './dm'
 
-
-let responseDummy = dummyAudioObject;
+import { getNewsfeed } from '../actions';
+import { connect } from 'react-redux';
 
 class NewsFeed extends Component {
-    render () {
-        let renderUserPosts = responseDummy.data.map(function(element){
-            return(
-                <VisualizerPlayer key={element._id} audio={element}/>
+    state = {
+        newsFeed: ''
+    }
 
-            )
-        })
+    componentWillMount = () => {
+        this.props.getNewsfeed();
+    }
+
+    render () {
+        if (this.props.list.data) {
+            this.renderUserPosts = this.props.list.data.map( function(element){
+                return(
+                    <VisualizerPlayer key={element.id} audio={element}/>
+                )
+            })
+        }
         return (
             <div>
                 <div>
@@ -34,11 +43,17 @@ class NewsFeed extends Component {
                         <div> <strong>Likes:</strong> 158</div>
                     </div>
                 </div>
-                {renderUserPosts};
+                {this.renderUserPosts};
                 <Footer/>
             </div>
         )
     }
 }
 
-export default NewsFeed;
+function mapStateToProps (state) {
+    return {
+        list: state.feed.all
+    }
+}
+
+export default connect(mapStateToProps, {getNewsfeed})(NewsFeed);
