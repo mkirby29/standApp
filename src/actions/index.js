@@ -1,9 +1,6 @@
 import types from './types'
 import axios from 'axios';
 
-const BASE_URL = 'http://api.reactprototypes.com';
-const API_KEY = '?key=ps_todo_list';
-
 export function addNewUser (info) {
     const resp = axios.post('/api/stand_app.php', {
         params: {
@@ -55,11 +52,15 @@ export const getSingleAudio = (id) => async dispatch => {
     }
 }
 
-export function likePost () {
-    const resp = axios.post(`${BASE_URL}/todos${API_KEY}`);
+export function likeAudio () {
+    const resp = axios.post('/api/stand_app.php', {
+        params: {
+            action: types.LIKE_AUDIO
+        }
+    });
 
     return {
-        type: types.LIKE_POST,
+        type: types.LIKE_AUDIO,
         payload: resp
     }
 }
@@ -103,6 +104,15 @@ export function retrieveAvatars () {
     }
 }
 
-export function unlikePost () {
-    const resp = axios.post(`${BASE_URL}/todos${API_KEY}`);
+export function unlikeAudio () {
+    const resp = axios.post('/api/stand_app.php', {
+        params: {
+            action: 'unlike_audio'
+        }
+    })
+
+    return {
+        type: types.UNLIKE_AUDIO,
+        payload: resp
+    }
 }
