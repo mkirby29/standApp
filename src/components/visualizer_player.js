@@ -4,7 +4,7 @@ import '../assets/css/visualizer.css';
 import albumImage from '../assets/images/album_art.jpg'
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { getSingleAudio } from '../actions';
+import { likeAudio, unlikeAudio } from '../actions';
 import Modal from 'react-modal';
 import CategoryModal from './category_modal';
 
@@ -26,7 +26,6 @@ const customStyles = {
     }
   };
 
-
 class VisualizerPlayer extends Component {
     constructor (props) {
         super(props)
@@ -35,9 +34,8 @@ class VisualizerPlayer extends Component {
             duration: 0,
             tracks: this.props.audio,
             playing: false,
-            like: false,
-            modalIsOpen: false
-
+            modalIsOpen: false,
+            liked: this.props.audio.liked
         }
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -152,14 +150,17 @@ class VisualizerPlayer extends Component {
     }
 
     // need id in future
-    async likedAudio () {
-        const response = await axios.post('/api/stand_app.php', {
-            params: {
-                action: 'like_post'
-            }
+    toggleLike = async () => {
+        if (!this.state.liked) {
+            this.props.unlikeAudio();
+            console.log('unliked');
+        } else {
+            this.props.likeAudio();
+            console.log('liked');
+        }
+        await this.setState({
+            liked: !this.state.liked
         })
-
-        console.log('likedAudio: ', response);
     }
 
     // need audio if from previous response passed into player to 
@@ -172,35 +173,25 @@ class VisualizerPlayer extends Component {
         console.log('getMp3fromS3: ', response);
     }
 
-    // need to sync with server to save like state
-    toggleLikeButton = (e) => {
-        if (!this.state.like) {
-            this.likedAudio();
-        }
-        this.setState({
-            like: !this.state.like
-        })
-    }
-
     openModal() {
         this.setState({modalIsOpen: true});
-      }
+    }
      
-      afterOpenModal() {
+    afterOpenModal() {
         // references are now sync'd and can be accessed.
         this.subtitle.style.color = '#f00';
-      }
+    }
      
-      closeModal() {
+    closeModal() {
         this.setState({modalIsOpen: false});
-    
-      }
+    }
 
     render () {
         // get current url and check to display correct page
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0]
         console.log('visual player: ', this.props)
+        console.log('this.state.liked', this.state.liked);
         return (
             <div className="container-fluid">
                 <div className="row audio_container">
@@ -211,8 +202,8 @@ class VisualizerPlayer extends Component {
                                     ? <i className={"far fa-pause-circle fa-3x"} onClick={this.pause.bind(this)}></i>
                                     : <i className={"far fa-play-circle fa-3x"} onClick={this.play.bind(this)}></i>
                             }
-                            <div className='likes_container' onClick={this.toggleLikeButton}>
-                                <i className={result === '' ? this.state.like ? "fas fa-heart fa-lg" : "far fa-heart fa-lg" : 'd-none'}></i>
+                            <div className='likes_container' onClick={() => this.toggleLike()}>
+                                <i className={result === '' ? (!this.state.liked) ? "fas fa-heart fa-lg" : "far fa-heart fa-lg" : 'd-none'}></i>
                                 <i className={result === '' ? 'd-none' : 'fas fa-heartbeat fa-lg'}></i>
                                 <div className={result === '' ? 'd-none' : 'likes-counter'}>100</div>
                             </div>
@@ -252,4 +243,7 @@ class VisualizerPlayer extends Component {
     }
 }
 
-export default VisualizerPlayer;
+export default connect(null, {
+    likeAudio,
+    unlikeAudio
+})(VisualizerPlayer);
