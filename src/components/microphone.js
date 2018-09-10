@@ -30,7 +30,8 @@ class Microphone extends Component {
       audiofile: '',
       blobfile: '',
       recording: '',
-      category: 'comedy'
+      category: 'comedy',
+      audio_name: ''
     }
 
     this.startRecording = this.startRecording.bind(this);
@@ -72,25 +73,20 @@ class Microphone extends Component {
       audiofile: audioFile,
       blobfile: recordedBlob
     })
-
-    var form = new FormData();
-    form.set('audio_name', blob);
-    form.set('user_id', 'mattkirby');
-    form.set('audio_duration', 100);
   }
 
-async postRecording (e){
+async postRecording (e) {
   e.preventDefault();
   var form = new FormData();
   form.set('audio', this.state.audiofile);
-  form.set('audio_name', 'helllo')
-  form.set('id', 'test.mp3');
-  form.set('user_id', 121);
-  form.set('avatar_id', 5);
+  // audio name for mysql
+  form.set('audio_name', this.state.audio_name)
+  // audio name for s3
+  form.set('id', this.state.audio_name);
+  form.set('user_id', 10);
   form.set('author_name', 'matt');
-  form.set('audio_duration', 500)
 
-  axios({
+  await axios({
     method: 'post',
     url: '/api/stand_app.php?action=add_item',
     data: form, 
@@ -98,26 +94,6 @@ async postRecording (e){
   }).then(function(response) {
     console.log("Response", response);
   });
-
-  // const resp = await axios.post('/api/stand_app.php', form,{
-  //   params: {
-  //     action: 'add_item'
-  //   }
-  // })
-
-  // const resp = await axios.post('/api/stand_app.php', this.state.recording,{
-  //   params: {
-  //     action: 'add_item'
-  //   }
-  // })
-
-  // const { errors, success } = resp.data;
-
-  // if(!success){
-  //     return this.setState({ 
-  //       errors 
-  //     });
-  // }
 }
 
   openModal() {
@@ -152,6 +128,14 @@ async postRecording (e){
 
   pauseEffect () {
     this.audio.pause();
+  }
+
+  async handleInputChange (e) {
+    const {name, value} = e.target;
+
+    await this.setState({
+        [name]: value,
+    })
   }
 
   render() {
@@ -204,7 +188,7 @@ async postRecording (e){
           <h2 ref={subtitle => this.subtitle = subtitle}>Completed Recording</h2>
           <form className='container center-align'>
             <div className='d-flex justify-content-center'>
-              <input placeholder = "Enter audio title here" className='title-input'/>
+              <input name='audio_name' placeholder = "Enter audio title here" className='title-input' value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
             </div>
             <div className='recorded-audio-player d-flex justify-content-center'>
               <audio controls>

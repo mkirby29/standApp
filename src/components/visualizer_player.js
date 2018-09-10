@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import '../assets/css/visualizer.css';
 import albumImage from '../assets/images/album_art.jpg'
 import axios from 'axios';
-import { connect } from 'react-redux';
-import { getSingleAudio } from '../actions'
-
 // takes in an array of objects container audio details
 // but one select/takes one audio object
 
@@ -21,13 +18,20 @@ class VisualizerPlayer extends Component {
         }
     }
 
+    avatarImage = {
+        backgroundImage: `url(${albumImage})`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center'
+    };
+
     componentDidMount(){
         this.createAudio();
         this.createVisualizer();
     }
 
     createAudio () {
-        this.audio = new Audio(this.state.tracks.url)
+        this.audio = new Audio(this.props.audio.audio_url)
         this.audio.crossOrigin = "anonymous";
         // this.audio.controls = true
     }
@@ -155,12 +159,12 @@ class VisualizerPlayer extends Component {
         // get current url and check to display correct page
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0]
-
+        console.log('visual player: ', this.props)
         return (
             <div className="container-fluid">
                 <div className="row audio_container">
                     <div className="left_container col-4 d-flex justify-content-center text-center">
-                        <div className="avatar_container d-flex align-items-center justify-content-center" style={ { backgroundImage: `url(${albumImage}})` } }>
+                        <div className="avatar_container d-flex align-items-center justify-content-center" style={this.avatarImage}>
                             {
                                 this.state.playing
                                     ? <i className={"far fa-pause-circle fa-3x"} onClick={this.pause.bind(this)}></i>
@@ -176,7 +180,7 @@ class VisualizerPlayer extends Component {
                     <div className="audio_display col-8 text-center">
                         <div className="align-middle post-title">
                             {/* to=audio-info/:id */}
-                            <Link className='text-white' to='/audio_info'>{this.props.audio.artist} - {this.props.audio.song}</Link>
+                            <Link className='text-white' to={`/audio_info/${this.props.audio.id}`}>{this.props.audio.username} - {this.props.audio.audio_name}</Link>
                         </div>
                         <div className="audio_visualizer">
                             <canvas ref={e => this.canvasRef = e}/>

@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
 import '../assets/css/newsfeed.css';
-
-// dummy data: need newfeed object and/or posts object by user id
 import VisualizerPlayer from './visualizer_player';
-import dummyAudioObject from '../assets/data/dummy_audio_object';
 import { getNewsfeed } from '../actions';
 import { connect } from 'react-redux';
 
-let responseDummy = dummyAudioObject;
-
 class NewsFeed extends Component {
-    componentDidMount () {
+    state = {
+        newsFeed: ''
+    }
+
+    componentWillMount = () => {
         this.props.getNewsfeed();
     }
 
     render () {
-        let renderNewsFeed = responseDummy.data.map( function(element){
-            return(
-                <VisualizerPlayer key={element._id} audio={element}/>
-            )
-        })
+        if (this.props.list.data) {
+            this.renderNewsFeed = this.props.list.data.map( function(element){
+                return(
+                    <VisualizerPlayer key={element.id} audio={element}/>
+                )
+            })
+        }
+        console.log('this.props: ', this.props);
         return (
             <div>
-                {renderNewsFeed}
+                {this.renderNewsFeed}
             </div>
         )
     }
@@ -30,7 +32,7 @@ class NewsFeed extends Component {
 
 function mapStateToProps (state) {
     return {
-        list: state.feed
+        list: state.feed.all
     }
 }
 
