@@ -15,6 +15,7 @@
 
 .likes_container {
     color: grey;
+    z-index: 1;
 }
 
 .post-title {
