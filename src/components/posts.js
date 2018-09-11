@@ -19,10 +19,10 @@ class NewsFeed extends Component {
     }
 
     componentWillMount = () => {
-        // this.props.getNewsfeed();
+        this.props.getNewsfeed();
         let token = localStorage.getItem('token');
         console.log('token post: ', token)
-        this.props.getPosts(token);
+        // this.props.getPosts(token);
     }
 
     render () {
