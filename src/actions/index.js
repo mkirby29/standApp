@@ -29,15 +29,18 @@ export const addNewUser = (username, password, email)  => {
     // }
 }
 
-export function addAvatar (token, avatar) {
-    const resp = axios.post('/api/stand_app.php', {
-        params: {
-            action: 'add_avatar'
-        }
-    })
-    return {
-        type: types.ADD_AVATAR,
-        payload: resp
+export const addAvatar = (image) => async dispatch => {
+    const resp = {image}
+    try {
+        dispatch ({
+            type: types.ADD_AVATAR, 
+            payload: resp
+        });
+    } catch (err) {
+        dispatch({
+            type: types.LIST_ERROR,
+            error: 'No item found'
+        });
     }
 }
 
