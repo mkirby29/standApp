@@ -37,6 +37,18 @@ export function getNewsfeed () {
     }
 }
 
+export function getPosts () {
+    const resp = axios.get('/api/stand_app.php', {
+        params: {
+            action: 'get_posts'
+        }
+    })
+    return {
+        type: types.GET_POSTS,
+        payload: resp
+    }
+}
+
 export const getSingleAudio = (id) => async dispatch => {
     try {
         const resp = await axios.get('/api/stand_app.php', id)

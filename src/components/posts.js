@@ -10,7 +10,7 @@ import dummyAudioObject from '../assets/data/dummy_audio_object';
 import avatar from '../assets/images/avatars/10kevinSoccer.jpg';
 import Dm from './dm'
 
-import { getNewsfeed } from '../actions';
+import { getNewsfeed, getPosts } from '../actions';
 import { connect } from 'react-redux';
 
 class NewsFeed extends Component {
@@ -19,7 +19,10 @@ class NewsFeed extends Component {
     }
 
     componentWillMount = () => {
-        this.props.getNewsfeed();
+        // this.props.getNewsfeed();
+        let token = localStorage.getItem('token');
+        console.log('token post: ', token)
+        this.props.getPosts(token);
     }
 
     render () {

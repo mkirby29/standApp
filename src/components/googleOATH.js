@@ -28,7 +28,7 @@ class GoogleComponent extends Component {
     const { data: { name, email, email_verified, sub }} = this.state;
     let currentToken = localStorage.getItem('token');
     console.log('currentToken before set: ', currentToken)
-    this.props.logIn();
+    this.props.logIn(currentToken);
     if (this.state === prevState) {
       return;
     } 
@@ -72,7 +72,6 @@ class GoogleComponent extends Component {
         fontSize: 16,
         fontWeight: 'bold',
         fontFamily: 'Roboto',
-
       }}
       >
         Login With Google
