@@ -13,6 +13,7 @@ import Dm from './dm'
 import { getNewsfeed } from '../actions';
 import { connect } from 'react-redux';
 
+
 class NewsFeed extends Component {
     state = {
         newsFeed: ''

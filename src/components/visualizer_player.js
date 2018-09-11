@@ -7,6 +7,27 @@ import { connect } from 'react-redux';
 import { likeAudio, unlikeAudio } from '../actions';
 import Modal from 'react-modal';
 import CategoryModal from './category_modal';
+import {
+    FacebookIcon, 
+    FacebookShareCount, 
+    FacebookShareButton,
+    TwitterShareButton,
+    TwitterIcon,
+    GooglePlusShareCount,
+    GooglePlusShareButton,
+    GooglePlusIcon,
+    EmailShareButton,
+    EmailIcon,
+    RedditShareCount,
+    RedditShareButton,
+    RedditIcon,
+    LinkedinShareCount,
+    LinkedinShareButton,
+    LinkedinIcon,
+} from 'react-share';
+
+import '../assets/css/shareButtons.css'
+
 
 // takes in an array of objects container audio details
 // but one select/takes one audio object
@@ -213,11 +234,114 @@ class VisualizerPlayer extends Component {
                         <div className="align-middle post-title">
                             {/* to=audio-info/:id */}
                             <Link className='text-white' to={`/audio_info/${this.props.audio.id}`}>{this.props.audio.username} - {this.props.audio.audio_name}</Link>
+                            <i className={result === '' ? 'd-none' : 'fa fa-trash fa-2x pull-right'} onClick={(event) => {this.openModal()}} aria-hidden="true"></i>
+
                         </div>
                         <div className="audio_visualizer">
                             <canvas ref={e => this.canvasRef = e}/>
-                            <i className={result === '' ? 'd-none' : 'fa fa-trash fa-4x'} onClick={(event) => {this.openModal()}} aria-hidden="true"></i>
+       
+
+
+                    
                         </div>
+                        <div className = 'shareContainer d-flex justify-content-around'>
+                 
+                            <div className="shareIcon">
+                            <LinkedinShareButton
+                                url={'http://localhost:3000/audio_info'}
+                                title={'Trying something new, dont go too hard on me: '}
+                                windowWidth={750}
+                                windowHeight={600}
+                                className="shareIcon__share-button">
+                                <LinkedinIcon
+                                size={32}
+                                round />
+                            </LinkedinShareButton>
+
+                            <LinkedinShareCount
+                                url={'http://localhost:3000/audio_info'}
+                                className="shareIcon__share-count">
+                                {count => count}
+                            </LinkedinShareCount>
+                            </div>
+                            <div className="shareIcon">
+                            <GooglePlusShareButton
+                                url={'http://localhost:3000/audio_info'}
+                                className="shareIcon__share-button">
+                                <GooglePlusIcon
+                                size={32}
+                                round />
+                            </GooglePlusShareButton>
+
+                            <GooglePlusShareCount
+                                url={'http://localhost:3000/audio_info'}
+                                className="shareIcon__share-count">
+                                {count => count}
+                            </GooglePlusShareCount>
+                            </div>
+                            <div className="shareIcon">
+                            <RedditShareButton
+                                url={'http://localhost:3000/audio_info'}
+                                title={'Trying something new, dont go too hard on me: '}
+                                windowWidth={660}
+                                windowHeight={460}
+                                className="shareIcon__share-button">
+                                <RedditIcon
+                                size={32}
+                                round />
+                            </RedditShareButton>
+
+                            <RedditShareCount url={'http://localhost:3000/audio_info'}
+                                className="shareIcon__share-count" />
+                            </div>
+
+                             {/* <div className="shareIcon">
+                            <TwitterShareButton
+                                url={'http://localhost:3000/audio_info'}
+                                title={'Trying something new, dont go too hard on me: '}
+                                className="shareIcon__share-button">
+                                <TwitterIcon
+                                size={32}
+                                round />
+                            </TwitterShareButton>
+
+                            <div className="shareIcon__share-count">
+                                &nbsp;
+                            </div>
+                            </div> */}
+
+                            {/* <div className="shareIcon">
+                            <EmailShareButton
+                                url={'http://localhost:3000/audio_info'}
+                                subject={'Trying something new, dont go too hard on me: '}
+                                body="body"
+                                className="shareIcon__share-button">
+                                <EmailIcon
+                                size={32}
+                                round />
+                            </EmailShareButton>
+                            </div> */}
+
+                            {/* <div className="shareIcon">
+                            <FacebookShareButton
+                                url={'http://localhost:3000/audio_info'}
+                                quote={'this is a title'}
+                                className="shareIcon__share-button">
+                                <FacebookIcon
+                                size={32}
+                                round />
+                            </FacebookShareButton>
+
+                            <FacebookShareCount
+                                url={'http://localhost:3000/audio_info'}
+                                className="shareIcon__share-count">
+                                {count => count}
+                            </FacebookShareCount>
+                            </div> */}
+
+
+                        
+                            </div>
                     </div>
                 </div>
         <Modal
