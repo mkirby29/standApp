@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/css/visualizer.css';
-import albumImage from '../assets/images/album_art.jpg'
+import albumImage from '../assets/images/microphone.png'
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { likeAudio, unlikeAudio} from '../actions';
@@ -151,14 +151,15 @@ class VisualizerPlayer extends Component {
 
     // need id in future
     toggleLike = async () => {
+        const { audio: {audio_name , id}} = this.props
         if (this.state.liked === '1') {
-            this.props.unlikeAudio();
+            this.props.unlikeAudio(audio_name, id);
             console.log('unliked');
             await this.setState({
                 liked: '0'
             })
         } else {
-            this.props.likeAudio();
+            this.props.likeAudio(audio_name, id);
             console.log('liked');
             await this.setState({
                 liked: '1'

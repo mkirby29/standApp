@@ -43,10 +43,10 @@ class GoogleComponent extends Component {
     let userInfo = {
       username: name,
       email: email,
-      token: sub
+      password: sub
     }
-    console.log('googleOuth name, email, verified: ', name, email, email_verified)
-    addNewUser(userInfo)
+    console.log('this.props.addNewUser: ', this.props.addNewUser)
+    this.props.addNewUser(name, sub, email)
     console.log(this.state)
   }
   
