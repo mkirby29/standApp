@@ -1,5 +1,4 @@
 import React from 'react';
-import avatar from '../assets/images/avatars/10kevinSoccer.jpg';
 import '../assets/css/header.css';
 
 import defaultAvatar from '../assets/images/avatars/default_avatar.png'
@@ -20,13 +19,12 @@ import Logo from './logo';
 import { connect } from 'react-redux';
 import { addAvatar } from '../actions';
 
-
 class Header extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             avatarID: this.props.avatar,
-            avatar: '',
+            avatar: defaultAvatar,
             imageArray: [
                 {name: 'Dj', src: Dj, id: 1},
                 {name: 'Tuba', src: Tuba, id: 2},
@@ -66,7 +64,7 @@ class Header extends React.Component {
                     })
                 }
             }
-        }
+        } 
     }
 
     render(){
