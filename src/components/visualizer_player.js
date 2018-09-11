@@ -248,7 +248,7 @@ class VisualizerPlayer extends Component {
                  
                             <div className="shareIcon">
                             <LinkedinShareButton
-                                url={'http://localhost:3000/audio_info'}
+                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
                                 title={'Trying something new, dont go too hard on me: '}
                                 windowWidth={750}
                                 windowHeight={600}
@@ -259,14 +259,14 @@ class VisualizerPlayer extends Component {
                             </LinkedinShareButton>
 
                             <LinkedinShareCount
-                                url={'http://localhost:3000/audio_info'}
+                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
                                 className="shareIcon__share-count">
                                 {count => count}
                             </LinkedinShareCount>
                             </div>
                             <div className="shareIcon">
                             <GooglePlusShareButton
-                                url={'http://localhost:3000/audio_info'}
+                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
                                 className="shareIcon__share-button">
                                 <GooglePlusIcon
                                 size={32}
@@ -274,14 +274,14 @@ class VisualizerPlayer extends Component {
                             </GooglePlusShareButton>
 
                             <GooglePlusShareCount
-                                url={'http://localhost:3000/audio_info'}
+                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
                                 className="shareIcon__share-count">
                                 {count => count}
                             </GooglePlusShareCount>
                             </div>
                             <div className="shareIcon">
                             <RedditShareButton
-                                url={'http://localhost:3000/audio_info'}
+                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
                                 title={'Trying something new, dont go too hard on me: '}
                                 windowWidth={660}
                                 windowHeight={460}
@@ -291,13 +291,13 @@ class VisualizerPlayer extends Component {
                                 round />
                             </RedditShareButton>
 
-                            <RedditShareCount url={'http://localhost:3000/audio_info'}
+                            <RedditShareCount url={`http://standapp.live/audio_info/${this.props.audio.id}`}
                                 className="shareIcon__share-count" />
                             </div>
 
                              {/* <div className="shareIcon">
                             <TwitterShareButton
-                                url={'http://localhost:3000/audio_info'}
+                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
                                 title={'Trying something new, dont go too hard on me: '}
                                 className="shareIcon__share-button">
                                 <TwitterIcon
@@ -312,7 +312,7 @@ class VisualizerPlayer extends Component {
 
                             {/* <div className="shareIcon">
                             <EmailShareButton
-                                url={'http://localhost:3000/audio_info'}
+                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
                                 subject={'Trying something new, dont go too hard on me: '}
                                 body="body"
                                 className="shareIcon__share-button">
@@ -324,7 +324,7 @@ class VisualizerPlayer extends Component {
 
                             {/* <div className="shareIcon">
                             <FacebookShareButton
-                                url={'http://localhost:3000/audio_info'}
+                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
                                 quote={'this is a title'}
                                 className="shareIcon__share-button">
                                 <FacebookIcon
@@ -333,7 +333,7 @@ class VisualizerPlayer extends Component {
                             </FacebookShareButton>
 
                             <FacebookShareCount
-                                url={'http://localhost:3000/audio_info'}
+                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
                                 className="shareIcon__share-count">
                                 {count => count}
                             </FacebookShareCount>

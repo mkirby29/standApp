@@ -34,7 +34,7 @@ class About extends Component {
             <div className="data">
                 <h2>Paul Su</h2>
                 <i>Lead Frontend Developer</i>
-                <div>Favorite Hobby: Live Stream Video Games</div>
+                <div>Favorite Hobby:Video Games</div>
                 <a href="http://github.com/paulcysu"><i className="fa fa-github" /></a>
                 <a href="http://linkedin.com/in/paulcysu/"><i className="fab fa-linkedin"/></a>
                 <a href="https://paulsu.in"><i className="fas fa-briefcase"/></a>
@@ -45,7 +45,7 @@ class About extends Component {
             <div className="data">
                 <h2>Mike Yim</h2>
                 <i>Backend Developer</i>
-                <div>Favorite Hobby: Live Stream Video Games</div>
+                <div>Favorite Hobby: Girls</div>
                 <a href="http://github.com/mikeyim337"><i className="fa fa-github" /></a>
                 <a href="http//linkedin.com/in/mike-yim-033356135/"><i className="fab fa-linkedin"/></a>
                 <a href="http://mikeyim.com/"><i className="fas fa-briefcase"/></a>
@@ -54,9 +54,9 @@ class About extends Component {
             <div className="card">
             <img src={matt} />
             <div className="data">
-                <h2>Matthew Kirby</h2>
+                <h2>Matt Kirby</h2>
                 <i>Backend Developer</i>
-                <div>Favorite Hobby: Video Games</div>
+                <div>Favorite Hobby: Public Speaking</div>
                 <a href="http://github.com/rag329"><i className="fa fa-github" /></a>
                 <a href="http://linkedin.com/in/matthew-kirby-270a3329/"><i className="fab fa-linkedin"/></a>
                 <a href="https://matt-kirby.us"><i className="fas fa-briefcase"/></a>
