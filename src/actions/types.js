@@ -4,6 +4,7 @@ export default {
     AUTH_ERROR: 'auth_error',
     GET_SINGLE_AUDIO: 'get_single_audio',
     GET_NEWSFEED: 'get_newsfeed',
+    GET_POSTS: 'get_posts',
     LIKE_AUDIO: 'like_audio',
     LIST_ERROR: 'list_error',
     LOG_IN: 'log_in',

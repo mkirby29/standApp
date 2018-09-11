@@ -1,10 +1,12 @@
 <?php
 
+$_POST = json_decode(file_get_contents('php://input'), true);
+
 $username=$_POST['username'];
-$token=$_POST['token'];
+$password=$_POST['password'];
 $email=$_POST['email'];
 
-$query = "INSERT INTO `users`(`username`, `token`, `email`) VALUES ('$username', '$token', '$email')";
+$query = "INSERT INTO `users`(`username`, `password`, `email`) VALUES ('$username', '$password', '$email')";
 
 $result = mysqli_query($conn, $query);
 

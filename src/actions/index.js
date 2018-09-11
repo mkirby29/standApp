@@ -1,16 +1,32 @@
 import types from './types'
 import axios from 'axios';
 
-export function addNewUser (info) {
+export const addNewUser = (username, password, email)  => {
     const resp = axios.post('/api/stand_app.php', {
+        username: username,
+        password: password,
+        email: email
+    }, {
         params: {
             action: 'add_new_user'
         }
     })
     return {
-        types: types.ADD_NEW_USER,
+        type: types.ADD_NEW_USER,
         payload: resp
     }
+    // try {
+    //     const resp = await axios.get('/api/stand_app.php', id)
+    //     dispatch ({
+    //         type: types.GET_SINGLE_AUDIO,
+    //         payload: resp
+    //     })
+    // } catch (err) {
+    //     dispatch ({
+    //         type: types.LIST_ERROR,
+    //         error: "No audio found"
+    //     })
+    // }
 }
 
 export function addAvatar (token, avatar) {
@@ -20,7 +36,7 @@ export function addAvatar (token, avatar) {
         }
     })
     return {
-        types: types.ADD_AVATAR,
+        type: types.ADD_AVATAR,
         payload: resp
     }
 }
@@ -33,6 +49,18 @@ export function getNewsfeed () {
     })
     return {
         type: types.GET_NEWSFEED,
+        payload: resp
+    }
+}
+
+export function getPosts () {
+    const resp = axios.get('/api/stand_app.php', {
+        params: {
+            action: 'get_posts'
+        }
+    })
+    return {
+        type: types.GET_POSTS,
         payload: resp
     }
 }
@@ -52,7 +80,7 @@ export const getSingleAudio = (id) => async dispatch => {
     }
 }
 
-export function likeAudio () {
+export function likeAudio (audioName, userID) {
     const resp = axios.post('/api/stand_app.php', {
         params: {
             action: types.LIKE_AUDIO
