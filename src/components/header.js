@@ -14,7 +14,9 @@ import Celebrity from '../assets/images/avatars/16nateCelebrity.jpg';
 import Sax from '../assets/images/avatars/sax.jpg';
 
 import {Link} from 'react-router-dom';
-import { slide as Menu } from 'react-burger-menu'
+import LoginConditional from './loginConditional';
+import Hamburger from './hamburger';
+import { stack as Menu } from 'react-burger-menu';
 import Logo from './logo';
 import { connect } from 'react-redux';
 import { addAvatar } from '../actions';
@@ -81,10 +83,10 @@ class Header extends React.Component {
                         <Link to='/posts'>
                             <img alt="Avatar" src={this.state.avatar} className="img-fluid avatar_image" />
                         </Link>
-                        <a id="home" className="menu-item" href="/posts">My Account</a>
-                        <a id="about" className="menu-item" href="/avatar_select">Avatar Select</a>
-                        <a id="contact" className="menu-item" href="/about">About Us</a>
-                        <a id="contact" className="menu-item" href="/login" onClick={this.logOut.bind()}>Log Out</a>
+                        <a id="home" className="menu-item" href="/posts"><i className="fas fa-home menu-item "/>  My Account</a>
+                        <a id="about" className="menu-item" href="/avatar_select"><i className="far fa-user-circle menu-item"/>   Avatar Select</a>
+                        <a id="contact" className="menu-item" href="/about"><i className="fas fa-users menu-item"/>  About Us</a>
+                        <a id="contact" className="menu-item" href="/login" onClick={this.logOut.bind()}><i className="fas fa-sign-out-alt menu-item"/>   Log Out</a>
                         <a onClick={ this.showSettings } className="menu-item--small" href=""></a>
                     </Menu>
                     {/* </div> */}
