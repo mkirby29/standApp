@@ -366,6 +366,9 @@ class VisualizerPlayer extends Component {
             </div>
           </form>
         </Modal>
+        <div className='d-flex justify-content-center'>
+            <hr className='post-hr'/>
+        </div>
             </div>
         )
     }

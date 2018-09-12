@@ -1,5 +1,4 @@
 .avatar_container {
-    border: 1px solid grey;
     width: 80%;
 }
 
@@ -31,9 +30,18 @@
     display: inline-block;
 }
 
+.post-hr {
+    width: 25%;
+    border: 0.1 solid grey;
+}
+
 @media only screen and (max-width: 600px) {
     .post-title {
         white-space: nowrap;
         font-size: 1rem;
+    }
+    .post-hr {
+        width: 25%;
+        border: 0.1 solid grey;
     }
 }

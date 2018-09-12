@@ -1,32 +1,41 @@
 import types from './types'
 import axios from 'axios';
 
-export const addNewUser = (username, password, email)  => {
-    const resp = axios.post('/api/stand_app.php', {
-        username: username,
-        password: password,
-        email: email
-    }, {
-        params: {
-            action: 'add_new_user'
+export const addNewUser = (username, password, email) => async dispatch => {
+    try {
+        const resp = await axios.post('/api/stand_app.php', {
+            username: username,
+            password: password,
+            email: email
+        }, {
+            params: {
+                action: 'add_new_user'
+            }
+        })
+        console.log('ADDNEWUSER: ', {data:{
+            username: username,
+            password: password,
+            email: email
+        }})
+        dispatch({
+            type: types.ADD_NEW_USER,
+            payload: {
+                username: username,
+                password: password,
+                email: email
+            }
+        })
+        return {
+            type: types.ADD_NEW_USER,
+            payload: resp
         }
-    })
-    return {
-        type: types.ADD_NEW_USER,
-        payload: resp
+    } catch (err) {
+        console.log('DELETE FAILED!')
+        dispatch({
+            type: types.LIST_ERROR,
+            error: 'Failed to add user item'
+        });
     }
-    // try {
-    //     const resp = await axios.get('/api/stand_app.php', id)
-    //     dispatch ({
-    //         type: types.GET_SINGLE_AUDIO,
-    //         payload: resp
-    //     })
-    // } catch (err) {
-    //     dispatch ({
-    //         type: types.LIST_ERROR,
-    //         error: "No audio found"
-    //     })
-    // }
 }
 
 export const addAvatar = (image) => async dispatch => {
