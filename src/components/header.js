@@ -72,7 +72,6 @@ class Header extends React.Component {
 
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0];
-
         if (result === '') {
         return (
             <div className="container-fluid">
@@ -82,11 +81,11 @@ class Header extends React.Component {
                         <Link to='/posts'>
                             <img alt="Avatar" src={this.state.avatar} className="img-fluid avatar_image" />
                         </Link>
-                        <a id="home" className="menu-item" href="/posts"><i className="fas fa-home menu-item fa-fw"/>  My Account</a>
-                        <a id="about" className="menu-item" href="/avatar_select"><i className="far fa-user-circle menu-item fa-fw"/>   Avatar Select</a>
-                        <a id="contact" className="menu-item" href="/about"><i className="fas fa-users menu-item fa-fw"/>  About Us</a>
-                        <a id="contact" className="menu-item" href="/login" onClick={this.logOut.bind()}><i className="fas fa-sign-out-alt menu-item fa-fw"/>   Log Out</a>
-                        <a onClick={ this.showSettings } className="menu-item--small" href=""></a>
+                        <Link id="home" className="menu-item" to="/posts"><i className="fas fa-home menu-item fa-fw"/>  My Account</Link>
+                        <Link id="about" className="menu-item" to="/avatar_select"><i className="far fa-user-circle menu-item fa-fw"/>   Avatar Select</Link>
+                        <Link id="contact" className="menu-item" to="/about"><i className="fas fa-users menu-item fa-fw"/>  About Us</Link>
+                        <Link id="contact" className="menu-item" to="/login" onClick={this.logOut.bind()}><i className="fas fa-sign-out-alt menu-item fa-fw"/>   Log Out</Link>
+                        {/* <a onClick={ this.showSettings } className="menu-item--small" href=""></a> */}
                     </Menu>
                     {/* </div> */}
                     <div className='logo'>

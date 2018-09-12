@@ -25,7 +25,6 @@ class SimpleSlider extends React.Component {
 
     attachAvatarToServer (e) {
         this.props.addAvatar(e.target.name);
-        console.log('e.target.name: ', e.target.name);
     }
 
     render() {

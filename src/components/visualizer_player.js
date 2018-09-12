@@ -195,7 +195,6 @@ class VisualizerPlayer extends Component {
                 action: 'get_audio_from_s3'
             }
         })
-        console.log('getMp3fromS3: ', response);
     }
 
     openModal() {
@@ -215,8 +214,6 @@ class VisualizerPlayer extends Component {
         // get current url and check to display correct page
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0]
-        console.log('visual player: ', this.props)
-        console.log('this.state.liked', this.state.liked);
         return (
             <div className="container-fluid">
                 <div className="row audio_container">

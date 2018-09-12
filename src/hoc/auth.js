@@ -27,7 +27,8 @@ export default function (WrappedComponent, path ='/login') {
     }
     function mapStateToProps (state) {
         return {
-            auth: state.user.error
+            auth: state.user.error,
+            user: state.user
         }
     }
     

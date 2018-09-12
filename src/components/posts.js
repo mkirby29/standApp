@@ -25,14 +25,12 @@ import Jedi from '../assets/images/avatars/12sarahJedi.jpg';
 import Celebrity from '../assets/images/avatars/16nateCelebrity.jpg';
 import Sax from '../assets/images/avatars/sax.jpg';
 
-
-
 class Post extends Component {
     constructor(props){
         super(props);
     this.state = {
         newsFeed: '',
-        avatarID: this.props.avatar,
+        avatarID: this.props.avatar.avatar,
         avatar: defaultAvatar,
         imageArray: [
             {name: 'Dj', src: Dj, id: 1},
@@ -51,15 +49,12 @@ class Post extends Component {
     }
 
     componentDidMount () {
-        
+        this.checkAvatar();
     }
 
     componentWillMount = () => {
-        this.checkAvatar();
         this.props.getNewsfeed();
         let token = localStorage.getItem('token');
-        console.log('token post: ', token)
-        // this.props.getPosts(token);
     }
 
     checkAvatar = async () => {
@@ -75,8 +70,8 @@ class Post extends Component {
             }
         } 
     }
+    
     render () {
-        console.log("THIS PROPS: ", this.props)
         if (this.props.list.data) {
             this.renderUserPosts = this.props.list.data.map( function(element){
                 return(
