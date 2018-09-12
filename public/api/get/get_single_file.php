@@ -17,15 +17,13 @@ $s3 = new S3Client([
     'scheme' => 'http'
 ]);
 
-// need comments too
 
-$query = "SELECT `u`.`id`, `avatar`, `username`, `audio_name`, `likes`
+$query = "SELECT `u`.`id`, `avatar`, `username`, `audio_name`, `likes`, `comment`, `comment_time
                 FROM `users` AS `u`
-                JOIN `audio` AS `a` 
-                    ON `a`.`user_id` = `u`.`id` 
-                JOIN `user_feedback` AS `f`
-                    ON `f`.`audio_id` = `a`.`id` 
-                ORDER BY `date_added` ASC";
+                JOIN `audio` AS `a`
+                    ON `a`.`user_id` = `u`.`id`
+                JOIN `comments` AS `c`
+                    ON `c`.`audio_id` = `a`.`id`";
 
 $result = mysqli_query($conn, $query);
 

@@ -2,7 +2,7 @@
 
 $username=$_POST['username'];
 
-$query = "SELECT `id` FROM `users` WHERE `username` LIKE '$username'";
+$query = "SELECT `id` FROM `users` WHERE `username` = '$username'";
 
 $result = mysqli_query($conn, $query);
 
