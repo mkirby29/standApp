@@ -12,20 +12,20 @@ const DEFAULT_STATE = {
 export default (state = DEFAULT_STATE, action) => {
     switch(action.type) {
         case types.ADD_AVATAR:
-            return { auth: true, error: '', all: '', avatar: action.payload, ...state}
+            return {...state, auth: true, avatar: action.payload}
         case types.ADD_NEW_USER:
-            return { auth: true, error: '', userInfo: action.payload, ...state}
+            return {...state, auth: true, userInfo: action.payload}
         case types.GET_USER_ID:
             return {...state, id: action.payload}
         case types.RETRIEVE_AVATARS:
-            return { auth: true, all: action.payload.data, error: ''}
+            return {...state, auth: true, all: action.payload.data}
         case types.AUTH_ERROR:
-            return { auth: false, error: action.error}
+            return {...state,  auth: false, error: action.error}
         case types.SIGN_UP:
         case types.LOG_IN:
-            return { auth: true, error: '' }
+            return {...state, auth: true}
         case types.LOG_OUT:
-            return { auth: false, error: '' }
+          return {...state, auth: false, error: '' }
         default:
             return state
     }

@@ -5,7 +5,6 @@ import { getSingleAudio } from '../actions';
 
 class AudioInfo extends Component {
     componentDidMount () {
-        console.log('ID: ', window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1));
         let id = window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1);
         this.props.getSingleAudio(id)
     }
