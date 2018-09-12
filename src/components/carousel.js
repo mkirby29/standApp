@@ -23,13 +23,9 @@ class SimpleSlider extends React.Component {
         this.attachAvatarToServer = this.attachAvatarToServer.bind(this);
     }
 
-    componentDidMount () {
-        
-    }
-
     attachAvatarToServer (e) {
-        let token = localStorage.getItem('token')
-        this.props.addAvatar(token, e.target.name);
+        this.props.addAvatar(e.target.name);
+        console.log('e.target.name: ', e.target.name);
     }
 
     render() {
@@ -58,7 +54,7 @@ class SimpleSlider extends React.Component {
             return(
                 <div key={index} className='d-flex justify-content-center'>
                     <Link to='/'>
-                        <img name={ele.id} key={index} src={ele.src} onClick={(e) => this.attachAvatarToServer(e)}/>
+                        <img name={ele.id} key={ele.id} src={ele.src} onClick={(e) => this.attachAvatarToServer(e)}/>
                     </Link>
                 </div>
             )

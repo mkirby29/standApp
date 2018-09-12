@@ -17,10 +17,13 @@ $s3 = new S3Client([
     'scheme' => 'http'
 ]);
 
-$query = "SELECT `u`.`id`, `avatar`, `username`, `audio_name`
+$query = "SELECT `u`.`id`, `username`, `audio_name`
                 FROM `users` AS `u`
                 JOIN `audio` AS `a` 
-                    ON `a`.`user_id` = `u`.`id`  
+                    ON `a`.`user_id` = `u`.`id` 
+                -- doesn't populate newsfeed if user_feedback is empty for user/audio
+                -- JOIN `user_feedback` AS `f`
+                --     ON `f`.`audio_id` = `a`.`id` 
                 ORDER BY `date_added` ASC";
 
 $result = mysqli_query($conn, $query);

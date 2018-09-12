@@ -13,11 +13,15 @@ class NewsFeed extends Component {
         this.props.getNewsfeed();
     }
 
+    updateNewsfeed () {
+        this.props.getNewsfeed();
+    }
+
     render () {
         if (this.props.list.data) {
-            this.renderNewsFeed = this.props.list.data.map( function(element){
+            this.renderNewsFeed = this.props.list.data.map((element) => {
                 return(
-                    <VisualizerPlayer key={element.id} audio={element}/>
+                    <VisualizerPlayer key={element.id} audio={element} update={this.updateNewsfeed.bind(this)}/>
                 )
             })
         }
