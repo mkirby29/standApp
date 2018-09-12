@@ -4,7 +4,8 @@ const DEFAULT_STATE = {
     auth: false,
     error: '', 
     all: '', 
-    avatar: ''
+    avatar: '',
+    userInfo: ''
 }
 
 export default (state = DEFAULT_STATE, action) => {
@@ -12,7 +13,7 @@ export default (state = DEFAULT_STATE, action) => {
         case types.ADD_AVATAR:
             return { auth: true, error: '', all: '', avatar: action.payload}
         case types.ADD_NEW_USER:
-            return { auth: true, error: '', userInfo: action.payload.data}
+            return { auth: true, error: '', userInfo: action.payload, ...state}
         case types.RETRIEVE_AVATARS:
             return { auth: true, all: action.payload.data, error: ''}
         case types.AUTH_ERROR:

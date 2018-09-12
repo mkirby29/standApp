@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ReactMic } from 'react-mic';
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 import axios from 'axios';
 import '../assets/css/microphone.css';
 import Modal from 'react-modal';
@@ -86,7 +87,7 @@ async postRecording (e) {
   // audio name for s3
   form.set('id', this.state.audio_name);
   form.set('user_id', 10);
-  form.set('author_name', 'matt');
+  form.set('author_name', this.props.user.userInfo.username);
 
   await axios({
     method: 'post',
@@ -141,7 +142,7 @@ async postRecording (e) {
   }
 
   render() {
-    
+    console.log("MICROPHONE: ", this.props.user);
     return (
       <div className='microphone'>
       <Link to='/'><i className="fas fa-chevron-left fa-2x" onClick={this.pauseEffect.bind(this)}></i></Link>
@@ -208,4 +209,10 @@ async postRecording (e) {
   }
 }
 
-export default Microphone;
+function mapStateToProps (state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(Microphone);

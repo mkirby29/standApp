@@ -21,6 +21,7 @@ class GoogleComponent extends Component {
       this.setState({ data: res.profile })
     } else {
       this.setState({ data: 'something happen wrong' })
+      this.props.history.push("/login");
     }
   }
 

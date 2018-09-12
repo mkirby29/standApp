@@ -3,7 +3,7 @@
 }
 
 .audio_container:first-child {
-    margin: 10% auto 15%;
+    margin: 10% auto 5%;
 }
 
 .title_text {
@@ -37,7 +37,7 @@ a {
 
 @media only screen and (min-width: 600px) {
     .audio_container:first-child {
-        margin: 5% auto 10%;
+        margin: 5% auto 7%;
     }
 
     .audio_container {
