@@ -22,7 +22,7 @@ if(empty($result1)){
 	}
 }
 
-$audioName = "SELECT `id` From `audio` WHERE `audio_name` = $name";
+$audioName = "SELECT `id` FROM `audio` WHERE `audio_name` = $name";
 $audioId = mysqli_query($conn, $audioName);
 
 $checkFeedback = "SELECT `audio_id` FROM `user_feedback` WHERE `user_id` = '$id'";
