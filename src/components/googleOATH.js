@@ -25,7 +25,7 @@ class GoogleComponent extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState){
+  async componentDidUpdate(prevProps, prevState){
     const { data: { name, email, email_verified, sub }} = this.state;
     let currentToken = localStorage.getItem('token');
     this.props.logIn(currentToken);
@@ -45,7 +45,7 @@ class GoogleComponent extends Component {
       password: sub
     }
     console.log('this.props.addNewUser: ', this.props.addNewUser)
-    this.props.addNewUser(name, sub, email)
+    await this.props.addNewUser(name, sub, email)
     console.log(this.state)
   }
   

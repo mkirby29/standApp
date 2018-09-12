@@ -29,7 +29,7 @@ switch($action) {
         require_once('get/get_single_audio.php');
         break;
     case 'get_user_id':
-        require_once('get/get_user_id.php');
+        require_once('post/get_user_id.php');
         break;
     case 'PUT':
         $output['message'] = 'PUT request made';
