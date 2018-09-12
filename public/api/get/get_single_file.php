@@ -18,7 +18,7 @@ $s3 = new S3Client([
 ]);
 
 
-$query = "SELECT `u`.`id`, `avatar`, `username`, `audio_name`, `likes`, `comment`, `comment_time
+$query = "SELECT `u`.`id`, `avatar`, `username`, `audio_name`, `likes`, `comment`, `comment_time`
                 FROM `users` AS `u`
                 JOIN `audio` AS `a`
                     ON `a`.`user_id` = `u`.`id`
