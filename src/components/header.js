@@ -19,7 +19,6 @@ import Hamburger from './hamburger';
 import { stack as Menu } from 'react-burger-menu';
 import Logo from './logo';
 import { connect } from 'react-redux';
-import { addAvatar } from '../actions';
 
 class Header extends React.Component {
     constructor(props){
@@ -83,10 +82,10 @@ class Header extends React.Component {
                         <Link to='/posts'>
                             <img alt="Avatar" src={this.state.avatar} className="img-fluid avatar_image" />
                         </Link>
-                        <a id="home" className="menu-item" href="/posts"><i className="fas fa-home menu-item "/>  My Account</a>
-                        <a id="about" className="menu-item" href="/avatar_select"><i className="far fa-user-circle menu-item"/>   Avatar Select</a>
-                        <a id="contact" className="menu-item" href="/about"><i className="fas fa-users menu-item"/>  About Us</a>
-                        <a id="contact" className="menu-item" href="/login" onClick={this.logOut.bind()}><i className="fas fa-sign-out-alt menu-item"/>   Log Out</a>
+                        <a id="home" className="menu-item" href="/posts"><i className="fas fa-home menu-item fa-fw"/>  My Account</a>
+                        <a id="about" className="menu-item" href="/avatar_select"><i className="far fa-user-circle menu-item fa-fw"/>   Avatar Select</a>
+                        <a id="contact" className="menu-item" href="/about"><i className="fas fa-users menu-item fa-fw"/>  About Us</a>
+                        <a id="contact" className="menu-item" href="/login" onClick={this.logOut.bind()}><i className="fas fa-sign-out-alt menu-item fa-fw"/>   Log Out</a>
                         <a onClick={ this.showSettings } className="menu-item--small" href=""></a>
                     </Menu>
                     {/* </div> */}
@@ -123,4 +122,4 @@ function mapStateToProps (state) {
     }
 }
 
-export default connect(mapStateToProps, {addAvatar})(Header);
+export default connect(mapStateToProps)(Header);
