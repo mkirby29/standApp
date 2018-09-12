@@ -18,7 +18,7 @@ class Home extends Component {
     }
 
     async componentDidMount () {
-        
+
     }
 
     async addItem(event) {
@@ -51,6 +51,7 @@ class Home extends Component {
     }
 
     render () {
+        console.log('HOME: ', this.props.user)
         return(
             <div>
                 {/* <Sidebar/> */}
@@ -65,5 +66,12 @@ class Home extends Component {
     }
 }
 
-export default connect(null, {
+function mapStateToProps (state) {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, {
+
 })(Home);

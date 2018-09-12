@@ -4,8 +4,12 @@
 // { HEARTS } check if fill or not. and toggle accordingly
 // { AUDIO } get current likes counter and +1
 
+$_POST = json_decode(file_get_contents('php://input'), true);
+
 $name = $_POST['audio_name'];
 $id = $_POST['id'];
+
+print_r($name, $id);
 
 $query = "UPDATE `audio` SET `likes`=(`likes`+1) WHERE `audio_name`=$name"; 
 
@@ -22,7 +26,7 @@ if(empty($result1)){
 	}
 }
 
-$audioName = "SELECT `id` From `audio` WHERE `audio_name` = $name";
+$audioName = "SELECT `id` FROM `audio` WHERE `audio_name` = $name";
 $audioId = mysqli_query($conn, $audioName);
 
 $checkFeedback = "SELECT `audio_id` FROM `user_feedback` WHERE `user_id` = '$id'";

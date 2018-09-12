@@ -92,9 +92,10 @@ export const getSingleAudio = (id) => async dispatch => {
     }
 }
 
-export const getUserID = (username) => async dispatch => {
-    const resp = await axios.get('/api/stand_app.php', { 
-        username: username
+export const getUserID = (email) => async dispatch => {
+    console.log('GETUSERID email: ', email)
+    const resp = await axios.post('/api/stand_app.php', { 
+        email: email
     }, {
         params: {
             action: types.GET_USER_ID
@@ -104,15 +105,21 @@ export const getUserID = (username) => async dispatch => {
         type: types.GET_USER_ID,
         payload: resp
     })
+    return {
+        type: types.GET_USER_ID,
+        payload: resp
+    }
 }
 
 export function likeAudio (audioName, userID) {
     const resp = axios.post('/api/stand_app.php', {
+        audio_name: audioName,
+        id: parseInt(userID)
+    },{
         params: {
             action: types.LIKE_AUDIO
         }
     });
-
     return {
         type: types.LIKE_AUDIO,
         payload: resp
