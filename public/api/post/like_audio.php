@@ -22,22 +22,22 @@ if(empty($result1)){
 	}
 }
 
-$audioName = "SELECT `id` FROM `audio` WHERE `audio_name`= $name";
-
+$audioName = "SELECT `id` From `audio` WHERE `audio_name` = $name";
 $audioId = mysqli_query($conn, $audioName);
-$checkFeedback = "SELECT `user_feedback` FROM `user_feedback` WHERE `user_id`=$id AND `audio_id`= $audioId";
-$addFeedback = "INSERT INTO `user_feedback`(`user_id`, `audio_id`) VALUES ('$id', '$audioName')";
-$deleteFeedback = "DELETE FROM `user_feedback` WHERE `user_id` = '$id' AND `audio_id` = '$audioName'";
+
+$checkFeedback = "SELECT `audio_id` FROM `user_feedback` WHERE `user_id` = '$id'";
+$addFeedback = "UPDATE `user_feedback` SET `audio_id` = '$audioId' WHERE `user_id` = '$id'";
+$updateFeedback = "UPDATE `user_feedback` SET `audio_id` = 0 WHERE `user_id` = '$id'";
 
 $result2 = mysqli_query($conn, $checkFeedback);
 
 if(empty($result2)){  
 	$output['errors'] = 'database error';
 }else {
-    if(mysqli_num_rows($result2)>0){
-        $delete = mysqli_query($conn, $deleteFeedback);
+    if($result2>0){
+        $delete = mysqli_query($conn, $updateFeedback);
         return true;
-    }else {      
+    }else if($result2===0){      
         $add = mysqli_query($conn, $addFeedback);
         return false;
     }
