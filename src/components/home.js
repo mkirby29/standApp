@@ -3,7 +3,9 @@ import Header from './header';
 import NewsFeed from './news_feed';
 import Footer from './footer';
 import SearchBar from './search_bar';
-import Sidebar from './sidebar'
+import Sidebar from './sidebar';
+import Searchbar from './searchbar';
+import '../assets/css/search_bar.css';
 
 import { formatPostData } from '../helpers';
 import axios from 'axios';
@@ -56,7 +58,8 @@ class Home extends Component {
                 {/* <Sidebar/> */}
                 <div id="page-content-wrapper">
                     <Header/>
-                    <SearchBar/>
+                    {/* <SearchBar/> */}
+                    <Searchbar/>
                     <NewsFeed/>
                     <Footer/>
                 </div>
