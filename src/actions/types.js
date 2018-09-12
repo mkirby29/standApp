@@ -5,6 +5,7 @@ export default {
     GET_SINGLE_AUDIO: 'get_single_audio',
     GET_NEWSFEED: 'get_newsfeed',
     GET_POSTS: 'get_posts',
+    GET_USER_ID: 'get_user_id',
     LIKE_AUDIO: 'like_audio',
     LIST_ERROR: 'list_error',
     LOG_IN: 'log_in',

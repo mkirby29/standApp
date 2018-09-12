@@ -8,6 +8,7 @@ import Modal from 'react-modal';
 import CategoryModal from './category_modal';
 import applauseTrack from '../assets/audio/applause.mp3';
 import laughTrack from '../assets/audio/laugh.mp3';
+import { getUserID } from '../actions';
 
 const customStyles = {
   content : {
@@ -47,6 +48,12 @@ class Microphone extends Component {
     this.closeModal = this.closeModal.bind(this);
   }
  
+  componentDidMount() {
+    const userInfo  = this.props.user
+    console.log('username: ', userInfo)
+    // this.props.getUserID(username);
+  }
+
   startRecording(){
     this.setState({
       record: true
@@ -215,4 +222,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps)(Microphone);
+export default connect(mapStateToProps, {getUserID})(Microphone);

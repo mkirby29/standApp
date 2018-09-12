@@ -28,8 +28,8 @@ switch($action) {
     case 'get_single_audio': 
         require_once('get/get_single_audio.php');
         break;
-    case 'get_user':
-        require_once('get/get_user.php');
+    case 'get_user_id':
+        require_once('get/get_user_id.php');
         break;
     case 'PUT':
         $output['message'] = 'PUT request made';
