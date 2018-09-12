@@ -225,7 +225,7 @@ class VisualizerPlayer extends Component {
                                     : <i className={"far fa-play-circle fa-3x"} onClick={this.play.bind(this)}></i>
                             }
                             <div className='likes_container' onClick={() => this.toggleLike()}>
-                                <i className={result === '' ? (this.state.liked && this.state.liked !== '0') ? "fas fa-heart fa-lg" : "far fa-heart fa-lg" : 'd-none'}></i>
+                                <i className={result === '' ? (this.state.liked && this.state.liked !== '0') ? "fas fa-heart fa-lg clickable-heart" : "far fa-heart fa-lg clickable-heart" : 'd-none'}></i>
                                 <i className={result === '' ? 'd-none' : 'fas fa-heartbeat fa-lg'}></i>
                                 <div className={result === '' ? 'd-none' : 'likes-counter'}>100</div>
                             </div>

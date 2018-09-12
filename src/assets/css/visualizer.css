@@ -14,6 +14,9 @@
 
 .likes_container {
     color: grey;
+}
+
+.clickable-heart {
     z-index: 1;
 }
 
