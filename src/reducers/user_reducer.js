@@ -11,7 +11,7 @@ const DEFAULT_STATE = {
 export default (state = DEFAULT_STATE, action) => {
     switch(action.type) {
         case types.ADD_AVATAR:
-            return { auth: true, error: '', all: '', avatar: action.payload}
+            return { auth: true, error: '', all: '', avatar: action.payload, ...state}
         case types.ADD_NEW_USER:
             return { auth: true, error: '', userInfo: action.payload, ...state}
         case types.RETRIEVE_AVATARS:
