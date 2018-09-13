@@ -105,8 +105,6 @@ async postRecording (e) {
   }).then(function(response) {
     console.log("Response", response);
   });
-
-  this.props.history.push('/');
 }
 
   openModal() {
@@ -205,8 +203,8 @@ async postRecording (e) {
                 <input name='audio_name' placeholder = "Enter audio title here" className='title-input' value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
               </div> */}
 
-              <div class="title-input-container">
-                <label for="audio_name">Title</label>
+              <div className="title-input-container">
+                <label>Title</label>
                 <input name='audio_name' type="text" className="form-control" placeholder="Enter audio title here" value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
               </div>
               

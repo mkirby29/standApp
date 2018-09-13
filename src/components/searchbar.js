@@ -5,7 +5,6 @@ import SearchInput, {createFilter} from 'react-search-input';
 import emails from './searchbarmails';
 import '../assets/css/search_bar.css';
 
-
 const KEYS_TO_FILTERS = ['user.name', 'subject', 'dest.name', 'id']
 
 class Searchbar extends Component {

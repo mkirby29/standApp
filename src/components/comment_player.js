@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import '../assets/css/comment_player.css';
 import CommentBar from './comment_bar';
 import axios from 'axios';
-import { postComment } from '../actions';
+import { postComment, getSingleAudio } from '../actions';
 import { connect } from 'react-redux';
 
 // need to fix here, not audio_info!
@@ -15,7 +15,7 @@ class CommentPlayer extends Component {
             buffer: null,
             duration: 0,
             tracks: { 
-                artist: "Amadeus",
+                artist: 'Paul',
                 song: "Goodbye",
                 url: "https://api.soundcloud.com/tracks/436771803/stream?client_id=b1495e39071bd7081a74093816f77ddb",
                 album_image: '',
@@ -50,6 +50,7 @@ class CommentPlayer extends Component {
                     }
                 ]
             },
+            audio_file: '',
             playing: false,
             like: false,
             muted: false, 
@@ -59,14 +60,21 @@ class CommentPlayer extends Component {
     }
 
     componentDidMount(){
+        // if ()
         this.createAudio();
         this.createVisualizer();
     }
 
+    async componentWillMount() {
+        var currentLocation = window.location.href;
+        var result = /[^/]*$/.exec(currentLocation)[0]
+        await this.props.getSingleAudio(result);
+        console.log(this.props.comment)
+    }
+
     createAudio () {
-        this.audio = new Audio(this.state.tracks.url)
+        this.audio = new Audio(this.props.comment[0].audio_url);
         this.audio.crossOrigin = "anonymous";
-        // this.audio.controls = true
     }
 
     createVisualizer () {
@@ -124,7 +132,7 @@ class CommentPlayer extends Component {
                     ctx.lineTo(x2, y2);
                     ctx.closePath();
                     ctx.stroke();
-            }
+                }
             }
             // toggle this on play and pause
             this.checkComment();
@@ -200,6 +208,17 @@ class CommentPlayer extends Component {
     }
 
     render() {
+        console.log('THIS PROPS COMMENT: ', this.props.comment)
+        let author_name = null;
+        let audio_name = null;
+        let audio_file = null;
+
+        if(this.props.comment){
+            author_name = this.props.comment[0].author_name
+            audio_name = this.props.comment[0].audio_name
+            audio_file = this.props.comment[0].audio_url
+        }
+
         return (
             <div className="player container text-center">
                 <canvas id='comment-canvas'></canvas>
@@ -207,14 +226,14 @@ class CommentPlayer extends Component {
                     <Link to='/'><i className="fas fa-chevron-left fa-2x back-button" onClick={this.stop.bind(this)}/></Link>
                 </div>
                 <div className="song">
-                    <h1 className="name">{this.state.tracks.song}</h1>
-                    <h3 className="artist">{this.state.tracks.artist}</h3>
+                    <h1 className="name">{audio_name}</h1>
+                    <h3 className="artist">{author_name}</h3>
                     <i id='like-container' onClick={this.toggleLikeButton} className={this.state.like ? "fas fa-heart fa-lg fa-2x" : "far fa-heart fa-lg fa-2x"}></i>
                 </div>
-                <div className="display-area">
-                    <div className="comments-container">{this.state.displayed_comment}</div>
+                {/* <div className="display-area">
+                    <div className="comments-container">{author_name}</div>
                     <div className="time"></div>
-                </div>
+                </div> */}
                 {this.state.audio}
                 <div className='controls-container'>
                     <div className="controls d-flex justify-content-around">
@@ -225,10 +244,16 @@ class CommentPlayer extends Component {
                         <i className={!this.state.muted ? "d-none" : "fas fa-volume-off fa-3x mute"} onClick={this.unmute.bind(this)}/>
                     </div>
                 </div>
-                <CommentBar post={this.postComment.bind(this)}/>
+                {/* <CommentBar post={this.postComment.bind(this)}/> */}
             </div>
         )
     }
 }
 
-export default connect(null, {postComment})(CommentPlayer);
+function mapStateToProps (state) {
+    return {
+        comment: state.comment.single.data
+    }
+}
+
+export default connect(mapStateToProps, {postComment, getSingleAudio})(CommentPlayer);

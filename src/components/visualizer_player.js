@@ -171,17 +171,16 @@ class VisualizerPlayer extends Component {
 
     // need id in future
     toggleLike = async () => {
-        const { audio: {audio_name}} = this.props
+        const audio_id = this.props.audio.id
         const { id } = this.props.user.id.data.data[0]
-        console.log('audio: ', audio_name, id)
         if (this.state.liked === '1') {
-            this.props.unlikeAudio(audio_name, id);
+            this.props.unlikeAudio(audio_id, id);
             console.log('unliked');
             await this.setState({
                 liked: '0'
             })
         } else {
-            this.props.likeAudio(audio_name, id);
+            this.props.likeAudio(audio_id, id);
             console.log('liked');
             await this.setState({
                 liked: '1'
@@ -247,9 +246,6 @@ class VisualizerPlayer extends Component {
                         </div>
                         <div className="audio_visualizer">
                             <canvas ref={e => this.canvasRef = e}/>
-       
-
-
                     
                         </div>
                         <div className = 'shareContainer d-flex justify-content-around'>

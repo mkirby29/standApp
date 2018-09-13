@@ -1,5 +1,7 @@
 <?php
 
+$_POST = json_decode(file_get_contents('php://input'), true);
+
 require('../../aws/vendor/autoload.php');
 require('secret_key.php');
 
@@ -17,13 +19,17 @@ $s3 = new S3Client([
     'scheme' => 'http'
 ]);
 
+$id = $_POST['audio_id'];
 
-$query = "SELECT `u`.`id`, `avatar`, `username`, `audio_name`, `likes`, `comment`, `comment_time`
-                FROM `users` AS `u`
-                JOIN `audio` AS `a`
-                    ON `a`.`user_id` = `u`.`id`
-                JOIN `comments` AS `c`
-                    ON `c`.`audio_id` = `a`.`id`";
+// $query = "SELECT `author_name`, `audio_name`, `a`.`id`, `c`.`comment`, `c`.`comment_time`
+//             FROM `audio` AS `a`
+//             JOIN `comments` AS `c`
+//                 ON `c`.`audio_id` = `a`.`id`
+//             WHERE `a`.`id` = $id";
+
+$query = "SELECT `author_name`, `audio_name`, `a`.`id`
+            FROM `audio` AS `a`
+            WHERE `a`.`id` = $id";
 
 $result = mysqli_query($conn, $query);
 

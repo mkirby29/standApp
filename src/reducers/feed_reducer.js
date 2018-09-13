@@ -9,8 +9,6 @@ const DEFAULT_STATE = {
 
 export default (state = DEFAULT_STATE, action) => {
     switch (action.type) {
-        case types.GET_SINGLE_AUDIO:
-            return {...state, single: action.payload.data};
         case types.GET_USER_POSTS:
             return {...state, user: action.payload.data};
         case types.DELETE_POST:

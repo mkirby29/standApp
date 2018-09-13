@@ -3,8 +3,6 @@ import Header from './header';
 import NewsFeed from './news_feed';
 import Footer from './footer';
 import SearchBar from './search_bar';
-import Sidebar from './sidebar';
-import Searchbar from './searchbar';
 import '../assets/css/search_bar.css';
 
 import { formatPostData } from '../helpers';
@@ -17,10 +15,6 @@ class Home extends Component {
         this.state = {
             newsFeed: [],
         }
-    }
-
-    async componentDidMount () {
-
     }
 
     async addItem(event) {
@@ -48,19 +42,15 @@ class Home extends Component {
             submitted: true,
             errors: []
         })
-
         this.getNewsFeedData();
     }
 
     render () {
-        console.log('HOME: ', this.props.user)
         return(
             <div>
-                {/* <Sidebar/> */}
                 <div id="page-content-wrapper">
                     <Header/>
-                    <SearchBar/>
-                    {/* <Searchbar/> */}
+                    {/* <SearchBar/> */}
                     <NewsFeed/>
                     <Footer/>
                 </div>
@@ -75,6 +65,4 @@ function mapStateToProps (state) {
     }
 }
 
-export default connect(mapStateToProps, {
-
-})(Home);
+export default connect(mapStateToProps)(Home);
