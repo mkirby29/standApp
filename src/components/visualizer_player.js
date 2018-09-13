@@ -4,7 +4,7 @@ import '../assets/css/visualizer.css';
 import albumImage from '../assets/images/microphone.png'
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { likeAudio, unlikeAudio} from '../actions';
+import { likeAudio, unlikeAudio, getUserID } from '../actions';
 import Modal from 'react-modal';
 import CategoryModal from './category_modal';
 import {
@@ -73,7 +73,16 @@ class VisualizerPlayer extends Component {
     componentDidMount(){
         this.createAudio();
         this.createVisualizer();
+        const { userInfo: {email}} = this.props.user
+        console.log('STUFF: ', email)
+        this.props.getUserID(email)
     }
+
+    // componentDidUpdate() {
+    //     const { userInfo: {email}} = this.props.user
+    //     console.log('STUFF: ', email)
+    //     this.props.getUserID(email)
+    // }
 
     createAudio () {
         console.log('create audio: ', this.props.audio.audio_url)
@@ -172,7 +181,9 @@ class VisualizerPlayer extends Component {
 
     // need id in future
     toggleLike = async () => {
-        const { audio: {audio_name , id}} = this.props
+        const { audio: {audio_name}} = this.props
+        const { id } = this.props.user.id.data.data[0]
+        console.log('audio: ', audio_name, id)
         if (this.state.liked === '1') {
             this.props.unlikeAudio(audio_name, id);
             console.log('unliked');
@@ -211,6 +222,7 @@ class VisualizerPlayer extends Component {
     }
 
     render () {
+        console.log('mapstatetoprops: ', this.props.user)
         // get current url and check to display correct page
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0]
@@ -371,7 +383,14 @@ class VisualizerPlayer extends Component {
     }
 }
 
-export default connect(null, {
+function mapStateToProps (state) {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, {
     likeAudio,
-    unlikeAudio
+    unlikeAudio, 
+    getUserID
 })(VisualizerPlayer);

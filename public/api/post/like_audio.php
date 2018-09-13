@@ -4,8 +4,12 @@
 // { HEARTS } check if fill or not. and toggle accordingly
 // { AUDIO } get current likes counter and +1
 
+$_POST = json_decode(file_get_contents('php://input'), true);
+
 $name = $_POST['audio_name'];
 $id = $_POST['id'];
+
+print_r($name, $id);
 
 $query = "UPDATE `audio` SET `likes`=(`likes`+1) WHERE `audio_name`=$name"; 
 
