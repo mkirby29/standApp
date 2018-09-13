@@ -41,7 +41,7 @@ const customStyles = {
       bottom                : 'auto',
       marginRight           : '-50%',
       transform             : 'translate(-50%, -50%)',
-      height: '20%',
+      height: '30%',
       backgroundColor: 'grey',
       borderRadius: '20px'
     }
@@ -369,9 +369,9 @@ class VisualizerPlayer extends Component {
           <h2 ref={subtitle => this.subtitle = subtitle}>Are you sure you want to delete?</h2>
           <form className='container center-align'>
          
-            <div className='post-controls d-flex justify-content-center'>
-              <button className='btn btn-dark'><i className="fas fa-times"/></button>
-              <button className='btn btn-warning' onClick={(e) => {this.deletePost(e)}}><i className="fas fa-check"/></button>
+            <div className='post-controls d-flex justify-content-center fa-2x'>
+              <button className='btn btn-dark' style={{padding: '10%', width: '60%'}}><i className="fas fa-times fa-2x"/></button>
+              <button className='btn btn-warning' style={{padding: '10%', width: '60%', marginLeft: '5%'}} onClick={(e) => {this.deletePost(e)}}><i className="fas fa-check"/></button>
             </div>
           </form>
         </Modal>
