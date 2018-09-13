@@ -59,8 +59,8 @@ class Home extends Component {
                 {/* <Sidebar/> */}
                 <div id="page-content-wrapper">
                     <Header/>
-                    {/* <SearchBar/> */}
-                    <Searchbar/>
+                    <SearchBar/>
+                    {/* <Searchbar/> */}
                     <NewsFeed/>
                     <Footer/>
                 </div>

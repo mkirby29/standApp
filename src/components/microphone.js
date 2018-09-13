@@ -93,7 +93,8 @@ async postRecording (e) {
   form.set('audio_name', this.state.audio_name)
   // audio name for s3
   form.set('id', this.state.audio_name);
-  form.set('user_id', 10);
+  console.log('record SUBMIT: ', this.props.user)
+  form.set('user_id', this.props.user.id.data.data[0].id);
   form.set('author_name', this.props.user.userInfo.username);
 
   await axios({
@@ -104,6 +105,8 @@ async postRecording (e) {
   }).then(function(response) {
     console.log("Response", response);
   });
+
+  this.props.history.push('/');
 }
 
   openModal() {
@@ -196,20 +199,28 @@ async postRecording (e) {
           >
  
           <h2 ref={subtitle => this.subtitle = subtitle}>Completed Recording</h2>
-          <form className='container center-align'>
+          <div className='container center-align'>
             <div className='d-flex justify-content-center'>
-              <input name='audio_name' placeholder = "Enter audio title here" className='title-input' value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
+              {/* <div className='title-input-container'>
+                <input name='audio_name' placeholder = "Enter audio title here" className='title-input' value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
+              </div> */}
+
+              <div class="title-input-container">
+                <label for="audio_name">Title</label>
+                <input name='audio_name' type="text" className="form-control" placeholder="Enter audio title here" value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
+              </div>
+              
             </div>
-            <div className='recorded-audio-player d-flex justify-content-center' style={{padding: '10% 0%' }}>
+            <div className='recorded-audio-player d-flex justify-content-center'>
               <audio controls>
                 <source src={this.state.blobfile.blobURL} type="audio/webm"/>
               </audio>
             </div>
             <div className='post-controls d-flex justify-content-center'>
-              <button className='btn btn-dark' style={{padding: '10%', width: '60%'}}><i class="fas fa-trash-alt fa-2x"/></button>
-              <button className='btn btn-warning' style={{padding: '10%', width: '60%', marginLeft: '5%'}} onClick={(e) => {this.postRecording(e)}}><i class="fas fa-sign-in-alt fa-2x"/></button>
+              <button className='btn btn-dark' onClick={this.closeModal.bind(this)}><i className="fas fa-trash-alt fa-2x"/></button>
+              <button className='btn btn-warning' onClick={(e) => {this.postRecording(e)}}><i className="fas fa-sign-in-alt fa-2x"/></button>
             </div>
-          </form>
+          </div>
         </Modal>
       </div>
     )

@@ -2,6 +2,12 @@
     width: 80%;
 }
 
+.avatar_container .fa-play-circle:hover, 
+.avatar_container .fa-pause-circle:hover {
+    color: rgb(114, 94, 42);
+    cursor: pointer;
+}
+
 .likes_container {
     position: absolute;
     right: -5%;
@@ -14,6 +20,11 @@
 
 .likes_container {
     color: grey;
+}
+
+.clickable-heart:hover {
+    color: rgb(177, 141, 52);
+    cursor: pointer;
 }
 
 .clickable-heart {
@@ -31,6 +42,11 @@
 
 .audio_visualizer {
     display: inline-block;
+}
+
+.post-title .fa-trash:hover {
+    color: rgb(177, 141, 52);
+    cursor: pointer;
 }
 
 .post-hr {

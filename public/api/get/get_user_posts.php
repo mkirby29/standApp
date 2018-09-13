@@ -1,5 +1,7 @@
 <?php
 
+$_POST = json_decode(file_get_contents('php://input'), true);
+
 require('../../aws/vendor/autoload.php');
 require('secret_key.php');
 
@@ -17,13 +19,13 @@ $s3 = new S3Client([
     'scheme' => 'http'
 ]);
 
-$query = "SELECT `u`.`id`, `username`, `audio_name`, `a`.`id`
+$id = $_POST['user_id'];
+
+$query = "SELECT `u`.`id`, `username`, `audio_name`, `a`.`id`, `a`.`likes`
                 FROM `users` AS `u`
                 JOIN `audio` AS `a` 
                     ON `a`.`user_id` = `u`.`id` 
-                -- doesn't populate newsfeed if user_feedback is empty for user/audio
-                -- JOIN `user_feedback` AS `f`
-                --     ON `f`.`audio_id` = `a`.`id` 
+                WHERE `a`.`user_id` = $id
                 ORDER BY `date_added` DESC";
 
 $result = mysqli_query($conn, $query);

@@ -4,7 +4,7 @@ import '../assets/css/visualizer.css';
 import albumImage from '../assets/images/microphone.png'
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { likeAudio, unlikeAudio, getUserID } from '../actions';
+import { likeAudio, unlikeAudio, getUserID, deletePost } from '../actions';
 import Modal from 'react-modal';
 import CategoryModal from './category_modal';
 import {
@@ -27,10 +27,6 @@ import {
 } from 'react-share';
 
 import '../assets/css/shareButtons.css'
-
-
-// takes in an array of objects container audio details
-// but one select/takes one audio object
 
 const customStyles = {
     content : {
@@ -77,12 +73,6 @@ class VisualizerPlayer extends Component {
         console.log('STUFF: ', email)
         this.props.getUserID(email)
     }
-
-    // componentDidUpdate() {
-    //     const { userInfo: {email}} = this.props.user
-    //     console.log('STUFF: ', email)
-    //     this.props.getUserID(email)
-    // }
 
     createAudio () {
         console.log('create audio: ', this.props.audio.audio_url)
@@ -221,8 +211,14 @@ class VisualizerPlayer extends Component {
         this.setState({modalIsOpen: false});
     }
 
+    toggleDelete = () => {
+        console.log("DELETE AUDIO NAME: ", this.props)
+        this.props.deletePost(this.props.audio.audio_name);
+        this.closeModal();
+    }
+
     render () {
-        console.log('mapstatetoprops: ', this.props.user)
+        console.log('mapstatetoprops: ', this.props.audio)
         // get current url and check to display correct page
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0]
@@ -239,7 +235,7 @@ class VisualizerPlayer extends Component {
                             <div className='likes_container' onClick={() => this.toggleLike()}>
                                 <i className={result === '' ? (this.state.liked && this.state.liked !== '0') ? "fas fa-heart fa-lg clickable-heart" : "far fa-heart fa-lg clickable-heart" : 'd-none'}></i>
                                 <i className={result === '' ? 'd-none' : 'fas fa-heartbeat fa-lg'}></i>
-                                <div className={result === '' ? 'd-none' : 'likes-counter'}>100</div>
+                                <div className={result === '' ? 'd-none' : 'likes-counter'}>{this.props.audio.likes}</div>
                             </div>
                         </div>
                     </div>
@@ -248,7 +244,6 @@ class VisualizerPlayer extends Component {
                             {/* to=audio-info/:id */}
                             <Link className='text-white' to={`/audio_info/${this.props.audio.id}`}>{this.props.audio.username} - {this.props.audio.audio_name}</Link>
                             <i className={result === '' ? 'd-none' : 'fa fa-trash fa-2x pull-right'} onClick={(event) => {this.openModal()}} aria-hidden="true"></i>
-
                         </div>
                         <div className="audio_visualizer">
                             <canvas ref={e => this.canvasRef = e}/>
@@ -367,13 +362,13 @@ class VisualizerPlayer extends Component {
           >
  
           <h2 ref={subtitle => this.subtitle = subtitle}>Are you sure you want to delete?</h2>
-          <form className='container center-align'>
+          <div className='container center-align'>
          
             <div className='post-controls d-flex justify-content-center fa-2x'>
-              <button className='btn btn-dark' style={{padding: '10%', width: '60%'}}><i className="fas fa-times fa-2x"/></button>
-              <button className='btn btn-warning' style={{padding: '10%', width: '60%', marginLeft: '5%'}} onClick={(e) => {this.deletePost(e)}}><i className="fas fa-check"/></button>
+              <button className='btn btn-dark' style={{padding: '10%', width: '60%'}} onClick={this.closeModal.bind(this)}><i className="fas fa-times fa-2x"/></button>
+              <button className='btn btn-warning' style={{padding: '10%', width: '60%', marginLeft: '5%'}} onClick={this.toggleDelete.bind(this)}><i className="fas fa-check"/></button>
             </div>
-          </form>
+          </div>
         </Modal>
         <div className='d-flex justify-content-center'>
             <hr className='post-hr'/>
@@ -392,5 +387,6 @@ function mapStateToProps (state) {
 export default connect(mapStateToProps, {
     likeAudio,
     unlikeAudio, 
-    getUserID
+    getUserID,
+    deletePost
 })(VisualizerPlayer);

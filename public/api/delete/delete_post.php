@@ -1,5 +1,7 @@
 <?php
 
+$_POST = json_decode(file_get_contents('php://input'), true);
+
 require('../../aws/vendor/autoload.php');
 
 use Aws\S3\S3Client;
@@ -18,11 +20,10 @@ $s3->deleteObject([
     'Key'    => $keyname
 ]);
 
-
 if(empty($_GET)){  
 	$ouput['errors'] = 'missing data';
 }
-$query = "DELETE FROM `audio` WHERE `audio_name` = {$_GET['audio_name']}";
+$query = "DELETE FROM `audio` WHERE `audio_name` = '$keyname'";
 
 $result = mysqli_query($conn, $query);
 

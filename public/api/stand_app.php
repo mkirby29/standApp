@@ -21,11 +21,14 @@ switch($action) {
     case 'add_new_user':
         require_once('post/add_new_user.php');
         break;
-    case 'delete_item':
-        require_once('delete/delete_item.php');
+    case 'delete_post':
+        require_once('delete/delete_post.php');
         break;
     case 'get_all': 
         require_once('get/retrieve_audio.php');
+        break;
+    case 'get_user_posts':
+        require_once('get/get_user_posts.php');
         break;
     case 'get_single_audio': 
         require_once('get/get_single_audio.php');

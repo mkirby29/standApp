@@ -53,6 +53,19 @@ export const addAvatar = (image) => async dispatch => {
     }
 }
 
+export function deletePost (audio_name) {
+    console.log("DELETE: ", audio_name)
+    const resp = axios.delete('/api/stand_app.php?action=delete_post', {
+        data:{
+            audio_name:audio_name
+        }
+    })
+    return {
+        type: types.DELETE_POST,
+        payload: resp
+    }
+}
+
 export function getNewsfeed () {
     const resp = axios.get('/api/stand_app.php', {
         params: {
@@ -65,14 +78,16 @@ export function getNewsfeed () {
     }
 }
 
-export function getPosts () {
-    const resp = axios.get('/api/stand_app.php', {
+export function getUserPosts (user_id) {
+    const resp = axios.post('/api/stand_app.php', {
+        user_id: user_id
+    }, {
         params: {
-            action: 'get_posts'
+            action: 'get_user_posts'
         }
     })
     return {
-        type: types.GET_POSTS,
+        type: types.GET_USER_POSTS,
         payload: resp
     }
 }

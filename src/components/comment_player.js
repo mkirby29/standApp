@@ -53,7 +53,8 @@ class CommentPlayer extends Component {
             playing: false,
             like: false,
             muted: false, 
-            displayed_comment: ''
+            displayed_comment: '',
+            draw: true
         }
     }
 
@@ -69,6 +70,7 @@ class CommentPlayer extends Component {
     }
 
     createVisualizer () {
+        this.recussion = true;
         const canvas = document.getElementById("comment-canvas");
         const ctx = canvas.getContext("2d");
         let width = canvas.width = window.innerWidth;
@@ -93,34 +95,36 @@ class CommentPlayer extends Component {
         gradient.addColorStop(1, "#6464ff");
 
         this.draw = () => {
-            console.log(this.audio.currentTime);
-            requestAnimationFrame(this.draw);
-            analyser.getByteFrequencyData(dataArray);
+            if (this.recussion === true) {
+                console.log(this.audio.currentTime);
+                requestAnimationFrame(this.draw);
+                analyser.getByteFrequencyData(dataArray);
 
-            ctx.fillStyle = "black";
-            ctx.fillRect(0, 0, width, height);
+                ctx.fillStyle = "black";
+                ctx.fillRect(0, 0, width, height);
 
-            let segments = dataArray.length / 2;
-            let radius = (height + dataArray[0]) / 5;
-            let angle = (Math.PI * 2) / segments;
+                let segments = dataArray.length / 2;
+                let radius = (height + dataArray[0]) / 5;
+                let angle = (Math.PI * 2) / segments;
 
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = gradient;
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = gradient;
 
-            for(let i = 0; i < segments; i++) {
-                let barHeight = dataArray[i] > 0 ? dataArray[i] : 1;
+                for(let i = 0; i < segments; i++) {
+                    let barHeight = dataArray[i] > 0 ? dataArray[i] : 1;
 
-                let x1 = width / 2 + Math.cos(angle * i) * radius;
-                let x2 = width / 2 + Math.cos(angle * i) * (radius + barHeight);
+                    let x1 = width / 2 + Math.cos(angle * i) * radius;
+                    let x2 = width / 2 + Math.cos(angle * i) * (radius + barHeight);
 
-                let y1 = height / 2 + Math.sin(angle * i) * radius;
-                let y2 = height / 2 + Math.sin(angle * i) * (radius + barHeight);
+                    let y1 = height / 2 + Math.sin(angle * i) * radius;
+                    let y2 = height / 2 + Math.sin(angle * i) * (radius + barHeight);
 
-                ctx.beginPath();
-                ctx.moveTo(x1, y1);
-                ctx.lineTo(x2, y2);
-                ctx.closePath();
-                ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                    ctx.closePath();
+                    ctx.stroke();
+            }
             }
             // toggle this on play and pause
             this.checkComment();
@@ -140,6 +144,13 @@ class CommentPlayer extends Component {
         this.setState({
             playing: false
         });
+        cancelAnimationFrame(this.draw);
+    }
+
+    async stop () {
+        this.audio.pause();
+        this.audio.currentTime = 0
+        this.recussion = false;
         cancelAnimationFrame(this.draw);
     }
 
@@ -193,7 +204,7 @@ class CommentPlayer extends Component {
             <div className="player container text-center">
                 <canvas id='comment-canvas'></canvas>
                 <div className="row">
-                    <Link to='/'><i className="fas fa-chevron-left fa-2x back-button"/></Link>
+                    <Link to='/'><i className="fas fa-chevron-left fa-2x back-button" onClick={this.stop.bind(this)}/></Link>
                 </div>
                 <div className="song">
                     <h1 className="name">{this.state.tracks.song}</h1>

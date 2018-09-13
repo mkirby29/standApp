@@ -17,10 +17,16 @@
 input.rcw-new-message {
     color: black;
 }
+
 textarea:focus input:focus {
     color: black;
 }
 
 input{
     color: black;
+}
+
+.rcw-launcher:hover {
+    background-color: rgb(51, 108, 155);
+    cursor: pointer;
 }
