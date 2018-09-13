@@ -6,7 +6,6 @@ $_POST = json_decode(file_get_contents('php://input'), true);
 
 $email=$_POST['email'];
 
-
 $query = "SELECT `id` FROM `users` WHERE `email` = '$email'";
 
 // $result = mysqli_query($conn, $query);

@@ -10,7 +10,7 @@ import dummyAudioObject from '../assets/data/dummy_audio_object';
 import avatar from '../assets/images/avatars/10kevinSoccer.jpg';
 import Dm from './dm'
 
-import { getNewsfeed, getPosts, addAvatar } from '../actions';
+import { getNewsfeed, getUserPosts, addAvatar } from '../actions';
 import { connect } from 'react-redux';
 
 import defaultAvatar from '../assets/images/avatars/default_avatar.png';
@@ -53,8 +53,11 @@ class Post extends Component {
     }
 
     componentWillMount = () => {
-        this.props.getNewsfeed();
-        let token = localStorage.getItem('token');
+        if (this.props.user.id !== '') {
+            const { id } = this.props.user.id.data.data[0]
+            console.log('POST ID: ' , id)
+            this.props.getUserPosts(id);
+        }
     }
 
     checkAvatar = async () => {
@@ -72,6 +75,7 @@ class Post extends Component {
     }
     
     render () {
+        console.log("POSTS LIST: ", this.props.list.data)
         if (this.props.list.data) {
             this.renderUserPosts = this.props.list.data.map( function(element){
                 return(
@@ -102,10 +106,13 @@ class Post extends Component {
 
 function mapStateToProps (state) {
     return {
-        list: state.feed.all,
-        avatar: state.user
+        // list: state.feed.all,
+        avatar: state.user,
+        list: state.feed.user,
+        user: state.user
     }
 }
 
-export default connect(mapStateToProps, {getNewsfeed, addAvatar})(Post);
+// export default connect(mapStateToProps, {getNewsfeed, addAvatar, getUserPosts})(Post);
+export default connect(mapStateToProps, {addAvatar, getUserPosts})(Post);
 

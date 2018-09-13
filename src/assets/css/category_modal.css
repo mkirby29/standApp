@@ -51,3 +51,30 @@
 #modal-split {
     border-color: black;
 }
+
+@media only screen and (min-width: 800px) {
+    .modal-body {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-height: 712px) {
+    .modal-comedy, 
+    .modal-others {
+        font-size: 6rem;
+    }
+}
+
+@media only screen and (max-height: 620px) {
+    .modal-comedy, 
+    .modal-others {
+        font-size: 5rem;
+    }
+}
+
+@media only screen and (max-height: 500px) {
+    .modal-comedy, 
+    .modal-others {
+        font-size: 2rem;
+    }
+}

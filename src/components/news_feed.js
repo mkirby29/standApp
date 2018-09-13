@@ -37,6 +37,7 @@ class NewsFeed extends Component {
 function mapStateToProps (state) {
     return {
         list: state.feed.all
+        
     }
 }
 
