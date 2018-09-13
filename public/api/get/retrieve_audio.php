@@ -24,7 +24,7 @@ $query = "SELECT `u`.`id`, `username`, `audio_name`
                 -- doesn't populate newsfeed if user_feedback is empty for user/audio
                 -- JOIN `user_feedback` AS `f`
                 --     ON `f`.`audio_id` = `a`.`id` 
-                ORDER BY `date_added` ASC";
+                ORDER BY `date_added` DESC";
 
 $result = mysqli_query($conn, $query);
 
