@@ -31,11 +31,11 @@ switch($action) {
     case 'get_user_id':
         require_once('post/get_user_id.php');
         break;
-    case 'PUT':
-        $output['message'] = 'PUT request made';
-        break;
     case 'retrieve_avatars':
         require_once('get/retrieve_avatars.php');
+        break;
+    case 'like_audio':
+        require_once('post/like_audio.php');
         break;
     default:
         $output['Error'] = 'Unknown request made';
