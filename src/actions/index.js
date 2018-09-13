@@ -114,7 +114,7 @@ export const getUserID = (email) => async dispatch => {
 export function likeAudio (audioName, userID) {
     const resp = axios.post('/api/stand_app.php', {
         audio_name: audioName,
-        id: parseInt(userID)
+        id: userID
     },{
         params: {
             action: types.LIKE_AUDIO
