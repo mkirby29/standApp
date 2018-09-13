@@ -52,9 +52,10 @@ class GoogleComponent extends Component {
   render () {
     return <div className = "text-center pull-md-right pull-xl-right pull-lg-right pull-sm-right pull-xs-right">
       <Google
-        url={'http://dev.standapp.live'}
+        url={'http://localhost:3000'}
         clientId={'575268215328-e3kffueqpfhho3m57b4quq8dbe907g7r.apps.googleusercontent.com'}
         clientSecret={'fW2w15epMMo5IqMTqdJGENMK'}
+        // redirectUri={'http://dev.standapp.live'}
         redirectUri={'http://localhost:3000'}
         scope={['https://www.googleapis.com/auth/userinfo.email']}
         width={300}
