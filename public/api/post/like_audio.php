@@ -3,6 +3,7 @@
 // takes in audio ID and changes table...
 // { HEARTS } check if fill or not. and toggle accordingly
 // { AUDIO } get current likes counter and +1
+$_POST = json_decode(file_get_contents('php://input'), true);
 
 $_POST = json_decode(file_get_contents('php://input'), true);
 
@@ -41,7 +42,8 @@ if(empty($result2)){
     if($result2>0){
         $delete = mysqli_query($conn, $updateFeedback);
         return true;
-    }else if($result2===0){      
+    }else if($result2===0){ 
+        print_r($result2);     
         $add = mysqli_query($conn, $addFeedback);
         return false;
     }

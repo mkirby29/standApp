@@ -206,8 +206,8 @@ async postRecording (e) {
               </audio>
             </div>
             <div className='post-controls d-flex justify-content-center'>
-              <button className='btn btn-dark' style={{padding: '10%', width: '60%'}}><i className="fas fa-times"/></button>
-              <button className='btn btn-warning' style={{padding: '10%', width: '60%', marginLeft: '5%'}} onClick={(e) => {this.postRecording(e)}}><i className="fas fa-check"/></button>
+              <button className='btn btn-dark' style={{padding: '10%', width: '60%'}}><i class="fas fa-trash-alt fa-2x"/></button>
+              <button className='btn btn-warning' style={{padding: '10%', width: '60%', marginLeft: '5%'}} onClick={(e) => {this.postRecording(e)}}><i class="fas fa-sign-in-alt fa-2x"/></button>
             </div>
           </form>
         </Modal>

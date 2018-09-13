@@ -5,7 +5,7 @@ require('../../aws/vendor/autoload.php');
 use Aws\S3\S3Client;
 
 $bucket = 'standup618';
-$keyname = 'mattkirby';
+$keyname = $_POST['audio_name'];
 
 $s3 = new S3Client([
     'version' => 'latest',
@@ -22,7 +22,7 @@ $s3->deleteObject([
 if(empty($_GET)){  
 	$ouput['errors'] = 'missing data';
 }
-$query = "DELETE FROM `audio` WHERE `audio_id` = {$_GET['id']}";
+$query = "DELETE FROM `audio` WHERE `audio_name` = {$_GET['audio_name']}";
 
 $result = mysqli_query($conn, $query);
 
