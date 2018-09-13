@@ -200,14 +200,14 @@ async postRecording (e) {
             <div className='d-flex justify-content-center'>
               <input name='audio_name' placeholder = "Enter audio title here" className='title-input' value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
             </div>
-            <div className='recorded-audio-player d-flex justify-content-center'>
+            <div className='recorded-audio-player d-flex justify-content-center' style={{padding: '10% 0%' }}>
               <audio controls>
                 <source src={this.state.blobfile.blobURL} type="audio/webm"/>
               </audio>
             </div>
             <div className='post-controls d-flex justify-content-center'>
-              <button className='btn btn-dark'><i className="fas fa-times"/></button>
-              <button className='btn btn-warning' onClick={(e) => {this.postRecording(e)}}><i className="fas fa-check"/></button>
+              <button className='btn btn-dark' style={{padding: '10%', width: '60%'}}><i className="fas fa-times"/></button>
+              <button className='btn btn-warning' style={{padding: '10%', width: '60%', marginLeft: '5%'}} onClick={(e) => {this.postRecording(e)}}><i className="fas fa-check"/></button>
             </div>
           </form>
         </Modal>
