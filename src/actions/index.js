@@ -92,18 +92,17 @@ export function getUserPosts (user_id) {
     }
 }
 
-export const getSingleAudio = (id) => async dispatch => {
-    try {
-        const resp = await axios.get('/api/stand_app.php', id)
-        dispatch ({
-            type: types.GET_SINGLE_AUDIO,
-            payload: resp
-        })
-    } catch (err) {
-        dispatch ({
-            type: types.LIST_ERROR,
-            error: "No audio found"
-        })
+export function getSingleAudio (audio_id) {
+    const resp = axios.post('/api/stand_app.php', {
+        audio_id: audio_id
+    }, {
+        params: {
+            action: 'get_single_audio'
+        }
+    })
+    return {
+        type: types.GET_SINGLE_AUDIO,
+        payload: resp
     }
 }
 
@@ -126,9 +125,9 @@ export const getUserID = (email) => async dispatch => {
     }
 }
 
-export function likeAudio (audioName, userID) {
+export function likeAudio (audioID, userID) {
     const resp = axios.post('/api/stand_app.php', {
-        audio_name: audioName,
+        audio_id: audioID,
         id: userID
     },{
         params: {
