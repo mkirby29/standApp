@@ -9,7 +9,7 @@ import 'react-chat-widget/lib/styles.css';
  
 class Dm extends Component {
   componentDidMount() {
-    addResponseMessage("Welcome to this awesome chat!");
+    addResponseMessage("Hey! Leave me some feedback :)");
   }
  
   handleNewUserMessage = (newMessage) => {
