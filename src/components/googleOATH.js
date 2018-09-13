@@ -17,6 +17,8 @@ class GoogleComponent extends Component {
   }
 
   google = (err, res) =>{
+    console.log('Error:', err);
+    console.log('Res:', res);
     if (!err) {
       this.setState({ data: res.profile })
     } else {
@@ -46,16 +48,17 @@ class GoogleComponent extends Component {
     }
     console.log('this.props.addNewUser: ', this.props.addNewUser)
     await this.props.addNewUser(name, sub, email)
-    console.log(this.state)
+    console.log('GOOGLE STATE:', this.state)
   }
   
   render () {
     return <div className = "text-center pull-md-right pull-xl-right pull-lg-right pull-sm-right pull-xs-right">
       <Google
         url={'http://dev.standapp.live'}
-        clientId={'575268215328-e3kffueqpfhho3m57b4quq8dbe907g7r.apps.googleusercontent.com'}
-        clientSecret={'fW2w15epMMo5IqMTqdJGENMK'}
-        redirectUri={'http://localhost:3000'}
+        clientId={'702527746371-a7atbnkbimvb8m3drb5g4mpnl6l2r5oi.apps.googleusercontent.com'}
+        clientSecret={'ScYeYpfs4-x1gRT7uXt6jHh5'}
+        redirectUri={'http://dev.standapp.live'}
+        // redirectUri={'http://dev.standapp.live/avatar_select'}
         scope={['https://www.googleapis.com/auth/userinfo.email']}
         width={300}
         height={300}

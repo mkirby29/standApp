@@ -26,7 +26,7 @@ class CommentPlayer extends Component {
                     },
                     {
                         time: 1, 
-                        message: 'NOOOOOOOO!!!!!!'
+                        message: 'This sounds awesome!'
                     },
                     {
                         time: 3,
@@ -42,7 +42,7 @@ class CommentPlayer extends Component {
                     },
                     {
                         time: 8,
-                        message: 'we made it!'
+                        message: 'who is she?'
                     },
                     {
                         time: 20, 
