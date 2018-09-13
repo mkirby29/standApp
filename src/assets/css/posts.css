@@ -13,3 +13,14 @@
         width: 40%
     }
 }
+
+input.rcw-new-message {
+    color: black;
+}
+textarea:focus input:focus {
+    color: black;
+}
+
+input{
+    color: black;
+}
