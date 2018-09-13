@@ -32,6 +32,9 @@ $addFeedback = "UPDATE `user_feedback` SET `audio_id` = '$audioId' WHERE `user_i
 $updateFeedback = "UPDATE `user_feedback` SET `audio_id` = 0 WHERE `user_id` = '$id'";
 
 $result2 = mysqli_query($conn, $checkFeedback);
+$row = mysql_fetch_assoc($result2);
+$audio = $row[0]; 
+print_r($audio);
 
 if(empty($result2)){  
 	$output['errors'] = 'database error';
