@@ -4,7 +4,7 @@ import '../assets/css/visualizer.css';
 import albumImage from '../assets/images/microphone.png'
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { likeAudio, unlikeAudio, getUserID, deletePost } from '../actions';
+import { likeAudio, unlikeAudio, getUserID, deletePost, getNewsfeed } from '../actions';
 import Modal from 'react-modal';
 import CategoryModal from './category_modal';
 import {
@@ -205,6 +205,7 @@ class VisualizerPlayer extends Component {
         console.log("DELETE AUDIO NAME: ", this.props)
         this.props.deletePost(this.props.audio.audio_name);
         this.closeModal();
+        this.getNewsfeed();
     }
 
     render () {
@@ -375,5 +376,6 @@ export default connect(mapStateToProps, {
     likeAudio,
     unlikeAudio, 
     getUserID,
-    deletePost
+    deletePost,
+    getNewsfeed,
 })(VisualizerPlayer);
