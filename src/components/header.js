@@ -25,7 +25,7 @@ class Header extends React.Component {
         super(props);
         this.state = {
             avatarID: this.props.avatar,
-            avatar: defaultAvatar,
+            avatar: Tuba,
             imageArray: [
                 {name: 'Dj', src: Dj, id: 1},
                 {name: 'Tuba', src: Tuba, id: 2},
@@ -37,7 +37,8 @@ class Header extends React.Component {
                 {name: 'Jedi', src: Jedi, id: 8},
                 {name: 'Celebrity', src: Celebrity, id: 9},
                 {name: 'Sax', src: Sax, id: 10},
-                {name: 'Default', src: defaultAvatar, id: 0}
+                {name: 'Default', src: defaultAvatar, id: 0},
+                {name: 'Tuba', src: Tuba, id: 11},
             ]
         }
     }
@@ -79,7 +80,7 @@ class Header extends React.Component {
                     {/* <div className="side-menu"> */}
                     <Menu>
                         <Link to='/posts'>
-                            <img alt="Avatar" src={Tuba} className="img-fluid avatar_image" />
+                            <img alt="Avatar" src={this.state.avatar} className="img-fluid avatar_image" />
                         </Link>
                         <Link id="home" className="menu-item" to="/posts"><i className="fas fa-home menu-item fa-fw"/>  My Account</Link>
                         <Link id="about" className="menu-item" to="/avatar_select"><i className="far fa-user-circle menu-item fa-fw"/>   Avatar Select</Link>
