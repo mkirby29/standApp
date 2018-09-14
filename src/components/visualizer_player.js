@@ -41,7 +41,7 @@ const customStyles = {
       backgroundColor: 'grey',
       borderRadius: '20px'
     }
-  };
+};
 
 class VisualizerPlayer extends Component {
     constructor (props) {
@@ -152,7 +152,7 @@ class VisualizerPlayer extends Component {
     }
 
     rewind () {
-        this.audio.currentTime = this.audio.currentTime - 5;
+        this.audio.currentTime = this.audio.currentTime - 10;
     }
 
     mute () {
@@ -186,15 +186,6 @@ class VisualizerPlayer extends Component {
                 liked: '1'
             })
         }
-    }
-
-    // need audio if from previous response passed into player to 
-    async getMp3FromS3 () {
-        const response = await axios.get('/api/stand_app.php', {
-            params: {
-                action: 'get_audio_from_s3'
-            }
-        })
     }
 
     openModal() {
@@ -357,12 +348,14 @@ class VisualizerPlayer extends Component {
             ariaHideApp={false}
           >
  
-          <h2 ref={subtitle => this.subtitle = subtitle}>Are you sure you want to delete?</h2>
+          <h2 className="delete-title" ref={subtitle => this.subtitle = subtitle}>Are you sure you want to delete?</h2>
           <div className='container center-align'>
          
-            <div className='post-controls d-flex justify-content-center fa-2x'>
-              <button className='btn btn-dark' style={{padding: '10%', width: '60%'}} onClick={this.closeModal.bind(this)}><i className="fas fa-times fa-2x"/></button>
-              <button className='btn btn-warning' style={{padding: '10%', width: '60%', marginLeft: '5%'}} onClick={this.toggleDelete.bind(this)}><i className="fas fa-check"/></button>
+            <div className='delete-controls d-flex justify-content-center fa-2x'>
+              <button className='btn btn-dark' onClick={this.closeModal.bind(this)}><i className="fas fa-times fa-3x"/></button>
+              <Link to='/'>
+                <button className='btn btn-warning' onClick={this.toggleDelete.bind(this)}><i className="fas fa-check 2x"/></button>
+              </Link>
             </div>
           </div>
         </Modal>
