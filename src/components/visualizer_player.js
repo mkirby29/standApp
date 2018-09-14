@@ -353,9 +353,7 @@ class VisualizerPlayer extends Component {
          
             <div className='delete-controls d-flex justify-content-center fa-2x'>
               <button className='btn btn-dark' onClick={this.closeModal.bind(this)}><i className="fas fa-times fa-3x"/></button>
-              <Link to='/'>
-                <button className='btn btn-warning' onClick={this.toggleDelete.bind(this)}><i className="fas fa-check 2x"/></button>
-              </Link>
+              <Link to='/' className='btn btn-warning' onClick={this.toggleDelete.bind(this)}><i className="delete-check fas fa-check fa-2x"/></Link>
             </div>
           </div>
         </Modal>
