@@ -22,7 +22,7 @@ class Dm extends Component {
       <div className="App">
         <Widget
           handleNewUserMessage={this.handleNewUserMessage}
-          profileAvatar={avatar}
+          profileAvatar={this.props.avatar}
           title="Direct Message"
           subtitle="What did you think of my performance?"
         />
