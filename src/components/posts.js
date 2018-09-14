@@ -28,7 +28,7 @@ class Post extends Component {
     this.state = {
         newsFeed: '',
         avatarID: this.props.avatar.avatar,
-        avatar: defaultAvatar,
+        avatar: Tuba,
         imageArray: [
             {name: 'Dj', src: Dj, id: 1},
             {name: 'Tuba', src: Tuba, id: 2},
