@@ -93,8 +93,8 @@ class Post extends Component {
                     <img alt="Avatar" src={this.state.avatar} className=" post_avatar_container img-fluid avatar_image" />
 
                     <div className='account-info d-flex align-items-center justify-content-around'>
-                        <div> <strong>Posts:</strong> 12</div>
-                        <div> <strong>Likes:</strong> 158</div>
+                        {/* <div> <strong>Posts:</strong> 12</div>
+                        <div> <strong>Likes:</strong> 158</div> */}
                     </div>
                 </div>
                 {this.renderUserPosts};
