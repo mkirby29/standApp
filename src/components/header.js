@@ -79,7 +79,7 @@ class Header extends React.Component {
                     {/* <div className="side-menu"> */}
                     <Menu>
                         <Link to='/posts'>
-                            <img alt="Avatar" src={this.state.avatar} className="img-fluid avatar_image" />
+                            <img alt="Avatar" src={Tuba} className="img-fluid avatar_image" />
                         </Link>
                         <Link id="home" className="menu-item" to="/posts"><i className="fas fa-home menu-item fa-fw"/>  My Account</Link>
                         <Link id="about" className="menu-item" to="/avatar_select"><i className="far fa-user-circle menu-item fa-fw"/>   Avatar Select</Link>

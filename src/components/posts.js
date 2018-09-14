@@ -87,7 +87,7 @@ class Post extends Component {
                 </div>
                 <Header/>
                 <div className='container text-center'>
-                    <img alt="Avatar" src={this.state.avatar} className=" post_avatar_container img-fluid avatar_image" />
+                    <img alt="Avatar" src={Tuba} className=" post_avatar_container img-fluid avatar_image" />
 
                     <div className='account-info d-flex align-items-center justify-content-around'>
                         {/* <div> <strong>Posts:</strong> 12</div>
