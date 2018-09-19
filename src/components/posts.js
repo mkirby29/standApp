@@ -95,7 +95,9 @@ class Post extends Component {
                         <div> <strong>Likes:</strong> 158</div> */}
                     </div>
                 </div>
-                {this.renderUserPosts};
+                <div className="newsfeed">                
+                    {this.renderUserPosts};
+                </div>
                 <Footer/>
             </div>
         )
