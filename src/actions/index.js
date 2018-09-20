@@ -2,6 +2,7 @@ import types from './types'
 import axios from 'axios';
 
 export const addNewUser = (username, password, email) => async dispatch => {
+    console.log("ADDNEWUSER: ", username, password, email)
     try {
         const resp = await axios.post('/api/stand_app.php', {
             username: username,
