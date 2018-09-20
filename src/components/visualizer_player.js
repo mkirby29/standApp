@@ -69,9 +69,9 @@ class VisualizerPlayer extends Component {
     componentDidMount(){
         this.createAudio();
         this.createVisualizer();
-        const { userInfo: {email}} = this.props.user
-        console.log('STUFF: ', email)
-        this.props.getUserID(email)
+        // const { userInfo: {email}} = this.props.user
+        // console.log('STUFF: ', email)
+        // this.props.getUserID(email)
     }
 
     createAudio () {

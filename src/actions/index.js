@@ -106,10 +106,10 @@ export function getSingleAudio (audio_id) {
     }
 }
 
-export const getUserID = (email) => async dispatch => {
-    console.log('GETUSERID email: ', email)
+export const getUserID = (token) => async dispatch => {
+    console.log('GETUSERID email: ', token)
     const resp = await axios.post('/api/stand_app.php', { 
-        email: email
+        token: token
     }, {
         params: {
             action: types.GET_USER_ID

@@ -14,18 +14,17 @@ import Celebrity from '../assets/images/avatars/16nateCelebrity.jpg';
 import Sax from '../assets/images/avatars/sax.jpg';
 
 import {Link} from 'react-router-dom';
-import LoginConditional from './loginConditional';
-import Hamburger from './hamburger';
 import { stack as Menu } from 'react-burger-menu';
 import Logo from './logo';
 import { connect } from 'react-redux';
+import { getUserID } from '../actions';
 
 class Header extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            avatarID: this.props.avatar,
-            avatar: Tuba,
+            avatarID: null,
+            avatar: defaultAvatar,
             imageArray: [
                 {name: 'Dj', src: Dj, id: 1},
                 {name: 'Tuba', src: Tuba, id: 2},
@@ -43,7 +42,9 @@ class Header extends React.Component {
         }
     }
 
-    componentDidMount () {
+    async componentDidMount () {
+        let token = localStorage.getItem('token');
+        await this.props.getUserID(token);
         this.checkAvatar();
     }
 
@@ -57,10 +58,11 @@ class Header extends React.Component {
 
     checkAvatar = async () => {
         let imageArray = this.state.imageArray;
-        if (this.state.avatarID) {
+        if (this.props.user.id) {
+            const { avatar } = this.props.user.id.data.data[0]
             for (var i = 0; i < imageArray.length; i++) {
                 let imageID = imageArray[i].id;
-                if (imageID == this.state.avatarID.image) {
+                if (imageID == avatar) {
                     await this.setState({
                         avatar: imageArray[i].src
                     })
@@ -118,8 +120,9 @@ class Header extends React.Component {
 
 function mapStateToProps (state) {
     return {
-        avatar: state.user.avatar
+        avatar: state.user.avatar,
+        user: state.user
     }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, {getUserID})(Header);

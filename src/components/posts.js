@@ -27,8 +27,8 @@ class Post extends Component {
         super(props);
     this.state = {
         newsFeed: '',
-        avatarID: this.props.avatar.avatar,
-        avatar: Tuba,
+        avatarID: null,
+        avatar: defaultAvatar,
         imageArray: [
             {name: 'Dj', src: Dj, id: 1},
             {name: 'Tuba', src: Tuba, id: 2},
@@ -52,18 +52,19 @@ class Post extends Component {
 
     componentWillMount = () => {
         if (this.props.user.id !== '') {
+            console.log('POST ID: ', this.props.user)
             const { id } = this.props.user.id.data.data[0]
-            console.log('POST ID: ' , id)
             this.props.getUserPosts(id);
         }
     }
 
     checkAvatar = async () => {
+        const { avatar } = this.props.user.id.data.data[0]
         let imageArray = this.state.imageArray;
-        if (this.state.avatarID) {
+        if (this.props.user.id) {
             for (var i = 0; i < imageArray.length; i++) {
                 let imageID = imageArray[i].id;
-                if (imageID == this.state.avatarID.image) {
+                if (imageID == avatar) {
                     await this.setState({
                         avatar: imageArray[i].src
                     })

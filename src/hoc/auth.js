@@ -14,9 +14,7 @@ export default function (WrappedComponent, path ='/login') {
         checkAuth () {
             console.log('check auth: ', this.props);
             const {auth, history} = this.props;
-            let token = localStorage.getItem('token');
-            console.log(token)
-            if(!token || token === 'undefined') {
+            if (!auth) {
                 history.push(path);
             }
         }
@@ -27,8 +25,7 @@ export default function (WrappedComponent, path ='/login') {
     }
     function mapStateToProps (state) {
         return {
-            auth: state.user.error,
-            user: state.user
+            auth: state.user.auth
         }
     }
     
