@@ -18,6 +18,7 @@ import { stack as Menu } from 'react-burger-menu';
 import Logo from './logo';
 import { connect } from 'react-redux';
 import { getUserID } from '../actions';
+import { Fragment } from 'react';
 
 class Header extends React.Component {
     constructor(props){
@@ -71,15 +72,12 @@ class Header extends React.Component {
         } 
     }
 
-    render(){
+    renderLinks () {
+        const { auth } = this.props.user
 
-        var currentLocation = window.location.href;
-        var result = /[^/]*$/.exec(currentLocation)[0];
-        if (result === '') {
-        return (
-            <div className="container-fluid">
-                <div className="navBar d-flex justify-content-between">
-                    {/* <div className="side-menu"> */}
+        if (auth) {
+            return (
+                <Fragment>
                     <Menu>
                         <Link to='/posts'>
                             <img alt="Avatar" src={this.state.avatar} className="img-fluid avatar_image" />
@@ -88,9 +86,33 @@ class Header extends React.Component {
                         <Link id="about" className="menu-item" to="/avatar_select"><i className="far fa-user-circle menu-item fa-fw"/>   Avatar Select</Link>
                         <Link id="contact" className="menu-item" to="/about"><i className="fas fa-users menu-item fa-fw"/>  About Us</Link>
                         <Link id="contact" className="menu-item" to="/login" onClick={this.logOut.bind()}><i className="fas fa-sign-out-alt menu-item fa-fw"/>   Log Out</Link>
-                        {/* <a onClick={ this.showSettings } className="menu-item--small" href=""></a> */}
                     </Menu>
-                    {/* </div> */}
+                </Fragment>
+            )
+        }
+        
+        return (
+            <Fragment>
+                <Menu>
+                    <Link to='/'>
+                        <img alt="Avatar" src={this.state.avatar} className="img-fluid avatar_image" />
+                    </Link>
+                    <Link id="contact" className="menu-item" to="/about"><i className="fas fa-users menu-item fa-fw"/>  About Us</Link>
+                    <Link id="contact" className="menu-item" to="/login" onClick={this.logOut.bind()}><i className="fas fa-sign-out-alt menu-item fa-fw"/>   Login / Signup</Link>
+                </Menu>
+            </Fragment>
+        )
+    }
+
+    render(){
+
+        var currentLocation = window.location.href;
+        var result = /[^/]*$/.exec(currentLocation)[0];
+        if (result === '') {
+        return (
+            <div className="container-fluid">
+                <div className="navBar d-flex justify-content-between">
+                    {this.renderLinks()}
                     <div className='logo'>
                         <Logo/>
                     </div>
