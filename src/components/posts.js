@@ -22,6 +22,8 @@ import Jedi from '../assets/images/avatars/12sarahJedi.jpg';
 import Celebrity from '../assets/images/avatars/16nateCelebrity.jpg';
 import Sax from '../assets/images/avatars/sax.jpg';
 
+import Loader from './loader';
+
 class Post extends Component {
     constructor(props){
         super(props);
@@ -42,7 +44,8 @@ class Post extends Component {
             {name: 'Sax', src: Sax, id: 10},
             {name: 'Default', src: defaultAvatar, id: 0},
             {name: 'Tuba', src: Tuba, id: 11},
-        ]
+        ],
+        loading: true
     }
     }
 
@@ -73,7 +76,11 @@ class Post extends Component {
     }
     
     render () {
-        console.log("POSTS LIST: ", this.props.list.data)
+
+        // if (!this.state.loading) {
+        //     return <Loader/>
+        // }
+
         if (this.props.list.data) {
             this.renderUserPosts = this.props.list.data.map( function(element){
                 return(
@@ -83,6 +90,7 @@ class Post extends Component {
         }
         return (
             <div>
+                <Loader/>
                 <div>
                     <Dm avatar={this.state.avatar}/>
                 </div>
