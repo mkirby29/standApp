@@ -7,7 +7,7 @@ import Footer from './footer';
 import VisualizerPlayer from './visualizer_player';
 import Dm from './dm'
 
-import { getNewsfeed, getUserPosts, addAvatar } from '../actions';
+import { getUserPosts, addAvatar, getUserID } from '../actions';
 import { connect } from 'react-redux';
 
 import defaultAvatar from '../assets/images/avatars/default_avatar.png';
@@ -47,15 +47,14 @@ class Post extends Component {
     }
 
     componentDidMount () {
-        this.checkAvatar();
     }
 
-    componentWillMount = () => {
-        if (this.props.user.id !== '') {
-            console.log('POST ID: ', this.props.user)
-            const { id } = this.props.user.id.data.data[0]
-            this.props.getUserPosts(id);
-        }
+    componentWillMount = async () => {
+        let token = localStorage.getItem('token');
+        await this.props.getUserID(token);
+        const { id } = this.props.user.id.data.data[0];
+        await this.props.getUserPosts(id);
+        this.checkAvatar();
     }
 
     checkAvatar = async () => {
@@ -115,5 +114,5 @@ function mapStateToProps (state) {
 }
 
 // export default connect(mapStateToProps, {getNewsfeed, addAvatar, getUserPosts})(Post);
-export default connect(mapStateToProps, {addAvatar, getUserPosts})(Post);
+export default connect(mapStateToProps, {addAvatar, getUserPosts, getUserID})(Post);
 
