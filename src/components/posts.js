@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import '../assets/css/newsfeed.css';
 import '../assets/css/posts.css'
 
@@ -57,7 +57,10 @@ class Post extends Component {
         await this.props.getUserID(token);
         const { id } = this.props.user.id.data.data[0];
         await this.props.getUserPosts(id);
-        this.checkAvatar();
+        await this.checkAvatar();
+        this.setState({
+            loading: false
+        })
     }
 
     checkAvatar = async () => {
@@ -74,13 +77,8 @@ class Post extends Component {
             }
         } 
     }
-    
-    render () {
 
-        // if (!this.state.loading) {
-        //     return <Loader/>
-        // }
-
+    renderPosts() {
         if (this.props.list.data) {
             this.renderUserPosts = this.props.list.data.map( function(element){
                 return(
@@ -88,13 +86,13 @@ class Post extends Component {
                 )
             })
         }
+
+        if (this.state.loading) {
+            return <Loader/>
+        } 
+        
         return (
-            <div>
-                <Loader/>
-                <div>
-                    <Dm avatar={this.state.avatar}/>
-                </div>
-                <Header/>
+            <Fragment>
                 <div className='container text-center'>
                     <img alt="Avatar" src={this.state.avatar} className=" post_avatar_container img-fluid avatar_image" />
 
@@ -106,6 +104,20 @@ class Post extends Component {
                 <div className="newsfeed">                
                     {this.renderUserPosts};
                 </div>
+            </Fragment>
+        )
+
+    }
+    
+    render () {
+
+        return (
+            <div>
+                <div>
+                    {/* <Dm avatar={this.state.avatar}/> */}
+                </div>
+                <Header/>
+                {this.renderPosts()}
                 <Footer/>
             </div>
         )
