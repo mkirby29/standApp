@@ -43,7 +43,7 @@ switch($action) {
         require_once('post/like_audio.php');
         break;
     case 'unlike_audio':
-        require_once('post/like_audio.php');
+        require_once('post/unlike_audio.php');
         break;
     case 'PUT':
         $output['message'] = 'PUT request made';

@@ -194,13 +194,15 @@ export function retrieveAvatars () {
     }
 }
 
-export function unlikeAudio () {
+export function unlikeAudio (audioID, userID) {
     const resp = axios.post('/api/stand_app.php', {
+        audio_id: audioID,
+        id: userID
+    },{
         params: {
-            action: 'unlike_audio'
+            action: types.UNLIKE_AUDIO
         }
-    })
-
+    });
     return {
         type: types.UNLIKE_AUDIO,
         payload: resp
