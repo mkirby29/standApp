@@ -14,18 +14,18 @@ import Celebrity from '../assets/images/avatars/16nateCelebrity.jpg';
 import Sax from '../assets/images/avatars/sax.jpg';
 
 import {Link} from 'react-router-dom';
-import LoginConditional from './loginConditional';
-import Hamburger from './hamburger';
 import { stack as Menu } from 'react-burger-menu';
 import Logo from './logo';
 import { connect } from 'react-redux';
+import { getUserID } from '../actions';
+import { Fragment } from 'react';
 
 class Header extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            avatarID: this.props.avatar,
-            avatar: Tuba,
+            avatarID: null,
+            avatar: defaultAvatar,
             imageArray: [
                 {name: 'Dj', src: Dj, id: 1},
                 {name: 'Tuba', src: Tuba, id: 2},
@@ -43,7 +43,9 @@ class Header extends React.Component {
         }
     }
 
-    componentDidMount () {
+    async componentDidMount () {
+        let token = localStorage.getItem('token');
+        await this.props.getUserID(token);
         this.checkAvatar();
     }
 
@@ -57,16 +59,49 @@ class Header extends React.Component {
 
     checkAvatar = async () => {
         let imageArray = this.state.imageArray;
-        if (this.state.avatarID) {
+        if (this.props.user.id) {
+            const { avatar } = this.props.user.id.data.data[0]
             for (var i = 0; i < imageArray.length; i++) {
                 let imageID = imageArray[i].id;
-                if (imageID == this.state.avatarID.image) {
+                if (imageID == avatar) {
                     await this.setState({
                         avatar: imageArray[i].src
                     })
                 }
             }
         } 
+    }
+
+    renderLinks () {
+        const { auth } = this.props.user
+
+        if (auth) {
+            return (
+                <Fragment>
+                    <Menu>
+                        <Link to='/posts'>
+                            <img alt="Avatar" src={this.state.avatar} className="img-fluid avatar_image" />
+                        </Link>
+                        <Link id="home" className="menu-item" to="/posts"><i className="fas fa-home menu-item fa-fw"/>  My Account</Link>
+                        <Link id="about" className="menu-item" to="/avatar_select"><i className="far fa-user-circle menu-item fa-fw"/>   Avatar Select</Link>
+                        <Link id="contact" className="menu-item" to="/about"><i className="fas fa-users menu-item fa-fw"/>  About Us</Link>
+                        <Link id="contact" className="menu-item" to="/login" onClick={this.logOut.bind()}><i className="fas fa-sign-out-alt menu-item fa-fw"/>   Log Out</Link>
+                    </Menu>
+                </Fragment>
+            )
+        }
+        
+        return (
+            <Fragment>
+                <Menu>
+                    <Link to='/'>
+                        <img alt="Avatar" src={this.state.avatar} className="img-fluid avatar_image" />
+                    </Link>
+                    <Link id="contact" className="menu-item" to="/about"><i className="fas fa-users menu-item fa-fw"/>  About Us</Link>
+                    <Link id="contact" className="menu-item" to="/login" onClick={this.logOut.bind()}><i className="fas fa-sign-out-alt menu-item fa-fw"/>   Login / Signup</Link>
+                </Menu>
+            </Fragment>
+        )
     }
 
     render(){
@@ -77,18 +112,7 @@ class Header extends React.Component {
         return (
             <div className="container-fluid">
                 <div className="navBar d-flex justify-content-between">
-                    {/* <div className="side-menu"> */}
-                    <Menu>
-                        <Link to='/posts'>
-                            <img alt="Avatar" src={this.state.avatar} className="img-fluid avatar_image" />
-                        </Link>
-                        <Link id="home" className="menu-item" to="/posts"><i className="fas fa-home menu-item fa-fw"/>  My Account</Link>
-                        <Link id="about" className="menu-item" to="/avatar_select"><i className="far fa-user-circle menu-item fa-fw"/>   Avatar Select</Link>
-                        <Link id="contact" className="menu-item" to="/about"><i className="fas fa-users menu-item fa-fw"/>  About Us</Link>
-                        <Link id="contact" className="menu-item" to="/login" onClick={this.logOut.bind()}><i className="fas fa-sign-out-alt menu-item fa-fw"/>   Log Out</Link>
-                        {/* <a onClick={ this.showSettings } className="menu-item--small" href=""></a> */}
-                    </Menu>
-                    {/* </div> */}
+                    {this.renderLinks()}
                     <div className='logo'>
                         <Logo/>
                     </div>
@@ -118,8 +142,9 @@ class Header extends React.Component {
 
 function mapStateToProps (state) {
     return {
-        avatar: state.user.avatar
+        avatar: state.user.avatar,
+        user: state.user
     }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, {getUserID})(Header);

@@ -1,9 +1,11 @@
 <?php
 
+$_POST = json_decode(file_get_contents('php://input'), true);
+
 $token=$_POST['token'];
 $avatar=$_POST['avatar'];
 
-$query = "INSERT INTO `users`(`token`, `avatar`) VALUES ('$token', '$avatar')";
+$query = "UPDATE `users` SET `avatar` = '$avatar' WHERE `users`.`password` = '$token'";
 
 $result = mysqli_query($conn, $query);
 

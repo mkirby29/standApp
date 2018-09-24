@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import '../assets/css/comment_player.css';
 import CommentBar from './comment_bar';
 import axios from 'axios';
-import { postComment, getSingleAudio } from '../actions';
+import { postComment, getSingleAudio, likeAudio, unlikeAudio, getUserID } from '../actions';
 import { connect } from 'react-redux';
 
 // need to fix here, not audio_info!
@@ -52,7 +52,7 @@ class CommentPlayer extends Component {
             },
             audio_file: '',
             playing: false,
-            like: false,
+            liked: 0,
             muted: false, 
             displayed_comment: '',
             draw: true
@@ -60,8 +60,12 @@ class CommentPlayer extends Component {
     }
 
     async componentDidMount(){
+        let token = localStorage.getItem('token');
+        await this.props.getUserID(token);
+
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0]
+
         await this.props.getSingleAudio(result);
         console.log(this.props.comment)
         if (this.props.comment) {
@@ -206,14 +210,41 @@ class CommentPlayer extends Component {
         await this.props.postComment(commentObject);
     }
 
-    toggleLikeButton = () => {
-        this.setState({
-            like: !this.state.like
-        })
+    toggleLike = async () => {
+        if(this.props.comment){
+            const audio_id = this.props.comment[0].id
+            const { id } = this.props.user.id.data.data[0]
+            if (this.state.liked === '1') {
+                this.props.unlikeAudio(audio_id, id);
+                console.log('unliked');
+                await this.setState({
+                    liked: '0'
+                })
+            } else {
+                this.props.likeAudio(audio_id, id);
+                console.log('liked');
+                await this.setState({
+                    liked: '1'
+                })
+            }
+        }
+    }
+
+    renderLike() {
+        const auth = this.props.user.auth;
+        console.log('USER AUTH: ', auth)
+        if(auth) {
+            return (
+                <i id='like-container' onClick={this.toggleLike} className={this.state.liked && this.state.liked !== '0' ? "fas fa-heart fa-lg fa-2x" : "far fa-heart fa-lg fa-2x"}></i>
+            )
+        } else {
+            return (
+                <div></div>
+            )
+        }
     }
 
     render() {
-        console.log('THIS PROPS COMMENT: ', this.props.comment)
         let author_name = null;
         let audio_name = null;
         let audio_file = null;
@@ -233,7 +264,7 @@ class CommentPlayer extends Component {
                 <div className="song">
                     <h1 className="name">{audio_name}</h1>
                     <h3 className="artist">{author_name}</h3>
-                    <i id='like-container' onClick={this.toggleLikeButton} className={this.state.like ? "fas fa-heart fa-lg fa-2x" : "far fa-heart fa-lg fa-2x"}></i>
+                    {this.renderLike()}
                 </div>
                 {/* <div className="display-area">
                     <div className="comments-container">{author_name}</div>
@@ -257,8 +288,9 @@ class CommentPlayer extends Component {
 
 function mapStateToProps (state) {
     return {
-        comment: state.comment.single.data
+        comment: state.comment.single.data,
+        user: state.user
     }
 }
 
-export default connect(mapStateToProps, {postComment, getSingleAudio})(CommentPlayer);
+export default connect(mapStateToProps, {postComment, getSingleAudio, likeAudio, unlikeAudio, getUserID})(CommentPlayer);

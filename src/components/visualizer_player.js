@@ -69,9 +69,9 @@ class VisualizerPlayer extends Component {
     componentDidMount(){
         this.createAudio();
         this.createVisualizer();
-        const { userInfo: {email}} = this.props.user
-        console.log('STUFF: ', email)
-        this.props.getUserID(email)
+        // const { userInfo: {email}} = this.props.user
+        // console.log('STUFF: ', email)
+        // this.props.getUserID(email)
     }
 
     createAudio () {
@@ -208,6 +208,26 @@ class VisualizerPlayer extends Component {
         this.getNewsfeed();
     }
 
+    renderLike() {
+        console.log("RENDER LIKE: ", this.props.user)
+        const auth = this.props.user.auth;
+        var currentLocation = window.location.href;
+        var result = /[^/]*$/.exec(currentLocation)[0]
+        if(auth) {
+            return (
+            <div className='likes_container' onClick={() => this.toggleLike()}>
+                <i className={result === '' ? (this.state.liked && this.state.liked !== '0') ? "fas fa-heart fa-lg clickable-heart" : "far fa-heart fa-lg clickable-heart" : 'd-none'}></i>
+                <i className={result === '' ? 'd-none' : 'fas fa-heartbeat fa-lg'}></i>
+                <div className={result === '' ? 'd-none' : 'likes-counter'}>{this.props.audio.likes}</div>
+            </div>
+            )
+        } else {
+            return (
+                <div></div>
+            )
+        }
+    }
+
     render () {
         console.log('mapstatetoprops: ', this.props.audio)
         // get current url and check to display correct page
@@ -223,11 +243,7 @@ class VisualizerPlayer extends Component {
                                     ? <i className={"far fa-pause-circle fa-3x"} onClick={this.pause.bind(this)}></i>
                                     : <i className={"far fa-play-circle fa-3x"} onClick={this.play.bind(this)}></i>
                             }
-                            <div className='likes_container' onClick={() => this.toggleLike()}>
-                                <i className={result === '' ? (this.state.liked && this.state.liked !== '0') ? "fas fa-heart fa-lg clickable-heart" : "far fa-heart fa-lg clickable-heart" : 'd-none'}></i>
-                                <i className={result === '' ? 'd-none' : 'fas fa-heartbeat fa-lg'}></i>
-                                <div className={result === '' ? 'd-none' : 'likes-counter'}>{this.props.audio.likes}</div>
-                            </div>
+                            {this.renderLike()}
                         </div>
                     </div>
                     <div className="audio_display col-8 text-center">
@@ -334,8 +350,6 @@ class VisualizerPlayer extends Component {
                                 {count => count}
                             </FacebookShareCount>
                             </div> */}
-
-
                         
                             </div>
                     </div>

@@ -2,6 +2,7 @@ import types from './types'
 import axios from 'axios';
 
 export const addNewUser = (username, password, email) => async dispatch => {
+    console.log("ADDNEWUSER: ", username, password, email)
     try {
         const resp = await axios.post('/api/stand_app.php', {
             username: username,
@@ -38,13 +39,27 @@ export const addNewUser = (username, password, email) => async dispatch => {
     }
 }
 
-export const addAvatar = (image) => async dispatch => {
-    const resp = {image}
+export const addAvatar = (token, avatar) => async dispatch => {
     try {
+        const resp = await axios.post('/api/stand_app.php', 
+            {
+                token: token,
+                avatar: avatar
+            },
+            {
+                params: {
+                    action: 'add_avatar'
+                }
+            }
+        )
         dispatch ({
             type: types.ADD_AVATAR, 
-            payload: resp
+            payload: avatar
         });
+        return {
+            type: types.ADD_AVATAR,
+            payload: resp
+        }
     } catch (err) {
         dispatch({
             type: types.LIST_ERROR,
@@ -106,10 +121,10 @@ export function getSingleAudio (audio_id) {
     }
 }
 
-export const getUserID = (email) => async dispatch => {
-    console.log('GETUSERID email: ', email)
+export const getUserID = (token) => async dispatch => {
+    console.log('GETUSERID email: ', token)
     const resp = await axios.post('/api/stand_app.php', { 
-        email: email
+        token: token
     }, {
         params: {
             action: types.GET_USER_ID
@@ -179,13 +194,15 @@ export function retrieveAvatars () {
     }
 }
 
-export function unlikeAudio () {
+export function unlikeAudio (audioID, userID) {
     const resp = axios.post('/api/stand_app.php', {
+        audio_id: audioID,
+        id: userID
+    },{
         params: {
-            action: 'unlike_audio'
+            action: types.UNLIKE_AUDIO
         }
-    })
-
+    });
     return {
         type: types.UNLIKE_AUDIO,
         payload: resp

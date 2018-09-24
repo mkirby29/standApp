@@ -15,7 +15,7 @@ class Footer extends Component {
         if (prevScrollPosition > currentScrollPosition) {
             document.querySelector(".footer_mic").style.bottom = "0";
         } else {
-            document.querySelector(".footer_mic").style.bottom = "-13vh";
+            document.querySelector(".footer_mic").style.bottom = "-17vh";
         }
         prevScrollPosition = currentScrollPosition;
         }

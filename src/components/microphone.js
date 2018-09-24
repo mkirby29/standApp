@@ -54,6 +54,12 @@ class Microphone extends Component {
     // this.props.getUserID(username);
   }
 
+  promptPermission() {
+    let constraints = { audio: true, video: false }
+    navigator.mediaDevices.getUserMedia(constraints)
+      .then()
+  }
+
   startRecording(){
     this.setState({
       record: true

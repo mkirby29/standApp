@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import '../assets/css/newsfeed.css';
 import '../assets/css/posts.css'
 
@@ -7,7 +7,7 @@ import Footer from './footer';
 import VisualizerPlayer from './visualizer_player';
 import Dm from './dm'
 
-import { getNewsfeed, getUserPosts, addAvatar } from '../actions';
+import { getUserPosts, addAvatar, getUserID } from '../actions';
 import { connect } from 'react-redux';
 
 import defaultAvatar from '../assets/images/avatars/default_avatar.png';
@@ -22,13 +22,15 @@ import Jedi from '../assets/images/avatars/12sarahJedi.jpg';
 import Celebrity from '../assets/images/avatars/16nateCelebrity.jpg';
 import Sax from '../assets/images/avatars/sax.jpg';
 
+import Loader from './loader';
+
 class Post extends Component {
     constructor(props){
         super(props);
     this.state = {
         newsFeed: '',
-        avatarID: this.props.avatar.avatar,
-        avatar: Tuba,
+        avatarID: null,
+        avatar: defaultAvatar,
         imageArray: [
             {name: 'Dj', src: Dj, id: 1},
             {name: 'Tuba', src: Tuba, id: 2},
@@ -42,28 +44,32 @@ class Post extends Component {
             {name: 'Sax', src: Sax, id: 10},
             {name: 'Default', src: defaultAvatar, id: 0},
             {name: 'Tuba', src: Tuba, id: 11},
-        ]
+        ],
+        loading: true
     }
     }
 
     componentDidMount () {
-        this.checkAvatar();
     }
 
-    componentWillMount = () => {
-        if (this.props.user.id !== '') {
-            const { id } = this.props.user.id.data.data[0]
-            console.log('POST ID: ' , id)
-            this.props.getUserPosts(id);
-        }
+    componentWillMount = async () => {
+        let token = localStorage.getItem('token');
+        await this.props.getUserID(token);
+        const { id } = this.props.user.id.data.data[0];
+        await this.props.getUserPosts(id);
+        await this.checkAvatar();
+        this.setState({
+            loading: false
+        })
     }
 
     checkAvatar = async () => {
+        const { avatar } = this.props.user.id.data.data[0]
         let imageArray = this.state.imageArray;
-        if (this.state.avatarID) {
+        if (this.props.user.id) {
             for (var i = 0; i < imageArray.length; i++) {
                 let imageID = imageArray[i].id;
-                if (imageID == this.state.avatarID.image) {
+                if (imageID == avatar) {
                     await this.setState({
                         avatar: imageArray[i].src
                     })
@@ -71,9 +77,8 @@ class Post extends Component {
             }
         } 
     }
-    
-    render () {
-        console.log("POSTS LIST: ", this.props.list.data)
+
+    renderPosts() {
         if (this.props.list.data) {
             this.renderUserPosts = this.props.list.data.map( function(element){
                 return(
@@ -81,12 +86,13 @@ class Post extends Component {
                 )
             })
         }
+
+        if (this.state.loading) {
+            return <Loader/>
+        } 
+        
         return (
-            <div>
-                <div>
-                    <Dm avatar={this.state.avatar}/>
-                </div>
-                <Header/>
+            <Fragment>
                 <div className='container text-center'>
                     <img alt="Avatar" src={this.state.avatar} className=" post_avatar_container img-fluid avatar_image" />
 
@@ -95,7 +101,23 @@ class Post extends Component {
                         <div> <strong>Likes:</strong> 158</div> */}
                     </div>
                 </div>
-                {this.renderUserPosts};
+                <div className="newsfeed">                
+                    {this.renderUserPosts};
+                </div>
+            </Fragment>
+        )
+
+    }
+    
+    render () {
+
+        return (
+            <div>
+                <div>
+                    {/* <Dm avatar={this.state.avatar}/> */}
+                </div>
+                <Header/>
+                {this.renderPosts()}
                 <Footer/>
             </div>
         )
@@ -112,5 +134,5 @@ function mapStateToProps (state) {
 }
 
 // export default connect(mapStateToProps, {getNewsfeed, addAvatar, getUserPosts})(Post);
-export default connect(mapStateToProps, {addAvatar, getUserPosts})(Post);
+export default connect(mapStateToProps, {addAvatar, getUserPosts, getUserID})(Post);
 

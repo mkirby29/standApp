@@ -25,13 +25,13 @@ class App extends Component {
                             return <AudioInfo/>
                         }}
                 />
-                {/* <Route path='/recording' component={auth(Recording)}/>
-                <Route path='/avatar_select' component={auth(Avatar)}/> */}
-                <Route path='/recording' component={Recording}/>
+                <Route path='/recording' component={auth(Recording)}/>
+                {/* <Route path='/avatar_select' component={auth(Avatar)}/> */}
+                {/* <Route path='/recording' component={Recording}/> */}
                 <Route path='/avatar_select' component={Avatar}/>
                 {/* public identify here */}
-                {/* <Route path='/posts' component={auth(Post)}/> */}
-                <Route path='/posts' component={Post}/>
+                <Route path='/posts' component={auth(Post)}/>
+                {/* <Route path='/posts' component={Post}/> */}
                 <Route path='/login' component={login}/>
                 <Route path='/about' component={About}/>
                 <Route component={NotFound}/>   
