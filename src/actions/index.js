@@ -39,13 +39,27 @@ export const addNewUser = (username, password, email) => async dispatch => {
     }
 }
 
-export const addAvatar = (image) => async dispatch => {
-    const resp = {image}
+export const addAvatar = (token, avatar) => async dispatch => {
     try {
+        const resp = await axios.post('/api/stand_app.php', 
+            {
+                token: token,
+                avatar: avatar
+            },
+            {
+                params: {
+                    action: 'add_avatar'
+                }
+            }
+        )
         dispatch ({
             type: types.ADD_AVATAR, 
-            payload: resp
+            payload: avatar
         });
+        return {
+            type: types.ADD_AVATAR,
+            payload: resp
+        }
     } catch (err) {
         dispatch({
             type: types.LIST_ERROR,
