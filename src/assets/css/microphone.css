@@ -52,7 +52,7 @@
 }
 
 .recorded-audio-player {
-
+    padding-top: 5%
 }
 
 .effect-button {
@@ -73,16 +73,23 @@
 }
 
 .post-controls {
-    position: absolute;
-    left: 50%;
-    bottom: 5%;
-    transform: translate(-50%, 5%)
+    padding-top: 5%;
+}
+
+.recording-completed-title {
+    font-size: 1.5rem;
+}
+
+.ReactModal__Content .container {
+    position: relative;
+    top: 50%;
+    transform: translate(0%, -50%);
 }
 
 @media only screen and (max-width: 2000px) {
     .ReactModal__Content {
-        width: 50% !important;
-        height: 50% !important
+        width: 60% !important;
+        height: 60% !important
     }
     .title-input-container {
         width: 80%;
@@ -108,7 +115,7 @@
 @media only screen and (min-height: 600px) and (min-width: 700px) {
     .ReactModal__Content {
         width: 40% !important;
-        height: 40% !important
+        height: 45% !important
     }
     .title-input-container {
         width: 80%;
