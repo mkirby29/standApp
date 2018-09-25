@@ -54,12 +54,6 @@ class Microphone extends Component {
     // this.props.getUserID(username);
   }
 
-  promptPermission() {
-    let constraints = { audio: true, video: false }
-    navigator.mediaDevices.getUserMedia(constraints)
-      .then()
-  }
-
   startRecording(){
     this.setState({
       record: true
@@ -203,28 +197,29 @@ async postRecording (e) {
             contentLabel="Example Modal"
             ariaHideApp={false}
           >
- 
-          <h2 ref={subtitle => this.subtitle = subtitle}>Completed Recording</h2>
-          <div className='container center-align'>
-            <div className='d-flex justify-content-center'>
-              {/* <div className='title-input-container'>
-                <input name='audio_name' placeholder = "Enter audio title here" className='title-input' value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
-              </div> */}
+          <div className='container'>
+            <div className='recording-completed-title' ref={subtitle => this.subtitle = subtitle}>Completed Recording</div>
+            <div className='center-align'>
+              <div className='d-flex justify-content-center'>
+                {/* <div className='title-input-container'>
+                  <input name='audio_name' placeholder = "Enter audio title here" className='title-input' value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
+                </div> */}
 
-              <div className="title-input-container">
-                <label>Title</label>
-                <input name='audio_name' type="text" className="form-control" placeholder="Enter audio title here" value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
+                <div className="title-input-container">
+                  <label>Title</label>
+                  <input name='audio_name' type="text" className="form-control text-center" placeholder="Input Title" value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
+                </div>
+                
               </div>
-              
-            </div>
-            <div className='recorded-audio-player d-flex justify-content-center'>
-              <audio controls>
-                <source src={this.state.blobfile.blobURL} type="audio/webm"/>
-              </audio>
-            </div>
-            <div className='post-controls d-flex justify-content-center'>
-              <button className='btn btn-dark' onClick={this.closeModal.bind(this)}><i className="fas fa-trash-alt fa-2x"/></button>
-              <button className='btn btn-warning' onClick={(e) => {this.postRecording(e)}}><i className="fas fa-sign-in-alt fa-2x"/></button>
+              <div className='recorded-audio-player d-flex justify-content-center'>
+                <audio controls>
+                  <source src={this.state.blobfile.blobURL} type="audio/webm"/>
+                </audio>
+              </div>
+              <div className='post-controls d-flex justify-content-center'>
+                <button className='btn btn-dark' onClick={this.closeModal.bind(this)}><i className="fas fa-trash-alt fa-2x"/></button>
+                <button className='btn btn-warning' onClick={(e) => {this.postRecording(e)}}><i className="fas fa-sign-in-alt fa-2x"/></button>
+              </div>
             </div>
           </div>
         </Modal>
