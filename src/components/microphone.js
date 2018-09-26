@@ -35,7 +35,8 @@ class Microphone extends Component {
       blobfile: '',
       recording: '',
       category: 'comedy',
-      audio_name: ''
+      audio_name: '',
+      error: ''
     }
 
     this.startRecording = this.startRecording.bind(this);
@@ -87,26 +88,29 @@ class Microphone extends Component {
 
 async postRecording (e) {
   e.preventDefault();
-  var form = new FormData();
-  form.set('audio', this.state.audiofile);
-  // audio name for mysql
-  form.set('audio_name', this.state.audio_name)
-  // audio name for s3
-  form.set('id', this.state.audio_name);
-  console.log('record SUBMIT: ', this.props.user)
-  form.set('user_id', this.props.user.id.data.data[0].id);
-  form.set('author_name', this.props.user.userInfo.username);
-
-  await axios({
-    method: 'post',
-    url: '/api/stand_app.php?action=add_item',
-    data: form, 
-    config: { headers: {'Content-Type': 'multipart/form-data' }}   
-  }).then(function(response) {
-    console.log("Response", response);
-  });
-
-  this.closeModal();
+  if(this.state.audio_name) {
+    var form = new FormData();
+    form.set('audio', this.state.audiofile);
+    form.set('audio_name', this.state.audio_name)
+    form.set('id', this.state.audio_name);
+    form.set('user_id', this.props.user.id.data.data[0].id);
+    form.set('author_name', this.props.user.userInfo.username);
+  
+    await axios({
+      method: 'post',
+      url: '/api/stand_app.php?action=add_item',
+      data: form, 
+      config: { headers: {'Content-Type': 'multipart/form-data' }}   
+    }).then(function(response) {
+      console.log("Response", response);
+    });
+  
+    this.closeModal();
+  } else {
+    this.setState({
+      error: 'Please add title'
+    })
+  }
 }
 
   openModal() {
@@ -152,7 +156,7 @@ async postRecording (e) {
   }
 
   render() {
-    console.log("MICROPHONE: ", this.props.user);
+
     return (
       <div className='microphone'>
       <Link to='/'><i className="fas fa-chevron-left fa-2x" onClick={this.pauseEffect.bind(this)}></i></Link>
@@ -206,7 +210,7 @@ async postRecording (e) {
                 </div> */}
 
                 <div className="title-input-container">
-                  <label>Title</label>
+                  <label>{this.state.error || 'Title'}</label>
                   <input name='audio_name' type="text" className="form-control text-center" placeholder="Input Title" value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
                 </div>
                 

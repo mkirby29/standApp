@@ -69,16 +69,11 @@ class VisualizerPlayer extends Component {
     componentDidMount(){
         this.createAudio();
         this.createVisualizer();
-        // const { userInfo: {email}} = this.props.user
-        // console.log('STUFF: ', email)
-        // this.props.getUserID(email)
     }
 
     createAudio () {
-        console.log('create audio: ', this.props.audio.audio_url)
         this.audio = new Audio(this.props.audio.audio_url)
         this.audio.crossOrigin = "anonymous";
-        // this.audio.controls = true
     }
 
     createVisualizer () {
@@ -209,7 +204,6 @@ class VisualizerPlayer extends Component {
     }
 
     renderLike() {
-        console.log("RENDER LIKE: ", this.props.user)
         const auth = this.props.user.auth;
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0]
@@ -228,9 +222,7 @@ class VisualizerPlayer extends Component {
         }
     }
 
-    render () {
-        console.log('mapstatetoprops: ', this.props.audio)
-        // get current url and check to display correct page
+    render () { 
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0]
         return (
