@@ -89,6 +89,10 @@
     padding: 0 4%;
 }
 
+.controls > i {
+    width: 30%;
+}
+
 #like-container {
     padding-top: 4%;
 }

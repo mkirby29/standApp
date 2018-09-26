@@ -67,19 +67,11 @@ class CommentPlayer extends Component {
         var result = /[^/]*$/.exec(currentLocation)[0]
 
         await this.props.getSingleAudio(result);
-        console.log(this.props.comment)
         if (this.props.comment) {
             this.createAudio();
             this.createVisualizer();
         }
     }
-
-    // async componentWillMount() {
-    //     var currentLocation = window.location.href;
-    //     var result = /[^/]*$/.exec(currentLocation)[0]
-    //     await this.props.getSingleAudio(result);
-    //     console.log(this.props.comment)
-    // }
 
     createAudio () {
         this.audio = new Audio(this.props.comment[0].audio_url);
@@ -113,7 +105,6 @@ class CommentPlayer extends Component {
 
         this.draw = () => {
             if (this.recussion === true) {
-                console.log(this.audio.currentTime);
                 requestAnimationFrame(this.draw);
                 analyser.getByteFrequencyData(dataArray);
 
@@ -216,13 +207,11 @@ class CommentPlayer extends Component {
             const { id } = this.props.user.id.data.data[0]
             if (this.state.liked === '1') {
                 this.props.unlikeAudio(audio_id, id);
-                console.log('unliked');
                 await this.setState({
                     liked: '0'
                 })
             } else {
                 this.props.likeAudio(audio_id, id);
-                console.log('liked');
                 await this.setState({
                     liked: '1'
                 })
@@ -232,7 +221,6 @@ class CommentPlayer extends Component {
 
     renderLike() {
         const auth = this.props.user.auth;
-        console.log('USER AUTH: ', auth)
         if(auth) {
             return (
                 <i id='like-container' onClick={this.toggleLike} className={this.state.liked && this.state.liked !== '0' ? "fas fa-heart fa-lg fa-2x" : "far fa-heart fa-lg fa-2x"}></i>
