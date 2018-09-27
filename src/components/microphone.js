@@ -50,9 +50,6 @@ class Microphone extends Component {
   }
  
   componentDidMount() {
-    const userInfo  = this.props.user
-    console.log('username: ', userInfo)
-    // this.props.getUserID(username);
   }
 
   startRecording(){
@@ -68,14 +65,10 @@ class Microphone extends Component {
   }
  
   onData(recordedBlob) {
-    console.log('chunk of real-time data is: ', recordedBlob);
   }
  
   //unable to add async because npm install components: old axios
   onStop(recordedBlob) {
-    console.log('recordedBlob is: ', recordedBlob);
-
-    // debugger;
     var blob = recordedBlob.blob;
     var audioFile = new File([blob], "music2.mp3", {
       type: "audio/mp3"
@@ -102,7 +95,7 @@ async postRecording (e) {
       data: form, 
       config: { headers: {'Content-Type': 'multipart/form-data' }}   
     }).then(function(response) {
-      console.log("Response", response);
+      
     });
   
     this.closeModal();

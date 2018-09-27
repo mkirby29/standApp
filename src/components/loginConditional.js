@@ -18,13 +18,9 @@ import redirect from '../hoc/redirect';
 
 class LoginConditional extends Component {
     redirectToTarget = () => {
-        console.log("clicked")
         this.props.history.push(`/login`)
       }
     render () {
-        const logout = () => {
-            console.log('logout')
-          }
           
         return(
             <div className="right">
@@ -60,13 +56,6 @@ class LoginConditional extends Component {
 
                 }
             </div>
-            
-
-
-
-                // <Header/>
-
-       
   
         )
     }

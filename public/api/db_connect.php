@@ -8,7 +8,7 @@ if(!$conn) {
     $output['error'] = 'Error connecting to Database';
 
     print(json_encode($output));
-
+    
     exit;
 }
 ?>
