@@ -30,9 +30,6 @@ class Login extends Component {
     }
 
     render () {
-        const logout = () => {
-            console.log('logout')
-        }
 
         const { handleSubmit, authError } = this.props;
           

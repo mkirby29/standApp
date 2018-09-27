@@ -170,13 +170,11 @@ class VisualizerPlayer extends Component {
         const { id } = this.props.user.id.data.data[0]
         if (this.state.liked === '1') {
             this.props.unlikeAudio(audio_id, id);
-            console.log('unliked');
             await this.setState({
                 liked: '0'
             })
         } else {
             this.props.likeAudio(audio_id, id);
-            console.log('liked');
             await this.setState({
                 liked: '1'
             })
@@ -197,7 +195,6 @@ class VisualizerPlayer extends Component {
     }
 
     toggleDelete = () => {
-        console.log("DELETE AUDIO NAME: ", this.props)
         this.props.deletePost(this.props.audio.audio_name);
         this.closeModal();
         this.getNewsfeed();

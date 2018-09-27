@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import createReactClass from 'create-react-class';
 import { Google } from 'react-oauth2';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { logIn, addNewUser } from '../actions';
 
@@ -17,8 +15,6 @@ class GoogleComponent extends Component {
   }
 
   google = (err, res) =>{
-    console.log('Error:', err);
-    console.log('Res:', res);
     if (!err) {
       this.setState({ data: res.profile })
     } else {
@@ -41,14 +37,7 @@ class GoogleComponent extends Component {
     } else {
         this.props.history.push("/");
     }
-    let userInfo = {
-      username: name,
-      email: email,
-      password: sub
-    }
-    console.log('this.props.addNewUser: ', this.props.addNewUser)
     await this.props.addNewUser(name, sub, email)
-    console.log('GOOGLE STATE:', this.state)
   }
   
   render () {

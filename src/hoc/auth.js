@@ -12,7 +12,6 @@ export default function (WrappedComponent, path ='/login') {
         }
 
         checkAuth () {
-            console.log('check auth: ', this.props);
             const {auth, history} = this.props;
             if (!auth) {
                 history.push(path);

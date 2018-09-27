@@ -25,7 +25,7 @@ class NewsFeed extends Component {
                 )
             })
         }
-        console.log('this.props: ', this.props);
+        
         return (
             <div className='newsfeed'>
                 {this.renderNewsFeed}

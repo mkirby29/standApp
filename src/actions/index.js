@@ -2,7 +2,6 @@ import types from './types'
 import axios from 'axios';
 
 export const addNewUser = (username, password, email) => async dispatch => {
-    console.log("ADDNEWUSER: ", username, password, email)
     try {
         const resp = await axios.post('/api/stand_app.php', {
             username: username,
@@ -13,11 +12,6 @@ export const addNewUser = (username, password, email) => async dispatch => {
                 action: 'add_new_user'
             }
         })
-        console.log('ADDNEWUSER: ', {data:{
-            username: username,
-            password: password,
-            email: email
-        }})
         dispatch({
             type: types.ADD_NEW_USER,
             payload: {
@@ -31,7 +25,6 @@ export const addNewUser = (username, password, email) => async dispatch => {
             payload: resp
         }
     } catch (err) {
-        console.log('DELETE FAILED!')
         dispatch({
             type: types.LIST_ERROR,
             error: 'Failed to add user item'
@@ -69,7 +62,6 @@ export const addAvatar = (token, avatar) => async dispatch => {
 }
 
 export function deletePost (audio_name) {
-    console.log("DELETE: ", audio_name)
     const resp = axios.delete('/api/stand_app.php?action=delete_post', {
         data:{
             audio_name:audio_name
@@ -122,7 +114,6 @@ export function getSingleAudio (audio_id) {
 }
 
 export const getUserID = (token) => async dispatch => {
-    console.log('GETUSERID email: ', token)
     const resp = await axios.post('/api/stand_app.php', { 
         token: token
     }, {
@@ -190,7 +181,7 @@ export function retrieveAvatars () {
             payload: resp
         }
     } catch (err) {
-        console.log('RETRIEVE AVATARS: ERROR')
+        
     }
 }
 
