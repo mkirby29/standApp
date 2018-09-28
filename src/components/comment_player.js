@@ -76,6 +76,7 @@ class CommentPlayer extends Component {
     createAudio () {
         this.audio = new Audio(this.props.comment[0].audio_url);
         this.audio.crossOrigin = "anonymous";
+        this.audio.addEventListener('ended', this.pause.bind(this));
     }
 
     createVisualizer () {

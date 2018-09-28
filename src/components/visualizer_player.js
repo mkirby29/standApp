@@ -74,6 +74,7 @@ class VisualizerPlayer extends Component {
     createAudio () {
         this.audio = new Audio(this.props.audio.audio_url)
         this.audio.crossOrigin = "anonymous";
+        this.audio.addEventListener('ended', this.pause.bind(this));
     }
 
     createVisualizer () {
