@@ -1,7 +1,7 @@
 {
-  "name": "react_starter",
+  "name": "stand_app",
   "version": "1.0.0",
-  "description": "Starting setup for react redux project",
+  "description": "A stand up sharing app where users can record their act and share in a public space",
   "main": "index.js",
   "scripts": {
     "start": "node dev_server.js",
@@ -13,11 +13,11 @@
       "target": "http://localhost:8000"
     }
   },
-  "author": "Scott Bowler",
+  "author": "Kevin Young, Paul Su, Matt Kirby, Mike Yim",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Learning-Fuze/react_starter.git"
+    "url": "https://github.com/Learning-Fuze/c618_standup.git"
   },
   "dependencies": {
     "axios": "^0.18.0",
