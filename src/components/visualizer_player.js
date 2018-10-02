@@ -250,7 +250,7 @@ class VisualizerPlayer extends Component {
                  
                             <div className="shareIcon">
                             <LinkedinShareButton
-                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
+                                url={`https://standapp.live/audio_info/${this.props.audio.id}`}
                                 title={'Trying something new, dont go too hard on me: '}
                                 windowWidth={750}
                                 windowHeight={600}
@@ -261,14 +261,14 @@ class VisualizerPlayer extends Component {
                             </LinkedinShareButton>
 
                             <LinkedinShareCount
-                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
+                                url={`https://standapp.live/audio_info/${this.props.audio.id}`}
                                 className="shareIcon__share-count">
                                 {count => count}
                             </LinkedinShareCount>
                             </div>
                             <div className="shareIcon">
                             <GooglePlusShareButton
-                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
+                                url={`https://standapp.live/audio_info/${this.props.audio.id}`}
                                 className="shareIcon__share-button">
                                 <GooglePlusIcon
                                 size={32}
@@ -276,14 +276,14 @@ class VisualizerPlayer extends Component {
                             </GooglePlusShareButton>
 
                             <GooglePlusShareCount
-                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
+                                url={`https://standapp.live/audio_info/${this.props.audio.id}`}
                                 className="shareIcon__share-count">
                                 {count => count}
                             </GooglePlusShareCount>
                             </div>
                             <div className="shareIcon">
                             <RedditShareButton
-                                url={`http://standapp.live/audio_info/${this.props.audio.id}`}
+                                url={`https://standapp.live/audio_info/${this.props.audio.id}`}
                                 title={'Trying something new, dont go too hard on me: '}
                                 windowWidth={660}
                                 windowHeight={460}
@@ -293,7 +293,7 @@ class VisualizerPlayer extends Component {
                                 round />
                             </RedditShareButton>
 
-                            <RedditShareCount url={`http://standapp.live/audio_info/${this.props.audio.id}`}
+                            <RedditShareCount url={`https://standapp.live/audio_info/${this.props.audio.id}`}
                                 className="shareIcon__share-count" />
                             </div>
 

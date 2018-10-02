@@ -177,7 +177,7 @@ async postRecording (e) {
               <i className="fas fa-hands fa-4x" onClick={this.playEffect.bind(this)}/>
           }
 
-          <label className='speaker-text'>Speakers Needed</label>
+          <label className='speaker-text'>Audience Button</label>
         </div>
         <div id="bubbles">
             <div className="bubble x1"></div>
