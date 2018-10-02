@@ -4,8 +4,8 @@ const webpack = require('webpack');
 module.exports = {
     output: {
         filename: 'bundle.js',
-        path: resolve(__dirname, 'dist'),
-        publicPath: '/'
+        path: resolve(__dirname, 'public', 'dist'),
+        publicPath: '/dist/'
     },
     context: resolve(__dirname, 'src'),
     module: {
@@ -31,6 +31,13 @@ module.exports = {
                     options: {
                         outputPath: 'assets/fonts/'
                     }
+                }
+            },
+            {
+                test: /\.mp3$/,
+                loader: 'file-loader',
+                query: {
+                    name: 'static/media/[name].[hash:8].[ext]'
                 }
             }
         ]
