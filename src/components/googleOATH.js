@@ -31,7 +31,7 @@ class GoogleComponent extends Component {
       return;
     } 
     else if (currentToken !== sub) {
-        this.props.history.push("/avatar_select");
+        this.props.history.push("/");
         this.setState({loggedin: true})
         localStorage.setItem('token', sub);
     } else {
@@ -43,8 +43,8 @@ class GoogleComponent extends Component {
   render () {
     return <div className = "text-center pull-md-right pull-xl-right pull-lg-right pull-sm-right pull-xs-right">
       <Google
-        // url={'http://dev.standapp.live'}
-        url={'http://localhost:3000'}
+        url={'http://dev.standapp.live'}
+        // url={'http://localhost:3000'}
         clientId={'702527746371-a7atbnkbimvb8m3drb5g4mpnl6l2r5oi.apps.googleusercontent.com'}
         clientSecret={'ScYeYpfs4-x1gRT7uXt6jHh5'}
         // redirectUri={'http://dev.standapp.live'}

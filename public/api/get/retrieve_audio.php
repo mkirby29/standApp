@@ -5,7 +5,7 @@ require('secret_key.php');
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
-use Aws\Cloudfront\CloudFrontClient;
+use Aws\CloudFront\CloudFrontClient;
 
 $bucket = 'standup618';
 $keyname = 'mattkirby';
