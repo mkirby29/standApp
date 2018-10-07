@@ -43,11 +43,11 @@ class GoogleComponent extends Component {
   render () {
     return <div className = "text-center pull-md-right pull-xl-right pull-lg-right pull-sm-right pull-xs-right">
       <Google
-        url={'https://www.standapp.live'}
+        url={'https://standapp.live'}
         // url={'http://localhost:3000'}
         clientId={'702527746371-a7atbnkbimvb8m3drb5g4mpnl6l2r5oi.apps.googleusercontent.com'}
         clientSecret={'ScYeYpfs4-x1gRT7uXt6jHh5'}
-        redirectUri={'https://standapp.live'}
+        redirectUri={'https://standapp.live/'}
         // redirectUri={'http://localhost:3000'}
         // redirectUri={'http://dev.standapp.live/avatar_select'}
         scope={['https://www.googleapis.com/auth/userinfo.email']}
