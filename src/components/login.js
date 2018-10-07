@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../assets/css/login.css';
 import GoogleComponent from './googleOATH';
-import {Route} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
 import Bubbles from './bubble';
 import Logo from './logo';
 import { css } from 'react-emotion';
@@ -50,6 +50,7 @@ class Login extends Component {
        
             
               <div className='login-button' onClick={this.startLoading}>
+                <Link to='/' className='btn guest-button'>Guest Login</Link>
                 <Route path = '/login' component = {GoogleComponent} />
               </div>
            
