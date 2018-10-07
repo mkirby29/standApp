@@ -47,7 +47,7 @@ class GoogleComponent extends Component {
         // url={'http://localhost:3000'}
         clientId={'702527746371-a7atbnkbimvb8m3drb5g4mpnl6l2r5oi.apps.googleusercontent.com'}
         clientSecret={'ScYeYpfs4-x1gRT7uXt6jHh5'}
-        redirectUri={'https://standapp.live/'}
+        redirectUri={'https://www.standapp.live'}
         // redirectUri={'http://localhost:3000'}
         // redirectUri={'http://dev.standapp.live/avatar_select'}
         scope={['https://www.googleapis.com/auth/userinfo.email']}
