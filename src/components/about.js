@@ -24,7 +24,7 @@ class About extends Component {
                     <h2>Kevin Young</h2>
                     <i>Team Lead</i>
                     <div>Favorite Hobby: MEMES</div>
-                    <a target="_blank" href="https://github.com/KYoung3212"><i className="fa fa-github" /></a>
+                    <a target="_blank" href="https://github.com/KYoung3212"><i className="fab fa-github" /></a>
                     <a target="_blank" href="https://www.linkedin.com/in/kevinyoung3212/"><i className="fab fa-linkedin"/></a>
                     <a target="_blank" href="https://kevin-young.us/"><i className="fas fa-briefcase"/></a>
                 </div>
@@ -35,7 +35,7 @@ class About extends Component {
                 <h2>Paul Su</h2>
                 <i>Lead Frontend Developer</i>
                 <div>Favorite Hobby: Video Games</div>
-                <a target="_blank" href="http://github.com/paulcysu"><i className="fa fa-github" /></a>
+                <a target="_blank" href="http://github.com/paulcysu"><i className="fab fa-github" /></a>
                 <a target="_blank" href="http://linkedin.com/in/paulcysu/"><i className="fab fa-linkedin"/></a>
                 <a target="_blank" href="https://paulsu.in"><i className="fas fa-briefcase"/></a>
             </div>
@@ -46,7 +46,7 @@ class About extends Component {
                 <h2>Mike Yim</h2>
                 <i>Backend Developer</i>
                 <div>Favorite Hobby: Tinder</div>
-                <a target="_blank" href="http://github.com/mikeyim337"><i className="fa fa-github" /></a>
+                <a target="_blank" href="http://github.com/mikeyim337"><i className="fab fa-github" /></a>
                 <a target="_blank" href="http//linkedin.com/in/mike-yim-033356135/"><i className="fab fa-linkedin"/></a>
                 <a target="_blank" href="http://mikeyim.com/"><i className="fas fa-briefcase"/></a>
             </div>
@@ -57,7 +57,7 @@ class About extends Component {
                 <h2>Matt Kirby</h2>
                 <i>Backend Developer</i>
                 <div>Favorite Hobby: Bartending</div>
-                <a target="_blank" href="http://github.com/rag329"><i className="fa fa-github" /></a>
+                <a target="_blank" href="http://github.com/rag329"><i className="fab fa-github" /></a>
                 <a target="_blank" href="http://linkedin.com/in/matthew-kirby-270a3329/"><i className="fab fa-linkedin"/></a>
                 <a target="_blank" href="https://matt-kirby.us"><i className="fas fa-briefcase"/></a>
             </div>
