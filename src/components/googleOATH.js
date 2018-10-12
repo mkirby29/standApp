@@ -49,7 +49,6 @@ class GoogleComponent extends Component {
         clientSecret={'ScYeYpfs4-x1gRT7uXt6jHh5'}
         redirectUri={'https://standapp.live'}
         // redirectUri={'http://localhost:3000'}
-        // redirectUri={'http://dev.standapp.live/avatar_select'}
         scope={['https://www.googleapis.com/auth/userinfo.email']}
         width={300}
         height={300}

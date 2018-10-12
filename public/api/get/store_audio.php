@@ -7,8 +7,6 @@ require('post/add_audio.php');
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
 
-
-
 try{
     //Create a S3Client
     $credentials = new Aws\Credentials\Credentials($key, $secret);
@@ -28,4 +26,5 @@ try{
     echo $e->getMessage() . "\n";
      
 }
+
 ?>

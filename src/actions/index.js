@@ -160,15 +160,6 @@ export const logIn = (token) => async dispatch => {
     }
 }
 
-export function postComment (message) {
-    const resp = axios.post('/api/stand_app.php', message)
-    
-    return {
-        type: types.POST_COMMENT,
-        payload: resp
-    }
-}
-
 export function retrieveAvatars () {
     try {
         const resp = axios.get('/api/stand_app.php', {
