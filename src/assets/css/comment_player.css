@@ -93,10 +93,6 @@
     width: 30%;
 }
 
-#like-container {
-    padding-top: 4%;
-}
-
 @media only screen and (orientation: landscape) {
     .song h1 {
         font-size: 2.5rem;
