@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import '../assets/css/comment_player.css';
-import CommentBar from './comment_bar';
-import axios from 'axios';
-import { postComment, getSingleAudio, likeAudio, unlikeAudio, getUserID } from '../actions';
+import { getSingleAudio, likeAudio, unlikeAudio, getUserID } from '../actions';
 import { connect } from 'react-redux';
-
-// need to fix here, not audio_info!
 
 class CommentPlayer extends Component {
     constructor (props) {
@@ -14,47 +10,11 @@ class CommentPlayer extends Component {
         this.state = {
             buffer: null,
             duration: 0,
-            tracks: { 
-                artist: 'Paul',
-                song: "Goodbye",
-                url: "https://api.soundcloud.com/tracks/436771803/stream?client_id=b1495e39071bd7081a74093816f77ddb",
-                album_image: '',
-                comment: [
-                    {
-                        time: 0.1,
-                        message: "first!!"
-                    },
-                    {
-                        time: 1, 
-                        message: 'This sounds awesome!'
-                    },
-                    {
-                        time: 3,
-                        message: 'we made it!'
-                    },
-                    {
-                        time: 5.52, 
-                        message: 'this sucks'
-                    },
-                    {
-                        time: 6.00, 
-                        message: 'NOOOOOOOO!!!!!!'
-                    },
-                    {
-                        time: 8,
-                        message: 'who is she?'
-                    },
-                    {
-                        time: 20, 
-                        message: 'this is awesome!!!'
-                    }
-                ]
-            },
+            tracks: null,
             audio_file: '',
             playing: false,
             liked: 0,
             muted: false, 
-            displayed_comment: '',
             draw: true
         }
     }
@@ -135,8 +95,6 @@ class CommentPlayer extends Component {
                     ctx.stroke();
                 }
             }
-            // toggle this on play and pause
-            this.checkComment();
         }
         this.draw();
     }
@@ -179,27 +137,6 @@ class CommentPlayer extends Component {
         this.setState({
             muted: false
         });
-    }
-
-    checkComment () {
-        for (let i = 0; i < this.state.tracks.comment.length; i++) {
-            if (this.state.tracks.comment[i].time <= this.audio.currentTime) {
-                this.setState({
-                    displayed_comment: this.state.tracks.comment[i].message
-                })
-            }
-        }
-    }
-
-    async postComment (commentObject) {
-        if(!commentObject) {
-            throw new Error('Missing Message')
-        }
-        commentObject.time = this.audio.currentTime;
-        this.setState({
-            displayed_comment: commentObject.comment
-        })
-        await this.props.postComment(commentObject);
     }
 
     toggleLike = async () => {
@@ -255,10 +192,6 @@ class CommentPlayer extends Component {
                     <h3 className="artist">{author_name}</h3>
                     {this.renderLike()}
                 </div>
-                {/* <div className="display-area">
-                    <div className="comments-container">{author_name}</div>
-                    <div className="time"></div>
-                </div> */}
                 {this.state.audio}
                 <div className='controls-container'>
                     <div className="controls d-flex justify-content-around">
@@ -269,7 +202,6 @@ class CommentPlayer extends Component {
                         <i className={!this.state.muted ? "d-none" : "fas fa-volume-off fa-3x mute"} onClick={this.unmute.bind(this)}/>
                     </div>
                 </div>
-                {/* <CommentBar post={this.postComment.bind(this)}/> */}
             </div>
         )
     }
@@ -282,4 +214,4 @@ function mapStateToProps (state) {
     }
 }
 
-export default connect(mapStateToProps, {postComment, getSingleAudio, likeAudio, unlikeAudio, getUserID})(CommentPlayer);
+export default connect(mapStateToProps, {getSingleAudio, likeAudio, unlikeAudio, getUserID})(CommentPlayer);

@@ -1,5 +1,4 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
  
 const customStyles = {
@@ -13,7 +12,6 @@ const customStyles = {
   }
 };
  
-// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#yourAppElement')
  
 class Modal extends React.Component {
@@ -34,7 +32,6 @@ class Modal extends React.Component {
   }
  
   afterOpenModal() {
-    // references are now sync'd and can be accessed.
     this.subtitle.style.color = '#f00';
   }
  

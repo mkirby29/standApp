@@ -41,15 +41,9 @@ class Microphone extends Component {
 
     this.startRecording = this.startRecording.bind(this);
     this.stopRecording = this.stopRecording.bind(this);
-    // this.postRecording = this.postRecording.bind(this);
-    // Modal binding
-
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-  }
- 
-  componentDidMount() {
   }
 
   startRecording(){
@@ -67,7 +61,6 @@ class Microphone extends Component {
   onData(recordedBlob) {
   }
  
-  //unable to add async because npm install components: old axios
   onStop(recordedBlob) {
     var blob = recordedBlob.blob;
     var audioFile = new File([blob], "music2.mp3", {
@@ -112,7 +105,6 @@ async postRecording (e) {
   }
  
   afterOpenModal() {
-    // references are now sync'd and can be accessed.
     this.subtitle.style.color = '#f00';
   }
  
@@ -198,9 +190,6 @@ async postRecording (e) {
             <div className='recording-completed-title' ref={subtitle => this.subtitle = subtitle}>Completed Recording</div>
             <div className='center-align'>
               <div className='d-flex justify-content-center'>
-                {/* <div className='title-input-container'>
-                  <input name='audio_name' placeholder = "Enter audio title here" className='title-input' value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
-                </div> */}
 
                 <div className="title-input-container">
                   <label>{this.state.error || 'Title'}</label>
