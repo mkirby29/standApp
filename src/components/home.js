@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Header from './header';
 import NewsFeed from './news_feed';
 import Footer from './footer';
-import SearchBar from './search_bar';
 import '../assets/css/search_bar.css';
 
 import { formatPostData } from '../helpers';
@@ -50,7 +49,6 @@ class Home extends Component {
             <div>
                 <div id="page-content-wrapper">
                     <Header/>
-                    {/* <SearchBar/> */}
                     <NewsFeed/>
                     <Footer/>
                 </div>

@@ -18,20 +18,14 @@ class App extends Component {
             <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route 
-                        // pass id through path
-                        path='/audio_info' 
-                        render={ (props) => {
-                            // replace with audio_desp component
-                            return <AudioInfo/>
-                        }}
+                    path='/audio_info' 
+                    render={ (props) => {
+                        return <AudioInfo/>
+                    }}
                 />
                 <Route path='/recording' component={auth(Recording)}/>
-                {/* <Route path='/avatar_select' component={auth(Avatar)}/> */}
-                {/* <Route path='/recording' component={Recording}/> */}
                 <Route path='/avatar_select' component={Avatar}/>
-                {/* public identify here */}
                 <Route path='/posts' component={auth(Post)}/>
-                {/* <Route path='/posts' component={Post}/> */}
                 <Route path='/login' component={login}/>
                 <Route path='/about' component={About}/>
                 <Route component={NotFound}/>   

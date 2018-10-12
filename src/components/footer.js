@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../assets/css/footer.css';
-import Microphone from './microphone';
 import {Link} from 'react-router-dom';
 
 class Footer extends Component {

@@ -2,9 +2,6 @@ import React from 'react'
 import { GoogleLogout } from './googleLogout';
 import { GoogleLogin } from './googleLogin';
 
-// import GoogleLogin, { GoogleLogout } from '../dist/google-login'
-// import FontAwesome from 'react-fontawesome';
-
 const clientId = '617246850621-95f9qhmehd380g2df86pjhrqc84n8nij.apps.googleusercontent.com'
 
 const success = response => {
@@ -35,10 +32,6 @@ export default () => (
       approvalPrompt="force"
       responseType="id_token"
       isSignedIn
-      // disabled
-      // prompt="consent"
-      // className='button'
-      // style={{ color: 'red' }}
     >
       <span>Analytics</span>
     </GoogleLogin>
@@ -50,12 +43,6 @@ export default () => (
       onRequest={loading}
       approvalPrompt="force"
       responseType="code"
-      // uxMode="redirect"
-      // redirectUri="http://google.com"
-      // disabled
-      // prompt="consent"
-      // className='button'
-      // style={{ color: 'red' }}
     >
       <span>Adwords</span>
     </GoogleLogin>

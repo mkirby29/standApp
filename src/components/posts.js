@@ -5,7 +5,6 @@ import '../assets/css/posts.css'
 import Header from './header';
 import Footer from './footer';
 import VisualizerPlayer from './visualizer_player';
-import Dm from './dm'
 
 import { getUserPosts, addAvatar, getUserID } from '../actions';
 import { connect } from 'react-redux';
@@ -97,8 +96,6 @@ class Post extends Component {
                     <img alt="Avatar" src={this.state.avatar} className=" post_avatar_container img-fluid avatar_image" />
 
                     <div className='account-info d-flex align-items-center justify-content-around'>
-                        {/* <div> <strong>Posts:</strong> 12</div>
-                        <div> <strong>Likes:</strong> 158</div> */}
                     </div>
                 </div>
                 <div className="newsfeed">                
@@ -113,9 +110,6 @@ class Post extends Component {
 
         return (
             <div>
-                <div>
-                    {/* <Dm avatar={this.state.avatar}/> */}
-                </div>
                 <Header/>
                 {this.renderPosts()}
                 <Footer/>
@@ -126,13 +120,11 @@ class Post extends Component {
 
 function mapStateToProps (state) {
     return {
-        // list: state.feed.all,
         avatar: state.user,
         list: state.feed.user,
         user: state.user
     }
 }
 
-// export default connect(mapStateToProps, {getNewsfeed, addAvatar, getUserPosts})(Post);
 export default connect(mapStateToProps, {addAvatar, getUserPosts, getUserID})(Post);
 

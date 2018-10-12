@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/css/visualizer.css';
 import albumImage from '../assets/images/microphone.png'
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { likeAudio, unlikeAudio, getUserID, deletePost, getNewsfeed } from '../actions';
 import Modal from 'react-modal';
-import CategoryModal from './category_modal';
 import {
     FacebookIcon, 
     FacebookShareCount, 
@@ -238,13 +236,11 @@ class VisualizerPlayer extends Component {
                     </div>
                     <div className="audio_display col-8 text-center">
                         <div className="align-middle post-title">
-                            {/* to=audio-info/:id */}
                             <Link className='text-white' to={`/audio_info/${this.props.audio.id}`}>{this.props.audio.username} - {this.props.audio.audio_name}</Link>
                             <i className={result === '' ? 'd-none' : 'fa fa-trash fa-2x pull-right'} onClick={(event) => {this.openModal()}} aria-hidden="true"></i>
                         </div>
                         <div className="audio_visualizer">
                             <canvas ref={e => this.canvasRef = e}/>
-                    
                         </div>
                         <div className = 'shareContainer d-flex justify-content-around'>
                  
