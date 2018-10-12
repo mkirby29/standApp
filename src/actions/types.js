@@ -10,7 +10,6 @@ export default {
     LIKE_AUDIO: 'like_audio',
     LIST_ERROR: 'list_error',
     LOG_IN: 'log_in',
-    POST_COMMENT: 'post_comment',
     RETRIEVE_AVATARS: 'retrieve_avatars',
     UNLIKE_AUDIO: 'unlike_audio'
 }

@@ -41,18 +41,6 @@ if(empty($result)){
 
             $row['audio_url'] = $audio_url;
             $output['data'][] = $row;
-            
-            // try {
-               
-            //     // Get the object.
-            //     $audio = $s3->getObjectUrl($bucket, $audio_key);
-            
-            //     header("Content-Type: {$audio['ContentType']}");
-            //     // echo $result['Body'];
-                
-            // } catch (S3Exception $e) {
-            //     echo $e->getMessage() . PHP_EOL;
-            // }
         }
         json_encode($output);
 	}else {		
