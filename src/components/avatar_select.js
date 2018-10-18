@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/css/avatar_select.css';
 import SimpleSlider from './carousel';
-import Logo from './logo';
+import Header from './header';
 
 class Avatar extends Component {
     constructor (props) {
@@ -11,8 +11,7 @@ class Avatar extends Component {
     render() {
         return (
             <div className='container-fluid'>
-                <Logo/>
-                <hr/>
+                <Header/>
                 <p className="avatar-select-title text-center">Select your avatar</p>     
                 <SimpleSlider/>
             </div>

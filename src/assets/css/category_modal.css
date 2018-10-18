@@ -28,8 +28,12 @@
 .modal-comedy:hover + div, 
 .modal-others:hover + div{
     color: rgb(177, 141, 52);
+    cursor: pointer;
 }
 
+.inner-record {
+    cursor: pointer;
+}
 
 .modal-text {
     text-align: center;
