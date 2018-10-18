@@ -193,7 +193,7 @@ async postRecording (e) {
 
                 <div className="title-input-container">
                   <label>{this.state.error || 'Title'}</label>
-                  <input name='audio_name' type="text" className="form-control text-center" placeholder="Input Title" value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
+                  <input name='audio_name' type="text" className="form-control text-center" placeholder="Enter recording title" value={this.state.audio_name} onChange={this.handleInputChange.bind(this)}/>
                 </div>
                 
               </div>

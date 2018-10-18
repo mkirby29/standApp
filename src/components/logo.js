@@ -1,10 +1,11 @@
 import React from 'react';
 import '../assets/css/logo.css';
+import { Link } from 'react-router-dom';
 
 export default () => {
     return (
-        <p id="logo-text" className="text-center">
+        <Link to='/' id="logo-text" className="text-center">
             <b>Stand</b><span id="app-text">App</span>
-        </p>
+        </Link>
     )
 }
