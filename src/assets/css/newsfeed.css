@@ -45,9 +45,53 @@ a {
     }
 }
 
-@media screen and (min-width: 1000px) {
-    .newsfeed {
-        max-width: 70%;
-        margin: auto;
+@media (min-width: 768px) {
+    .desktop-menu .menu-item {
+        font-size: 1.2rem !important;
     }
+    .newsfeed {
+        border-left: 1px solid grey;
+    }
+}
+
+@media (min-width: 890px) {
+    .desktop-menu .menu-item {
+        font-size: 1.5rem !important;
+    }
+}
+
+@media (min-width: 1000px) {
+    .desktop-menu .menu-item {
+        font-size: 1.7rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .desktop-menu {
+        display: none;
+    }
+}
+
+.desktop-menu {
+    position: fixed;
+    left: 0;
+    padding: 0;
+}
+
+.desktop-menu img {
+    width: 50%;
+    display: block;
+    margin: auto;
+}
+
+.desktop-menu .menu-item {
+    display: block;
+    color: rgb(241, 205, 112);
+    margin: auto;
+    font-size: 19rem;
+    padding-left: 10%;
+}
+
+.desktop-menu .menu-item:hover {
+    color: rgb(197, 168, 93);
 }
