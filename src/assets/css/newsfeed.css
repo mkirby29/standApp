@@ -51,6 +51,7 @@ a {
     }
     .newsfeed {
         border-left: 1px solid grey;
+        box-sizing: border-box;
     }
 }
 
@@ -70,6 +71,10 @@ a {
     .desktop-menu {
         display: none;
     }
+}
+
+.justify-content-end {
+    width: 100% !important;
 }
 
 .desktop-menu {
