@@ -43,8 +43,11 @@ class NewsFeed extends Component {
         }
     }
 
-    componentWillMount = () => {
+    async componentWillMount () {
+        let token = localStorage.getItem('token');
         this.props.getNewsfeed();
+        await this.props.getUserID(token);
+        this.checkAvatar();
     }
 
     updateNewsfeed () {
@@ -53,6 +56,21 @@ class NewsFeed extends Component {
 
     logOut () {
         localStorage.removeItem('token');
+    }
+
+    checkAvatar = async () => {
+        let imageArray = this.state.imageArray;
+        if (this.props.user.id) {
+            const { avatar } = this.props.user.id.data.data[0]
+            for (var i = 0; i < imageArray.length; i++) {
+                let imageID = imageArray[i].id;
+                if (imageID == avatar) {
+                    await this.setState({
+                        avatar: imageArray[i].src
+                    })
+                }
+            }
+        } 
     }
 
     renderLinks () {
