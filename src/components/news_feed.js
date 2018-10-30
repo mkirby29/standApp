@@ -112,6 +112,7 @@ class NewsFeed extends Component {
                     </Link>
                     {this.renderLinks()};
                 </div>
+                <div id='line'></div>
                 <div className='newsfeed col col-sm-12 col-md-9 col-lg-9'>
                     {this.renderNewsFeed}
                 </div>
