@@ -49,7 +49,7 @@ a {
     .desktop-menu .menu-item {
         font-size: 1.2rem !important;
     }
-    .newsfeed {
+    .row .newsfeed {
         border-left: 1px solid grey;
         box-sizing: border-box;
     }
