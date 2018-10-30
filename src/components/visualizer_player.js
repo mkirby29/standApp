@@ -255,13 +255,8 @@ class VisualizerPlayer extends Component {
                                 size={32}
                                 round />
                             </LinkedinShareButton>
-
-                            <LinkedinShareCount
-                                url={`https://standapp.live/audio_info/${this.props.audio.id}`}
-                                className="shareIcon__share-count">
-                                {count => count}
-                            </LinkedinShareCount>
                             </div>
+
                             <div className="shareIcon">
                             <GooglePlusShareButton
                                 url={`https://standapp.live/audio_info/${this.props.audio.id}`}
@@ -270,13 +265,8 @@ class VisualizerPlayer extends Component {
                                 size={32}
                                 round />
                             </GooglePlusShareButton>
-
-                            <GooglePlusShareCount
-                                url={`https://standapp.live/audio_info/${this.props.audio.id}`}
-                                className="shareIcon__share-count">
-                                {count => count}
-                            </GooglePlusShareCount>
                             </div>
+
                             <div className="shareIcon">
                             <RedditShareButton
                                 url={`https://standapp.live/audio_info/${this.props.audio.id}`}
@@ -288,9 +278,6 @@ class VisualizerPlayer extends Component {
                                 size={32}
                                 round />
                             </RedditShareButton>
-
-                            <RedditShareCount url={`https://standapp.live/audio_info/${this.props.audio.id}`}
-                                className="shareIcon__share-count" />
                             </div>
 
                              {/* <div className="shareIcon">
