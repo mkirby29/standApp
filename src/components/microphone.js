@@ -80,7 +80,11 @@ async postRecording (e) {
     form.set('audio_name', this.state.audio_name)
     form.set('id', this.state.audio_name);
     form.set('user_id', this.props.user.id.data.data[0].id);
-    form.set('author_name', this.props.user.userInfo.username);
+    if (this.props.user.userInfo.username.trim() !== '') {
+      form.set('author_name', this.props.user.userInfo.username);
+    } else {
+      form.set('author_name', "Anonymous")
+    }
   
     await axios({
       method: 'post',
@@ -171,13 +175,6 @@ async postRecording (e) {
 
           <label className='speaker-text'>Audience Button</label>
         </div>
-        {/* <div id="bubbles">
-            <div className="bubble x1"></div>
-            <div className="bubble x2"></div>
-            <div className="bubble x3"></div>
-            <div className="bubble x4"></div>
-            <div className="bubble x5"></div>
-        </div> */}
         <Modal
             isOpen={this.state.modalIsOpen}
             onAfterOpen={this.afterOpenModal}
