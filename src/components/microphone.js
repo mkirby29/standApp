@@ -75,9 +75,10 @@ class Microphone extends Component {
 async postRecording (e) {
   e.preventDefault();
   if(this.state.audio_name) {
+    // console.log("audiofile: ", this.state.audiofile);
     var form = new FormData();
-    // form.set('audio', this.state.audiofile);
-    form.set('audio', this.state.recordedBlob);
+    form.set('audio', this.state.audiofile);
+    // form.set('audio', this.state.recordedBlob);
     form.set('audio_name', this.state.audio_name)
     form.set('id', this.state.audio_name);
     form.set('user_id', this.props.user.id.data.data[0].id);

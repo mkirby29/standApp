@@ -19,7 +19,8 @@ try{
     $result = $s3Client->putObject([
         'Bucket'     => "standup618",
         'Key'        => "{$name}",
-        'SourceFile' => "{$target_file}",
+        // 'SourceFile' => "{$target_file}",
+        'SourceFile' => "{$thing}",
     ]);
         
 } catch (S3Exception $e) {
