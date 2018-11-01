@@ -61,12 +61,12 @@ class Microphone extends Component {
   onData(recordedBlob) {
   }
  
-  async onStop(recordedBlob) {
+  onStop(recordedBlob) {
     var blob = recordedBlob.blob;
     var audioFile = new File([blob], "music2.mp3", {
       type: "audio/mp3"
     });
-    await this.setState({
+    this.setState({
       audiofile: audioFile,
       blobfile: recordedBlob
     })
@@ -82,7 +82,7 @@ async postRecording (e) {
     form.set('audio_name', this.state.audio_name)
     form.set('id', this.state.audio_name);
     form.set('user_id', this.props.user.id.data.data[0].id);
-    console.log('username: ', this.props.user.userInfo.username);
+    // console.log('username: ', this.props.user.userInfo.username);
     // if (this.props.user.userInfo.username !== '') {
     form.set('author_name', this.props.user.userInfo.username);
     // } else {
