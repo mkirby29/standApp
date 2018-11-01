@@ -63,7 +63,7 @@ class Microphone extends Component {
  
   async onStop(recordedBlob) {
     var blob = recordedBlob.blob;
-    var audioFile = new File([blob], "music2.mp3", {
+    var audioFile = new File([blob], "audio.mp3", {
       type: "audio/mp3"
     });
     await this.setState({
