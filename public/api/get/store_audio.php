@@ -20,7 +20,6 @@ try{
         'Bucket'     => "standup618",
         'Key'        => "{$name}",
         'SourceFile' => "{$target_file}",
-        // 'SourceFile' => "{$thing}",
     ]);
         
 } catch (S3Exception $e) {
