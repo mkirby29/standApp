@@ -70,7 +70,6 @@ class VisualizerPlayer extends Component {
     }
 
     createAudio () {
-        console.log("URL: ", this.props.audio.audio_url);
         let splitURL = this.props.audio.audio_url.split("//")
         let httpsAudio = "https://" + splitURL[1];
         this.audio = new Audio(httpsAudio);
