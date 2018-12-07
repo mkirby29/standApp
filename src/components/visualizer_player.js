@@ -70,7 +70,9 @@ class VisualizerPlayer extends Component {
     }
 
     createAudio () {
-        let httpsAudio = "https://" + this.props.audio.audio_url;
+        console.log("URL: ", this.props.audio.audio_url);
+        let splitURL = this.props.audio.audio_url.split("//")
+        let httpsAudio = "https://" + splitURL[1];
         this.audio = new Audio(httpsAudio);
         // this.audio = new Audio(this.props.audio.audio_url);
         this.audio.crossOrigin = "anonymous";
