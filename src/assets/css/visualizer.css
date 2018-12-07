@@ -104,7 +104,7 @@
     }
 }
 
-/* Testing */
+/* Desktop View for Visual Player */
 
 @media (min-width: 768px) {
     .audio_container {
@@ -133,11 +133,9 @@
     }
     .audio_display {
         padding-top: 0.5%;
+        text-align: left !important;
     }
     .col-4 {
         max-width: 16.666667% !important;
-    }
-    .text-center {
-        text-align: left !important;
     }
 }
