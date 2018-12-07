@@ -19,13 +19,12 @@ if(empty($_POST)){
 }
 
 $author=$_POST['author_name'];
-if(!$author) {
+if($author == undefined) {
 	$author= 'Anonymous';
 }
 $audioName=$_POST['audio_name'];
 $user_id=$_POST['user_id'];
 
-print('authorname: ' . $author);
 $query = "INSERT INTO `audio`(`author_name`, `audio_name`, `user_id`, `likes`) VALUES ('$author', '$audioName', '$user_id', 0)";
 // $query = "INSERT INTO `audio`(`author_name`, `audio_name`, `user_id`, `likes`) VALUES ('Testing', '$audioName', '$user_id', 0)";
 
