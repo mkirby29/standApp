@@ -225,7 +225,7 @@ class VisualizerPlayer extends Component {
         var currentLocation = window.location.href;
         var result = /[^/]*$/.exec(currentLocation)[0]
         return (
-            <div className="container-fluid">
+            <div className="VP">
                 <div className="row audio_container">
                     <div className="left_container col-4 d-flex justify-content-center text-center">
                         <div className="avatar_container d-flex align-items-center justify-content-center" style={this.avatarImage}>
