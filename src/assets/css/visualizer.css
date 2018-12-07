@@ -123,15 +123,15 @@
         margin: 10px 0 0 0 !important;
     }
     .newfeed {
-        padding: 0
+        padding: 0 !important;
     }
-    .newfeed .container-fluid {
+    .container-fluid {
         padding: 0 !important;
     }
     .audio_display {
         padding-top: 0.5%;
     }
-    .left_container .col-4 {
+    .col-4 {
         max-width: 16.666667% !important;
     }
 }
