@@ -114,7 +114,10 @@
         display: none;
     }
     .shareContainer {
-        display: none !important;
+        display: inline-block !important;
+        position: absolute;
+        right: -100px;
+        top: 10%;
     }
     .post-hr {
         width: 100% !important;
@@ -133,5 +136,8 @@
     }
     .col-4 {
         max-width: 16.666667% !important;
+    }
+    .text-center {
+        text-align: left !important;
     }
 }
