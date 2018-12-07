@@ -103,3 +103,35 @@
         border: 0.1 solid grey;
     }
 }
+
+/* Testing */
+
+@media (min-width: 768px) {
+    .audio_container {
+        height: 50px
+    }
+    .audio_visualizer {
+        display: none;
+    }
+    .shareContainer {
+        display: none !important;
+    }
+    .post-hr {
+        width: 100% !important;
+    }
+    .audio_container:first-child {
+        margin: 10px 0 0 0 !important;
+    }
+    .newfeed {
+        padding: 0
+    }
+    .newfeed .container-fluid {
+        padding: 0 !important;
+    }
+    .audio_display {
+        padding-top: 0.5%;
+    }
+    .left_container .col-4 {
+        max-width: 16.666667% !important;
+    }
+}
